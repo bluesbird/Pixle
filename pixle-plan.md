@@ -153,19 +153,34 @@ visually reviewed; the finer levels progressively reveal his face. Public assets
 and private answers/provenance are separated under `puzzles`. Regeneration and
 automated coverage are documented in `puzzles/README.md`.
 
-### 2. Implement the API and persistence
+### [x] 2. Implement the API and persistence
 
-- Create the FastAPI service and PostgreSQL schema for puzzle dates, target
+- [x] Create the FastAPI service and PostgreSQL schema for puzzle dates, target
   references, anonymous player identifiers (if needed), and submitted results.
-- Add endpoints to retrieve the daily puzzle and submit guesses/results; validate
+- [x] Add endpoints to retrieve the daily puzzle and submit guesses/results; validate
   dates, inputs, and duplicate submissions on the server.
-- Keep answer validation server-side and return only the puzzle data the client
+- [x] Keep answer validation server-side and return only the puzzle data the client
   needs to play.
-- Add automated tests for puzzle selection, answer matching, scoring, invalid
+- [x] Add automated tests for puzzle selection, answer matching, scoring, invalid
   input, and duplicate-result handling.
 
 **Done when:** API tests cover the gameplay path and the service can initialize
 its schema and serve a configured daily puzzle without exposing its answer.
+
+**Completed:** `backend` provides the FastAPI service, SQLAlchemy PostgreSQL schema,
+explicit initialization and offline daily-puzzle assignment commands, anonymous
+cookie sessions, catalogue suggestions, server-validated guesses, persisted results,
+and per-player statistics. Active games never return the answer; finished games
+may reveal it. Scores and results are derived from recorded guesses, not accepted
+from clients. PostgreSQL row locks and database constraints protect concurrent
+submissions and retries.
+
+All 18 API tests passed against PostgreSQL 18, including concurrent submissions.
+A live HTTP smoke check initialized the schema, assigned the sample puzzle,
+and preserved attempts and results across API restarts. Setup, UTC date policy,
+scoring, session handling, and test commands are documented in `backend/README.md`.
+Temporary validation databases and services were removed; no development database
+or API server is left running.
 
 ### 3. Build the browser game
 
