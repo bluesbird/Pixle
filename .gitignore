@@ -1,0 +1,4 @@
+.people-review/
+__pycache__/
+.idea/
+*.iml
