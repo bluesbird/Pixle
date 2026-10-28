@@ -1,0 +1,40 @@
+{
+  "music": [
+    "Taylor Swift", "Beyoncé", "Rihanna", "Lady Gaga", "Madonna",
+    "Michael Jackson", "Shakira", "Adele", "Justin Bieber", "Ed Sheeran",
+    "Ariana Grande", "Billie Eilish", "Dua Lipa", "Bad Bunny", "Drake (musician)",
+    "Eminem", "Jungkook", "Psy", "Bob Marley", "Celine Dion",
+    "Mariah Carey", "Elton John", "Freddie Mercury", "Snoop Dogg", "Jennifer Lopez",
+    "50 Cent", "Elvis Presley"
+  ],
+  "screen_and_media": [
+    "Tom Cruise", "Leonardo DiCaprio", "Brad Pitt", "Angelina Jolie", "Dwayne Johnson",
+    "Johnny Depp", "Robert Downey Jr.", "Will Smith", "Jackie Chan", "Bruce Lee",
+    "Emma Watson", "Scarlett Johansson", "Jennifer Lawrence", "Keanu Reeves",
+    "Tom Hanks", "Julia Roberts", "Meryl Streep", "Zendaya", "Kim Kardashian",
+    "Arnold Schwarzenegger", "James Dean", "Mary-Louise Parker", "Marilyn Monroe",
+    "Ellen DeGeneres"
+  ],
+  "sports": [
+    "Lionel Messi", "Cristiano Ronaldo", "Neymar", "Kylian Mbappé", "Diego Maradona",
+    "Pelé", "David Beckham", "Ronaldinho", "Serena Williams", "Mohamed Salah",
+    "Roger Federer", "Rafael Nadal", "Novak Djokovic", "Tiger Woods", "LeBron James",
+    "Michael Jordan", "Kobe Bryant", "Usain Bolt", "Lewis Hamilton", "Michael Schumacher",
+    "Shohei Ohtani", "Magnus Carlsen", "Erling Haaland", "Conor McGregor",
+    "Mike Tyson", "Muhammad Ali"
+  ],
+  "politics_and_public_life": [
+    "Barack Obama", "Donald Trump", "Joe Biden", "Vladimir Putin", "Volodymyr Zelenskyy",
+    "Emmanuel Macron", "Angela Merkel", "Elizabeth II", "Charles III", "Narendra Modi",
+    "Xi Jinping", "Nelson Mandela", "14th Dalai Lama", "Pope Francis", "Benjamin Netanyahu",
+    "Adolf Hitler", "Winston Churchill", "Abraham Lincoln", "Ronald Reagan",
+    "Mahatma Gandhi", "Mao Zedong", "Kim Jong Un", "John F. Kennedy",
+    "Diana, Princess of Wales"
+  ],
+  "other": [
+    "Oprah Winfrey", "Elon Musk", "Bill Gates", "Mark Zuckerberg", "Jeff Bezos",
+    "Greta Thunberg", "Stephen Hawking", "Albert Einstein", "Steve Jobs",
+    "Marie Curie", "Franz Kafka", "J. K. Rowling", "Pablo Picasso", "Sigmund Freud",
+    "Anne Frank"
+  ]
+}

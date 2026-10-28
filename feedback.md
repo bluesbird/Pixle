@@ -1,0 +1,101 @@
+## People to keep, but replace image
+They’re either blurry, the face isn’t fully visible, or the image doesn’t match the person.
+- [x] Dalai Lama
+- [x] Adele — initial replacement completed; replaced again for the additional request below. Current image: [`people\images\adele.jpg`](people/images/adele.jpg).
+- [x] grande
+- [x] bad bunny
+- [x] billie eilish
+- [x] celine dion
+- [x] beckham
+- [x] drake
+- [x] ed sheeran
+- [x] eminem
+- [x] emma watson
+- [x] freddie mercury
+- [x] jenifer lawrence
+- [x] johnny depp (good but blurry)
+- [x] Justin bieber
+- [x] leo dicaprio
+- [x] madonna
+- [x] mariah carey
+- [x] mark zuckerberg
+- [x] michael jordan
+- [x] schumacher
+- [x] oprah winfrey
+- [x] pope francis
+- [x] psy
+- [x] nadal
+- [x] rhianna
+- [x] robert downey jr
+- [x] federer
+- [x] ronaldinho
+- [x] serena whilliams
+- [x] stephen hawking
+- [x] steve jobs
+- [x] taylor swift (good but blurry)
+- [x] tiger woods
+- [x] tom hanks
+- [x] xi jinping
+- [x] 50 cent (face is cropped) - widened the square crop to include the full face and cap.
+- [x] adele (blurry) - replaced with a February 2023 concert photograph, not the Nashville image.
+- [x] dalai lama (looks weird) - replaced with a seated color photograph in yellow robes.
+- [x] Arnold Schwarzenegger (use image of younger version) - replaced with Harry Langdon's 1985 photograph.
+- [x] coner mcgregor (use image of younger version) - replaced the 2025 image with a 2018 photograph.
+- [x] beckham (blurry) - replaced with a higher-resolution Wimbledon photograph; removed the tight, upscaled Doha crop.
+- [x] ellen degeneres (looks weird) - replaced with a smiling 2009 photograph.
+- [x] freddie mercury (blurry) - replaced the concert photo with a 1977 publicity photograph; historical grain remains.
+- [x] greta thunberg (use image of younger version) - replaced with an earlier portrait with braids.
+- [x] jennifer lawrence (face too big) - replaced with an Academy Awards photograph framed to include shoulders and upper body.
+- [x] justin bieber (looks weird) - replaced with an early-career photograph and manually framed the face, not the hand.
+- [x] kim jong un (looks fake) - replaced with a different April 2019 photograph; no generated or reconstructed facial detail.
+- [x] magnus carlsen (weird + blurry) - replaced with a front-facing 2012 portrait.
+- [x] mary louise parker (weird + blurry) - replaced with a smiling 1999 photograph.
+- [x] schumacher (blurry) - replaced with a clearer outdoor photograph wearing sunglasses.
+- [x] mohammed ali (face is cropped) - replaced with a smiling 1962 boxing portrait with the full head visible.
+- [x] picasso (face is cropped) - replaced with a wider Victoria Station photograph with the full head visible.
+- [x] robert downey jr (face is cropped) - used the wider original Comic-Con photograph rather than the tight derivative.
+- [x] federer (face is cropped) - replaced with a wider 2015 tennis photograph and manually framed the full head.
+- [x] stephen hawking (use more famous image) - replaced with the familiar smiling StarChild archival portrait; the original is only 250 x 359 pixels, so softness remains.
+- [x] taylor swift (face is cropped) - replaced with a wider 2019 American Music Awards photograph.
+
+## Remove people
+- [x] Aishwarya rai
+- [x] amitabh bachchan
+- [x] deepika padukone
+- [x] shah rukh khan
+- [x] malala yousafzai
+- [x] manny pacquiao
+- [x] ms dhoni
+- [x] pryanka chopra
+- [x] sachin tendulkar
+- [x] salman khan
+- [x] Virat Kohli
+
+## People to add
+- [x] Schwarzenegger
+- [x] Magnus Carlsen
+- [x] Erlin Haaland
+- [x] Hitler
+- [x] Churchill
+- [x] 50 cent
+- [x] Jamese Dean
+- [x] Mary-Louise Parker
+- [x] marie curie
+- [x] Lincoln
+- [x] Kafka
+- [x] Ronald Reagan
+- [x] Gandhi
+- [x] Mao Zedong
+- [x] Kim Jong Un
+- [x] John F Kennedy
+- [x] Elvis Presley
+- [x] JK Rowling
+- [x] Picasso
+- [x] Sigmund Freud
+- [x] Anne Frank
+- [x] Princess Diana
+- [x] Marilyn Monroe
+- [x] Ellen DeGeneres
+- [x] Conner mcgregor
+- [x] Mike Tyson
+- [x] Mohammad Ali
