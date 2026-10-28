@@ -208,6 +208,18 @@ were visually reviewed. Setup and commands are in `frontend/README.md` (Node 22+
 Native mobile Safari and production-like routing remain step 4 verification;
 temporary validation services have been stopped.
 
+### [x] 3a. Post-MVP gameplay polish
+
+- [x] Reveal the original portrait after each finished game (win or loss).
+- [x] Allow post-game level switching by clicking the progress bar, plus a
+  dedicated "Show original portrait" view.
+- [x] Add a random practice mode button for unscored rounds on faces outside
+  the daily answer.
+
+**Done when:** finished games let players inspect every reveal level and the
+original portrait, and players can start an unscored random follow-up round
+without affecting daily statistics.
+
 ### 4. Integrate and verify the MVP
 
 - Connect the frontend to the API and static mosaic assets through the intended

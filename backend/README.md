@@ -43,6 +43,13 @@ or original portraits, and never serves either directory.
 | `GET /api/puzzles/daily` | Today's puzzle and this player's persisted progress |
 | `GET /api/puzzles/YYYY-MM-DD` | Available puzzle and this player's progress |
 | `POST /api/puzzles/YYYY-MM-DD/guesses` | Validate a guess and advance the game |
+| `POST /api/puzzles/YYYY-MM-DD/skip` | Consume one attempt and reveal the next level |
+| `POST /api/practice/random` | Start an unscored random practice mosaic |
+| `POST /api/practice/mosaic` | Start an unscored practice round using published daily mosaic levels |
+| `GET /api/practice/{practice_id}` | Retrieve the current practice game state |
+| `POST /api/practice/{practice_id}/guesses` | Submit a practice guess |
+| `POST /api/practice/{practice_id}/skip` | Skip to the next practice level |
+| `GET /api/practice/{practice_id}/level-{n}.jpg` | Authenticated practice mosaic image |
 | `GET /api/stats/me` | Completed games, wins, total score for this session |
 
 Puzzle, guess, and stats routes require the session cookie. Session creation
@@ -77,12 +84,19 @@ consume attempts. Repeating a person with a different UUID returns 409. Replayin
 the same UUID and person is idempotent and returns current progress; reusing the
 UUID for a different person returns 409. Extra request fields are rejected.
 
-Each incorrect guess advances one level. There is one attempt per level (five
-for the sample). A correct guess earns `(max_attempts - attempts + 1) * 100`;
+Each incorrect guess advances one level. The skip endpoints also advance exactly
+one level without requiring a typed name, and record that turn as `Skipped`.
+There is one attempt per level (five for the sample). A correct guess earns
+`(max_attempts - attempts + 1) * 100`;
 exhausting attempts earns zero. The server derives every value. Results are
 created atomically with the terminal guess. Further guesses return 409.
 The answer and score appear only after this player's game is finished.
 Responses are not cacheable. Database errors are logged and return 503.
+
+Practice mode is unscored and does not update `/api/stats/me`. Random practice
+creates five authenticated mosaic images generated from the selected portrait
+at progressively finer block sizes. Mosaic practice reuses a published daily
+puzzle's five `/puzzles/.../level-*.jpg` assets.
 
 PostgreSQL row locks on the player serialize concurrent guesses, including the
 first guess, and uniqueness constraints enforce one game per player/date, one

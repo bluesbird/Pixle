@@ -57,6 +57,7 @@ integration/deployment step.
 
 - Search is accent-insensitive. Suggestions support Up/Down, Enter to select,
   Escape to close, and touch/pointer selection. Submit with the button or Enter.
+- Use **Skip** to consume one attempt without typing a name.
 - The mosaic and guess history remain visible during recoverable API errors.
   Refresh retrieves authoritative server progress without discarding the input.
 - A pending guess's date, text, and UUID are retained in session storage before
@@ -68,3 +69,6 @@ integration/deployment step.
   UTC puzzle date, attempt count, score, outcome blocks, and site origin.
   If clipboard permission is unavailable, a selectable text field is provided.
 - Every puzzle links its image credits. All photos retain their individual licenses.
+- Practice mode is unscored. You can test:
+  - random pixel-style practice mosaics,
+  - daily-mosaic-style practice that reuses published `/puzzles` levels.

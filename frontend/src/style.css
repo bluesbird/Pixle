@@ -37,7 +37,11 @@ h1 span { color: #7d8674; }
 .mosaic-caption { color: #61695a; font-size: 11px; }
 .play-panel { padding-top: 10px; min-width: 0; }
 .progress { display: flex; gap: 7px; margin: 14px 0 24px; }
-.progress span { height: 5px; flex: 1; background: #daddcf; border-radius: 4px; }
+.progress span, .progress button { height: 5px; flex: 1; background: #daddcf; border-radius: 4px; }
+.progress button { border: 0; padding: 0; min-height: 0; }
+.progress button[aria-pressed="true"] { box-shadow: 0 0 0 2px #314b38 inset; }
+.progress.finished { gap: 9px; margin-bottom: 14px; }
+.progress.finished button { height: 18px; border: 1px solid #95a088; border-radius: 6px; }
 .progress .used { background: #a97960; }
 .progress .correct { background: #3d6947; }
 h2 { font-size: 27px; letter-spacing: -.7px; margin: 0 0 8px; }
@@ -48,6 +52,8 @@ input, textarea { width: 100%; border: 1px solid #bfc6b6; border-radius: 8px; pa
 input::placeholder { color: #7b8175; }
 .primary { width: 100%; margin-top: 12px; color: #fffef9; background: #334e3c; border-color: #334e3c; display: flex; justify-content: space-between; align-items: center; min-height: 49px; font-weight: 600; font-size: 14px; }
 .primary:hover:not(:disabled) { background: #243f2d; }
+.turn-actions { display: grid; gap: 10px; grid-template-columns: auto 1fr; align-items: end; margin-top: 12px; }
+.turn-actions .primary { margin-top: 0; }
 .suggestions { position: relative; }
 [role="listbox"] { padding: 5px; margin: 5px 0 0; background: #fffef9; border: 1px solid #bdc5b5; border-radius: 8px; list-style: none; max-height: 300px; overflow-y: auto; }
 [role="option"], .no-match { padding: 12px 10px; font-size: 14px; border-radius: 4px; }
@@ -80,6 +86,7 @@ summary { font-weight: 600; cursor: pointer; min-height: 30px; }
 .result h2:focus { outline: none; }
 .share-fallback { margin-top: 16px; }
 .share-fallback textarea { margin-top: 8px; font-family: monospace; font-weight: 400; resize: vertical; }
+.mode-actions { margin-top: 8px; display: flex; flex-direction: column; align-items: flex-start; }
 footer { border-top: 1px solid #d9d9cc; margin-top: 52px; padding: 23px 0 30px; font-size: 11px; color: #727969; display: flex; justify-content: space-between; gap: 12px; }
 @media (max-width: 760px) {
   .shell { max-width: 550px; padding: 0 20px; }

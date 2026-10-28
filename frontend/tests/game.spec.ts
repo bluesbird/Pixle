@@ -9,30 +9,60 @@ const people = [
   { id: "taylor-swift", name: "Taylor Swift" },
   { id: "tom-hanks", name: "Tom Hanks" },
 ];
+const tinyJpeg = Buffer.from("/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBUQEBAVFhUVFRUVFRUVFRUVFRUWFhUXFhUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0fHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAQMBIgACEQEDEQH/xAAXAAEAAwAAAAAAAAAAAAAAAAAAAQID/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB0A//xAAXEAADAQAAAAAAAAAAAAAAAAAAAQIR/9oACAEBAAEFApWf/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwEf/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwEf/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJf/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQABPyFf/9k=", "base64");
 
 type Submission = { guess: string; request_id: string };
 
 async function mockApi(page: Page, options: { empty?: boolean; commitAndDrop?: boolean } = {}) {
   const guesses: { attempt: number; name: string; correct: boolean }[] = [];
   const requests = new Map<string, string>();
+  const practiceRequests = new Map<string, string>();
   const submissions: Submission[] = [];
+  const practiceGuesses: { attempt: number; name: string; correct: boolean }[] = [];
+  const practiceId = "abcdef0123456789abcdef0123456789";
+  const practiceTarget = "tom-hanks";
   let dropped = false;
   let failDaily = false;
+  const levels = [8, 12, 24, 48, 96].map((grid, index) => ({
+    level: index + 1, grid, width: 768, height: 768, url: `/puzzles/${puzzleId}/level-0${index + 1}.jpg`,
+  }));
   const current = () => {
     const won = guesses.at(-1)?.correct ?? false;
     const status = won ? "won" : guesses.length === 5 ? "lost" : "playing";
     const level = Math.min(status === "playing" ? guesses.length + 1 : Math.max(1, guesses.length), 5);
     return {
-      date: "2026-10-28", puzzle_id: puzzleId, status, attempts: guesses.length, max_attempts: 5,
-      level: { level, grid: [8, 12, 24, 48, 96][level - 1], width: 768, height: 768,
-        url: `/puzzles/${puzzleId}/level-0${level}.jpg` },
+      date: "2026-10-28", puzzle_id: puzzleId, mode: "daily", status, attempts: guesses.length, max_attempts: 5,
+      level: levels[level - 1], levels,
       guesses, credits_url: `/puzzles/${puzzleId}/credits.md`,
-      ...(status === "playing" ? {} : { answer: "Albert Einstein", score: won ? (6 - guesses.length) * 100 : 0 }),
+      ...(status === "playing" ? {} : {
+        answer: "Albert Einstein", score: won ? (6 - guesses.length) * 100 : 0,
+        original_image_url: "/api/people/albert-einstein/photo",
+      }),
+    };
+  };
+  const practice = () => {
+    const won = practiceGuesses.at(-1)?.correct ?? false;
+    const status = won ? "won" : practiceGuesses.length === 5 ? "lost" : "playing";
+    const level = Math.min(status === "playing" ? practiceGuesses.length + 1 : Math.max(1, practiceGuesses.length), 5);
+    const practiceLevels = [8, 12, 24, 48, 96].map((grid, index) => ({
+      level: index + 1, grid, width: 768, height: 768, url: `/api/practice/${practiceId}/level-0${index + 1}.jpg`,
+    }));
+    return {
+      date: "2026-10-28", puzzle_id: "practice-abcdef0123456789", mode: "practice",
+      practice_id: practiceId, status, attempts: practiceGuesses.length, max_attempts: 5,
+      level: practiceLevels[level - 1], levels: practiceLevels, guesses: practiceGuesses, credits_url: "/api/people",
+      ...(status === "playing" ? {} : { answer: "Tom Hanks", original_image_url: `/api/people/${practiceTarget}/photo` }),
     };
   };
   await page.route("**/api/**", async (route) => {
     const url = new URL(route.request().url());
     if (url.pathname === "/api/session") return route.fulfill({ json: { status: "ready" } });
+    if (url.pathname.startsWith(`/api/practice/${practiceId}/level-`)) {
+      return route.fulfill({ status: 200, body: tinyJpeg, contentType: "image/jpeg" });
+    }
+    if (url.pathname.startsWith("/api/people/") && url.pathname.endsWith("/photo")) {
+      return route.fulfill({ status: 200, body: tinyJpeg, contentType: "image/jpeg" });
+    }
     if (url.pathname === "/api/people") return route.fulfill({ json: people });
     if (url.pathname === "/api/stats/me") {
       return route.fulfill({ json: {
@@ -45,9 +75,50 @@ async function mockApi(page: Page, options: { empty?: boolean; commitAndDrop?: b
       if (failDaily) return route.fulfill({ status: 503, json: { detail: "Unavailable" } });
       return route.fulfill({ json: current() });
     }
+    if (url.pathname === "/api/practice/random") return route.fulfill({ json: practice() });
+    if (url.pathname === "/api/practice/mosaic") {
+      const daily = current();
+      return route.fulfill({ json: {
+        ...daily,
+        mode: "practice",
+        practice_id: practiceId,
+        score: undefined,
+        answer: undefined,
+        original_image_url: undefined,
+      } });
+    }
+    if (url.pathname === `/api/practice/${practiceId}`) return route.fulfill({ json: practice() });
+    if (url.pathname.endsWith("/skip")) {
+      const body = route.request().postDataJSON() as { request_id: string };
+      submissions.push({ guess: "__skip__", request_id: body.request_id });
+      if (url.pathname === `/api/practice/${practiceId}/skip`) {
+        if (!practiceRequests.has(body.request_id)) {
+          practiceGuesses.push({ attempt: practiceGuesses.length + 1, name: "Skipped", correct: false });
+          practiceRequests.set(body.request_id, "__skip__");
+        }
+        return route.fulfill({ json: practice() });
+      }
+      if (!requests.has(body.request_id)) {
+        guesses.push({ attempt: guesses.length + 1, name: "Skipped", correct: false });
+        requests.set(body.request_id, "__skip__");
+      }
+      return route.fulfill({ json: current() });
+    }
     if (url.pathname.endsWith("/guesses")) {
       const body = route.request().postDataJSON() as Submission;
       submissions.push(body);
+      if (url.pathname === `/api/practice/${practiceId}/guesses`) {
+        if (!practiceRequests.has(body.request_id)) {
+          const person = people.find((p) => p.name.toLowerCase() === body.guess.toLowerCase());
+          if (!person) return route.fulfill({ status: 422, json: { detail: "Unknown" } });
+          if (practiceGuesses.some((g) => g.name === person.name)) {
+            return route.fulfill({ status: 409, json: { detail: "Duplicate" } });
+          }
+          practiceGuesses.push({ attempt: practiceGuesses.length + 1, name: person.name, correct: person.id === practiceTarget });
+          practiceRequests.set(body.request_id, body.guess);
+        }
+        return route.fulfill({ json: practice() });
+      }
       if (!requests.has(body.request_id)) {
         const person = people.find((p) => p.name.toLowerCase() === body.guess.toLowerCase());
         if (!person) return route.fulfill({ status: 422, json: { detail: "Unknown" } });
@@ -86,6 +157,10 @@ test("keyboard suggestions, reveals, completion, spoiler-free sharing, and reloa
   await guess(page, "Albert Einstein");
   await expect(page.getByRole("heading", { name: "You saw it." })).toBeFocused();
   await expect(page.getByText("400", { exact: true }).first()).toBeVisible();
+  await page.getByRole("button", { name: "Show detail level 1" }).click();
+  await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
+  await page.getByRole("button", { name: "Show original portrait" }).click();
+  await expect(page.getByRole("img", { name: /original portrait/i })).toBeVisible();
   await page.evaluate(() => {
     Object.defineProperty(navigator, "clipboard", { configurable: true, value: {
       writeText: () => Promise.reject(new Error("denied")),
@@ -163,4 +238,28 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
   await expect(page.getByText("No matching people. Try another name.")).toBeVisible();
   await page.getByRole("combobox").press("Escape");
   await expect(page.getByRole("combobox")).toHaveAttribute("aria-expanded", "false");
+});
+
+test("random practice rounds are unscored and replayable", async ({ page }) => {
+  await mockApi(page);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Practice random face (pixel)" }).click();
+  await expect(page.getByText("Practice mode started.")).toBeVisible();
+  await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
+  await page.getByRole("button", { name: "Skip" }).click();
+  await expect(page.getByText("Skipped", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: /detail level 2/ })).toBeVisible();
+  await guess(page, "Tom Hanks");
+  await expect(page.getByRole("heading", { name: "You saw it." })).toBeVisible();
+  await expect(page.getByText("points")).toHaveCount(0);
+  await page.getByRole("button", { name: "Play another random face" }).click();
+  await expect(page.getByText("Practice mode started.")).toBeVisible();
+});
+
+test("daily mosaic practice mode can be started", async ({ page }) => {
+  await mockApi(page);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Practice daily mosaic" }).click();
+  await expect(page.getByText("daily mosaic style")).toBeVisible();
+  await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
 });

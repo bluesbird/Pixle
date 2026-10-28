@@ -59,6 +59,24 @@ class ApiTests(unittest.TestCase):
             json={"guess": name, "request_id": request_id or str(uuid4())},
         )
 
+    def practice_guess(self, practice_id, name, request_id=None, client=None):
+        return (client or self.client).post(
+            f"/api/practice/{practice_id}/guesses",
+            json={"guess": name, "request_id": request_id or str(uuid4())},
+        )
+
+    def skip(self, request_id=None, client=None):
+        return (client or self.client).post(
+            f"/api/puzzles/{DAY}/skip",
+            json={"request_id": request_id or str(uuid4())},
+        )
+
+    def practice_skip(self, practice_id, request_id=None, client=None):
+        return (client or self.client).post(
+            f"/api/practice/{practice_id}/skip",
+            json={"request_id": request_id or str(uuid4())},
+        )
+
     def test_daily_initial_state_and_suggestions_do_not_identify_target(self):
         response = self.client.get("/api/puzzles/daily")
         self.assertEqual(response.status_code, 200)
@@ -97,6 +115,74 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.client.get("/api/stats/me").json(),
                          {"played": 1, "won": 1, "total_score": 400})
         self.assertEqual(self.guess("Adele").status_code, 409)
+        self.assertTrue(body["original_image_url"].startswith("/api/people/"))
+        self.assertEqual(self.client.get(f"/api/puzzles/{DAY}/original").status_code, 200)
+
+    def test_original_image_is_hidden_until_finish(self):
+        initial = self.client.get("/api/puzzles/daily").json()
+        self.assertNotIn("original_image_url", initial)
+        self.assertEqual(self.client.get(f"/api/puzzles/{DAY}/original").status_code, 409)
+        self.guess("Albert Einstein")
+        self.assertEqual(self.client.get(f"/api/puzzles/{DAY}/original").status_code, 200)
+
+    def test_practice_round_is_unscored_and_separate_from_daily_stats(self):
+        practice = self.client.post("/api/practice/random").json()
+        self.assertEqual(practice["mode"], "practice")
+        self.assertEqual(practice["status"], "playing")
+        self.assertIn("practice_id", practice)
+        self.assertNotIn("score", practice)
+        self.assertTrue(all("/api/practice/" + practice["practice_id"] + "/" in level["url"]
+                            for level in practice["levels"]))
+        self.assertEqual(self.client.get(practice["levels"][0]["url"]).status_code, 200)
+        self.assertEqual(self.client.get("/api/practice/" + practice["practice_id"]).status_code, 200)
+        self.assertEqual(self.client.get("/api/practice/" + practice["practice_id"] + "/original").status_code, 409)
+        body = practice
+        for person in self.client.get("/api/people").json():
+            if body["status"] != "playing":
+                break
+            response = self.practice_guess(practice["practice_id"], person["name"])
+            self.assertEqual(response.status_code, 200)
+            body = response.json()
+            if body["status"] == "won":
+                break
+        self.assertIn(body["status"], ("won", "lost"))
+        self.assertNotIn("score", body)
+        self.assertIn("original_image_url", body)
+        self.assertEqual(self.client.get("/api/practice/" + practice["practice_id"] + "/original").status_code, 200)
+        self.assertEqual(self.client.get("/api/stats/me").json(),
+                         {"played": 0, "won": 0, "total_score": 0})
+
+    def test_mosaic_practice_uses_daily_puzzle_levels(self):
+        practice = self.client.post("/api/practice/mosaic").json()
+        self.assertEqual(practice["mode"], "practice")
+        self.assertEqual(practice["status"], "playing")
+        self.assertIn("practice_id", practice)
+        self.assertTrue(practice["level"]["url"].startswith("/puzzles/" + ASSET + "/level-"))
+        self.assertEqual(practice["credits_url"], f"/puzzles/{ASSET}/credits.md")
+
+    def test_skip_advances_level_without_name_guess(self):
+        body = self.skip().json()
+        self.assertEqual(body["status"], "playing")
+        self.assertEqual(body["attempts"], 1)
+        self.assertEqual(body["level"]["level"], 2)
+        self.assertEqual(body["guesses"][-1]["name"], "Skipped")
+        self.assertFalse(body["guesses"][-1]["correct"])
+        self.assertEqual(self.client.get("/api/puzzles/daily").json()["guesses"][-1]["name"], "Skipped")
+        replay_id = str(uuid4())
+        first = self.skip(replay_id).json()
+        second = self.skip(replay_id).json()
+        self.assertEqual(first, second)
+
+    def test_practice_skip_advances_without_scoring(self):
+        practice = self.client.post("/api/practice/random").json()
+        body = self.practice_skip(practice["practice_id"]).json()
+        self.assertEqual(body["status"], "playing")
+        self.assertEqual(body["attempts"], 1)
+        self.assertEqual(body["guesses"][-1]["name"], "Skipped")
+        for _ in range(4):
+            body = self.practice_skip(practice["practice_id"]).json()
+        self.assertEqual(body["status"], "lost")
+        self.assertNotIn("score", body)
 
     def test_first_and_last_guess_scoring(self):
         self.assertEqual(self.guess("albert-einstein").json()["score"], 500)
