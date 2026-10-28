@@ -182,18 +182,31 @@ scoring, session handling, and test commands are documented in `backend/README.m
 Temporary validation databases and services were removed; no development database
 or API server is left running.
 
-### 3. Build the browser game
+### [x] 3. Build the browser game
 
-- Set up the React, TypeScript, and Vite frontend.
-- Implement the mosaic display, guess input with suggestions, incorrect-guess
+- [x] Set up the React, TypeScript, and Vite frontend.
+- [x] Implement the mosaic display, guess input with suggestions, incorrect-guess
   feedback, progressive levels, and a score based on the number of reveals.
-- Show completion or failure results and provide a shareable result that does not
+- [x] Show completion or failure results and provide a shareable result that does not
   disclose the answer before the player finishes.
-- Make the experience usable on mobile and desktop, including keyboard
+- [x] Make the experience usable on mobile and desktop, including keyboard
   navigation and clear loading, empty, and error states.
 
 **Done when:** a player can complete a full puzzle on a phone or desktop and the
 interface handles API errors without losing the current game state.
+
+**Completed:** `frontend` contains the responsive React/TypeScript game with
+keyboard and touch suggestions, mosaic levels, guess history, server-derived
+results and statistics, spoiler-free sharing, accessible feedback, and explicit
+loading, empty, API-error, and image-error states. Pending guesses retain their
+idempotency UUID across retries and reloads; errors do not discard visible progress.
+
+The production frontend build passes. Twelve mocked browser scenarios and two
+live API browser runs passed at desktop/mobile viewport sizes, including real
+FastAPI/PostgreSQL gameplay and reload persistence. Desktop/mobile screenshots
+were visually reviewed. Setup and commands are in `frontend/README.md` (Node 22+).
+Native mobile Safari and production-like routing remain step 4 verification;
+temporary validation services have been stopped.
 
 ### 4. Integrate and verify the MVP
 

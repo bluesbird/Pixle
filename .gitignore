@@ -3,3 +3,7 @@ __pycache__/
 .idea/
 *.iml
 pixle-local.db
+node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/

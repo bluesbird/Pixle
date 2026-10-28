@@ -1,0 +1,166 @@
+import { expect, test, type Page } from "@playwright/test";
+
+const puzzleId = "1d79c84a0dd89e24dd601cfe";
+const people = [
+  { id: "adele", name: "Adele" },
+  { id: "albert-einstein", name: "Albert Einstein" },
+  { id: "beyonce", name: "Beyonce" },
+  { id: "rihanna", name: "Rihanna" },
+  { id: "taylor-swift", name: "Taylor Swift" },
+  { id: "tom-hanks", name: "Tom Hanks" },
+];
+
+type Submission = { guess: string; request_id: string };
+
+async function mockApi(page: Page, options: { empty?: boolean; commitAndDrop?: boolean } = {}) {
+  const guesses: { attempt: number; name: string; correct: boolean }[] = [];
+  const requests = new Map<string, string>();
+  const submissions: Submission[] = [];
+  let dropped = false;
+  let failDaily = false;
+  const current = () => {
+    const won = guesses.at(-1)?.correct ?? false;
+    const status = won ? "won" : guesses.length === 5 ? "lost" : "playing";
+    const level = Math.min(status === "playing" ? guesses.length + 1 : Math.max(1, guesses.length), 5);
+    return {
+      date: "2026-10-28", puzzle_id: puzzleId, status, attempts: guesses.length, max_attempts: 5,
+      level: { level, grid: [8, 12, 24, 48, 96][level - 1], width: 768, height: 768,
+        url: `/puzzles/${puzzleId}/level-0${level}.jpg` },
+      guesses, credits_url: `/puzzles/${puzzleId}/credits.md`,
+      ...(status === "playing" ? {} : { answer: "Albert Einstein", score: won ? (6 - guesses.length) * 100 : 0 }),
+    };
+  };
+  await page.route("**/api/**", async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === "/api/session") return route.fulfill({ json: { status: "ready" } });
+    if (url.pathname === "/api/people") return route.fulfill({ json: people });
+    if (url.pathname === "/api/stats/me") {
+      return route.fulfill({ json: {
+        played: current().status === "playing" ? 0 : 1,
+        won: current().status === "won" ? 1 : 0, total_score: current().score ?? 0,
+      } });
+    }
+    if (url.pathname === "/api/puzzles/daily") {
+      if (options.empty) return route.fulfill({ status: 404, json: { detail: "No puzzle" } });
+      if (failDaily) return route.fulfill({ status: 503, json: { detail: "Unavailable" } });
+      return route.fulfill({ json: current() });
+    }
+    if (url.pathname.endsWith("/guesses")) {
+      const body = route.request().postDataJSON() as Submission;
+      submissions.push(body);
+      if (!requests.has(body.request_id)) {
+        const person = people.find((p) => p.name.toLowerCase() === body.guess.toLowerCase());
+        if (!person) return route.fulfill({ status: 422, json: { detail: "Unknown" } });
+        if (guesses.some((g) => g.name === person.name)) {
+          return route.fulfill({ status: 409, json: { detail: "Duplicate" } });
+        }
+        guesses.push({ attempt: guesses.length + 1, name: person.name, correct: person.id === "albert-einstein" });
+        requests.set(body.request_id, body.guess);
+        if (options.commitAndDrop && !dropped) { dropped = true; return route.abort("failed"); }
+      }
+      return route.fulfill({ json: current() });
+    }
+    return route.fulfill({ status: 404 });
+  });
+  return { submissions, guesses, setFailDaily: (value: boolean) => { failDaily = value; } };
+}
+
+async function guess(page: Page, name: string) {
+  await page.getByRole("combobox", { name: "Your guess" }).fill(name);
+  await page.getByRole("button", { name: "Make a guess" }).click();
+}
+
+test("keyboard suggestions, reveals, completion, spoiler-free sharing, and reload", async ({ page }) => {
+  await mockApi(page);
+  await page.goto("/");
+  await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
+  await page.getByRole("combobox").fill("Tay");
+  await page.getByRole("combobox").press("ArrowDown");
+  await expect(page.getByRole("option", { name: "Taylor Swift" })).toHaveAttribute("aria-selected", "true");
+  await page.getByRole("combobox").press("Enter");
+  await page.getByRole("button", { name: "Make a guess" }).click();
+  await expect(page.getByRole("img", { name: /detail level 2/ })).toBeVisible();
+  await expect(page.getByText("Not quite", { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByText("Taylor Swift", { exact: true })).toBeVisible();
+  await guess(page, "Albert Einstein");
+  await expect(page.getByRole("heading", { name: "You saw it." })).toBeFocused();
+  await expect(page.getByText("400", { exact: true }).first()).toBeVisible();
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: {
+      writeText: () => Promise.reject(new Error("denied")),
+    } });
+  });
+  await page.getByRole("button", { name: /Copy spoiler-free/ }).click();
+  const share = page.getByRole("textbox", { name: "Copy this result" });
+  await expect(share).toBeVisible();
+  expect(await share.inputValue()).toContain("2/5 | 400 points");
+  expect(await share.inputValue()).not.toContain("Einstein");
+  await expect(page.getByRole("link", { name: /Photo credits/ })).toHaveAttribute("href", `/puzzles/${puzzleId}/credits.md`);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "You saw it." })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test("committed but interrupted submissions retain UUID across reload", async ({ page }) => {
+  const api = await mockApi(page, { commitAndDrop: true });
+  await page.goto("/");
+  await guess(page, "Adele");
+  await expect(page.getByRole("alert").filter({ hasText: "Connection interrupted" })).toBeVisible();
+  await expect(page.getByRole("combobox")).toHaveValue("Adele");
+  await page.reload();
+  await page.getByRole("button", { name: "Retry pending guess" }).click();
+  await expect(page.getByRole("button", { name: "Make a guess" })).toBeVisible();
+  expect(api.submissions).toHaveLength(2);
+  expect(api.submissions[0]).toEqual(api.submissions[1]);
+  expect(api.guesses).toHaveLength(1);
+});
+
+test("five misses end the game and disable further guesses", async ({ page }) => {
+  await mockApi(page);
+  await page.goto("/");
+  for (const name of ["Adele", "Beyonce", "Rihanna", "Taylor Swift", "Tom Hanks"]) {
+    await guess(page, name);
+  }
+  await expect(page.getByRole("heading", { name: "Meet today's face." })).toBeVisible();
+  await expect(page.getByText("Albert Einstein", { exact: true })).toBeVisible();
+  await expect(page.getByRole("combobox")).toHaveCount(0);
+  await expect(page.getByText("0", { exact: true }).first()).toBeVisible();
+});
+
+test("empty daily puzzle offers a clear retry without invented game state", async ({ page }) => {
+  await mockApi(page, { empty: true });
+  await page.goto("/");
+  await expect(page.getByRole("alert")).toContainText("No puzzle is available");
+  await expect(page.getByRole("button", { name: "Refresh progress" })).toBeEnabled();
+  await expect(page.getByRole("combobox")).toHaveCount(0);
+});
+
+test("refresh failure preserves the current mosaic and guess history", async ({ page }) => {
+  const api = await mockApi(page);
+  await page.goto("/");
+  await guess(page, "Adele");
+  await guess(page, "Unknown");
+  await expect(page.getByRole("alert")).toContainText("Choose a name");
+  api.setFailDaily(true);
+  await page.getByRole("button", { name: "Refresh progress" }).click();
+  await expect(page.getByRole("alert")).toContainText("temporarily unavailable");
+  await expect(page.getByRole("img", { name: /detail level 2/ })).toBeVisible();
+  await expect(page.getByText("Adele", { exact: true })).toBeVisible();
+  await expect(page.getByRole("combobox")).toHaveValue("Unknown");
+});
+
+test("broken mosaic can be retried and no-match suggestions are explained", async ({ page }) => {
+  await mockApi(page);
+  let fail = true;
+  await page.route("**/puzzles/**/level-*.jpg*", (route) => fail ? route.abort() : route.continue());
+  await page.goto("/");
+  await expect(page.getByText("The mosaic could not load.")).toBeVisible();
+  fail = false;
+  await page.getByRole("button", { name: "Retry image" }).click();
+  await expect(page.getByText("The mosaic could not load.")).toHaveCount(0);
+  await page.getByRole("combobox").fill("zzzzz");
+  await expect(page.getByText("No matching people. Try another name.")).toBeVisible();
+  await page.getByRole("combobox").press("Escape");
+  await expect(page.getByRole("combobox")).toHaveAttribute("aria-expanded", "false");
+});
