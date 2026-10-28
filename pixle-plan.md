@@ -68,7 +68,7 @@ Image processing runs offline during puzzle preparation.
 
 - Curate approximately 100 globally recognizable contemporary people.
 - Obtain suitable photographs and verify their usage licenses.
-- Store square, normalized source images in `/people`.
+- Store square, normalized source images in `/people/images`.
 - Maintain attribution, source URL and license metadata for each image.
 - Generate mosaic tiles from other people, excluding the target image.
 - Match tiles to target-image regions based on average color.
@@ -115,32 +115,43 @@ Deliver the MVP in the sequence below. Keep the image-curation workflow offline 
 publish only reviewed puzzle assets and the data required by each application
 component.
 
-### 0. Complete and review the portrait dataset
+### [x] 0. Complete and review the portrait dataset
 
-- Resolve the six people without downloaded portraits; keep any unavailable or
+- [x] Resolve the six people without downloaded portraits; keep any unavailable or
   unsuitable source explicitly recorded rather than substituting an unverified image.
-- Review every generated contact sheet, correct crops through
+- [x] Review every generated contact sheet, correct crops through
   `people/crop-overrides.json`, and review affected images again after recropping.
-- Check that image metadata, per-image credits, license terms, and modification
+- [x] Check that image metadata, per-image credits, license terms, and modification
   notices are complete before using an image in a published puzzle.
 
 **Done when:** all selected entries have an approved image or a documented
 replacement decision, and every image intended for publication has passed visual
 and attribution review.
 
-### 1. Build the offline mosaic pipeline
+**Completed:** all 116 selected people have reviewed 768 x 768 portraits in
+`people/images`; no portraits are missing. The two feedback passes, crop fixes,
+and per-image attribution are recorded in `feedback.md` and `people/metadata.json`.
+`python tools\curate_people.py --verify` confirms the dataset checks.
 
-- Add a reproducible generator that reads the reviewed portraits and produces
+### [x] 1. Build the offline mosaic pipeline
+
+- [x] Add a reproducible generator that reads the reviewed portraits and produces
   target mosaics at progressively finer resolutions.
-- Match source-image tiles to target-image regions by average color, excluding the
+- [x] Match source-image tiles to target-image regions by average color, excluding the
   target portrait from its own tile pool.
-- Write versioned static assets and a manifest for each puzzle; keep target
+- [x] Write versioned static assets and a manifest for each puzzle; keep target
   identities and answers out of publicly served asset metadata where practical.
-- Verify output dimensions, level ordering, target exclusion, and deterministic
+- [x] Verify output dimensions, level ordering, target exclusion, and deterministic
   regeneration from the same inputs.
 
 **Done when:** a sample target has a complete set of ordered, visually checked
 mosaic levels and can be regenerated without manual image editing.
+
+**Completed:** `tools/generate_mosaic.py` generates five ordered levels at
+8, 12, 24, 48, and 96 tiles per side. The Einstein sample's five levels were
+visually reviewed; the finer levels progressively reveal his face. Public assets
+and private answers/provenance are separated under `puzzles`. Regeneration and
+automated coverage are documented in `puzzles/README.md`.
 
 ### 2. Implement the API and persistence
 
