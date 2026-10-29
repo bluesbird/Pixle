@@ -230,10 +230,10 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
   let fail = true;
   await page.route("**/puzzles/**/level-*.jpg*", (route) => fail ? route.abort() : route.continue());
   await page.goto("/");
-  await expect(page.getByText("The mosaic could not load.")).toBeVisible();
+  await expect(page.getByText("The image could not load.")).toBeVisible();
   fail = false;
   await page.getByRole("button", { name: "Retry image" }).click();
-  await expect(page.getByText("The mosaic could not load.")).toHaveCount(0);
+  await expect(page.getByText("The image could not load.")).toHaveCount(0);
   await page.getByRole("combobox").fill("zzzzz");
   await expect(page.getByText("No matching people. Try another name.")).toBeVisible();
   await page.getByRole("combobox").press("Escape");
@@ -244,16 +244,16 @@ test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
   await page.goto("/");
   await page.getByRole("button", { name: "Practice random face (pixel)" }).click();
-  await expect(page.getByText("Practice mode started.")).toBeVisible();
+  await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
   await page.getByRole("button", { name: "Skip" }).click();
   await expect(page.getByText("Skipped", { exact: true })).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 2/ })).toBeVisible();
   await guess(page, "Tom Hanks");
   await expect(page.getByRole("heading", { name: "You saw it." })).toBeVisible();
-  await expect(page.getByText("points")).toHaveCount(0);
+  await expect(page.locator(".result .score")).toHaveCount(0);
   await page.getByRole("button", { name: "Play another random face" }).click();
-  await expect(page.getByText("Practice mode started.")).toBeVisible();
+  await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
 });
 
 test("daily mosaic practice mode can be started", async ({ page }) => {

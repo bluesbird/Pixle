@@ -215,36 +215,114 @@ temporary validation services have been stopped.
   dedicated "Show original portrait" view.
 - [x] Add a random practice mode button for unscored rounds on faces outside
   the daily answer.
+- [x] Add skip actions for daily and practice rounds to reveal the next level
+  without typing a name.
+- [x] Improve finished-state progress controls so level-selection buttons are
+  visually obvious and easier to tap.
+- [x] Add a second unscored practice mode that reuses published daily mosaic
+  assets (`/puzzles/.../level-*.jpg`) for side-by-side UX comparison.
+- [x] Harden startup behavior by retrying initial read requests in the frontend
+  during backend warm-up races.
+- [x] Fix daily skip persistence bug by keeping skip request IDs within the
+  `guesses.request_id` `VARCHAR(36)` database constraint.
 
 **Done when:** finished games let players inspect every reveal level and the
 original portrait, and players can start an unscored random follow-up round
 without affecting daily statistics.
 
-### 4. Integrate and verify the MVP
+**Completed:** post-game level review and original-image reveal are active;
+daily/practice skip is implemented and persisted; both practice variants are
+available (random pixel-style and daily-mosaic-style); startup-read retry logic
+reduces first-load connection interruptions after server restarts.
+Backend and frontend validations passed after these changes (`backend` tests and
+frontend production build/type-check).
 
-- Connect the frontend to the API and static mosaic assets through the intended
+### [x] 4. Integrate and verify the MVP
+
+- [x] Connect the frontend to the API and static mosaic assets through the intended
   same-origin `/api/*` and static-file routes.
-- Test a full daily-puzzle flow, including correct and incorrect guesses,
+- [x] Test a full daily-puzzle flow, including correct and incorrect guesses,
   progressive reveals, scoring, reload behavior, and result sharing.
-- Check that submitted results are treated as untrusted, answer data is not
+- [x] Check that submitted results are treated as untrusted, answer data is not
   shipped to the browser, and image credits remain available wherever images are
   redistributed or displayed.
-- Run the project checks and manually review representative puzzles at each
+- [x] Run the project checks and manually review representative puzzles at each
   difficulty level.
 
 **Done when:** the end-to-end flow works with production-like configuration and
 the MVP acceptance checks pass on desktop and mobile layouts.
 
+**Completed:** same-origin routing is active in development and integration tests:
+`/api/*` is proxied to FastAPI and `/puzzles/*` is served from public puzzle
+assets only. Backend response contracts and tests confirm that answers and scores
+are server-derived and hidden until completion, while credits links are returned
+for puzzle assets.
+
+Automated checks passed for this integration step: backend API suite (`23 tests`,
+including validation and untrusted-input handling), frontend production build,
+frontend browser suite (`16 passed, 2 live-only skipped`), and live API smoke
+tests on desktop/mobile (`2 passed`) covering incorrect/correct guesses, reveal
+progression, reload persistence, scoring, and sharing flow.
+
 ### 5. Deploy and operate
 
-- Containerize the frontend build, API, and PostgreSQL database with Docker
-  Compose; configure Caddy for HTTPS, static files, and API proxying.
-- Configure production secrets outside version control, database persistence,
-  health checks, and a tested backup/restore procedure.
-- Deploy to a VPS, verify HTTPS and daily puzzle selection, then run a small user
-  test and address usability or puzzle-quality issues before expanding the
-  dataset.
+- Prepare Pixle for deployment to the existing VPS at `13.140.170.196`,
+  alongside Mnemo (`https://mnemo-hub.duckdns.org`).
 
-**Done when:** the deployed site serves the daily game over HTTPS, survives a
-service restart without losing persisted results, and has a verified recovery
-path for its database.
+- SSH access is available via `mnemo-vps`, using the dedicated
+  `pixle-agent` key. Authentication uses the existing Linux user
+  `mnemo-agent`, with the same permissions as the Mnemo agent.
+
+- Inspect the existing Docker, networking, and Caddy setup before
+  making changes. Do not disrupt Mnemo or overwrite its configuration.
+
+- Prepare Docker Compose for Pixle's frontend, API, and PostgreSQL,
+  including persistent storage, production secrets outside version
+  control, health checks, and database backup/restore procedures.
+
+- Prepare the Caddy configuration change for
+  `https://pixle.duckdns.org`, reusing the existing Caddy instance.
+  Update the Caddyfile in the Mnemo repository locally, but do not
+  deploy or reload Caddy yet.
+
+- **Pause before deploying anything to the VPS.** I will deploy the
+  updated Mnemo project, including the Caddy configuration. Wait for
+  my explicit confirmation before proceeding with Pixle's deployment.
+
+- After confirmation, deploy Pixle and verify HTTPS, API
+  functionality, daily puzzle selection, persistence across
+  restarts, and database recovery. Confirm Mnemo remains operational.
+  Run a small user test and address critical issues.
+
+**Done when:** Pixle is deployed at `https://pixle.duckdns.org`,
+persisted results survive service restarts, database recovery is
+tested, and Mnemo remains fully operational.
+
+
+                   Internet
+                      |
+              DNS: 13.140.170.196
+                      |
+             +------------------+
+             |       VPS        |
+             |  13.140.170.196  |
+             |                  |
+             |  Caddy :80/:443  |
+             +------------------+
+                      |
+             HTTP Hostname prüfen
+                      |
+              +-------+-------+
+              |               |
+  mnemo-hub.duckdns.org   pixle.duckdns.org
+        |                     |
+        v                     v
+  +-------------+       +-------------+
+  | Mnemo       |       | Pixle       |
+  | bestehende  |       | Frontend    |
+  | Infrastruktur|      |             |
+  +-------------+       +-------------+
+        |                     |
+    Mnemo API             Pixle API
+        |                     |
+    Mnemo DB              Pixle DB
