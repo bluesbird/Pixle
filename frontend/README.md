@@ -2,6 +2,8 @@
 
 React, TypeScript, and Vite. Requires **Node.js 22 or newer** and npm.
 No external fonts, analytics, accounts, or portrait downloads are used by the UI.
+For production container deployment and reverse-proxy integration, see
+`DEPLOYMENT.md`.
 
 ## Run locally
 

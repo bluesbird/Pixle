@@ -3,6 +3,8 @@
 FastAPI with SQLAlchemy and PostgreSQL. All gameplay state is server-side; there
 is no endpoint accepting a claimed score, attempt count, win, or arbitrary result.
 Completing the last guess transaction records exactly one result per game.
+For production container deployment and backup/restore procedures, see
+`DEPLOYMENT.md`.
 
 ## Set up PostgreSQL and assign a daily puzzle
 

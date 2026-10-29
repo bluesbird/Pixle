@@ -264,7 +264,22 @@ frontend browser suite (`16 passed, 2 live-only skipped`), and live API smoke
 tests on desktop/mobile (`2 passed`) covering incorrect/correct guesses, reveal
 progression, reload persistence, scoring, and sharing flow.
 
-### 5. Deploy and operate
+### [x] 5. Deploy and operate
+
+**Completed:** Pixle is deployed on VPS `13.140.170.196` and served at
+`https://pixle.duckdns.org` through the shared Caddy instance, while
+`https://mnemo-hub.duckdns.org` remains healthy.
+
+The deployed stack runs via Docker Compose (`db`, `api`, `frontend`) with
+persistent PostgreSQL storage, production secrets in `.env.production`,
+daily puzzle assignment via `backend.manage configure-puzzle`, and health checks
+for all services. End-to-end verification passed on the live host:
+HTTPS reachability, API health, puzzle asset serving, wrong/correct guess flow,
+score calculation, and reload persistence.
+
+Service-restart and recovery checks also passed: gameplay data remained intact
+after `docker compose restart`, and a database backup/restore rehearsal succeeded
+with a generated dump (`deploy/backups/pixle-*.dump`) restored through `pg_restore`.
 
 - Prepare Pixle for deployment to the existing VPS at `13.140.170.196`,
   alongside Mnemo (`https://mnemo-hub.duckdns.org`).
