@@ -62,15 +62,16 @@ integration/deployment step.
 - Use **Skip** to consume one attempt without typing a name.
 - The mosaic and guess history remain visible during recoverable API errors.
   Refresh retrieves authoritative server progress without discarding the input.
+- While a puzzle is active, the frontend preloads all reveal levels in the
+  background to reduce per-level loading delay. The original portrait URL is
+  only available after finishing the puzzle, and is preloaded at that point.
 - A pending guess's date, text, and UUID are retained in session storage before
   sending it. A timeout or server error keeps the same UUID for retries, including
   after reload. Only the server consumes attempts; the UI never guesses a score.
   If storage is blocked, the UI warns that pending recovery is limited to the tab.
 - Session identity is an HttpOnly cookie, not a local-storage identifier.
-- Results show the answer only after completion. Shared text contains only the
-  UTC puzzle date, attempt count, score, outcome blocks, and site origin.
-  If clipboard permission is unavailable, a selectable text field is provided.
+- Results show the answer only after completion.
 - Every puzzle links its image credits. All photos retain their individual licenses.
 - Practice mode is unscored. You can test:
   - random pixel-style practice mosaics,
-  - daily-mosaic-style practice that reuses published `/puzzles` levels.
+  - random mosaic practice that reuses available `/puzzles` levels.

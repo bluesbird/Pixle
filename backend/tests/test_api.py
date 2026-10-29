@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta
 import hashlib
+import json
 import os
 from pathlib import Path
 import shutil
@@ -9,7 +10,7 @@ import unittest
 from uuid import uuid4
 
 from fastapi.testclient import TestClient
-from sqlalchemy import func, select, text
+from sqlalchemy import delete, func, select, text
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import Session
 from sqlalchemy.schema import CreateTable
@@ -76,6 +77,16 @@ class ApiTests(unittest.TestCase):
             f"/api/practice/{practice_id}/skip",
             json={"request_id": request_id or str(uuid4())},
         )
+
+    def available_asset_ids(self):
+        private_root = ROOT / "puzzles" / "private"
+        asset_ids = set()
+        for metadata_path in private_root.glob("*.json"):
+            if metadata_path.name == "targets.json":
+                continue
+            payload = json.loads(metadata_path.read_text(encoding="utf-8"))
+            asset_ids.add(payload["puzzle_id"])
+        return asset_ids
 
     def test_daily_initial_state_and_suggestions_do_not_identify_target(self):
         response = self.client.get("/api/puzzles/daily")
@@ -152,13 +163,26 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.client.get("/api/stats/me").json(),
                          {"played": 0, "won": 0, "total_score": 0})
 
-    def test_mosaic_practice_uses_daily_puzzle_levels(self):
+    def test_mosaic_practice_uses_available_puzzle_levels(self):
+        tomorrow = DAY + timedelta(days=1)
+        configure_puzzle(self.engine, tomorrow, "06ad9680afd1ac5fe465467b")
         practice = self.client.post("/api/practice/mosaic").json()
         self.assertEqual(practice["mode"], "practice")
         self.assertEqual(practice["status"], "playing")
         self.assertIn("practice_id", practice)
-        self.assertTrue(practice["level"]["url"].startswith("/puzzles/" + ASSET + "/level-"))
-        self.assertEqual(practice["credits_url"], f"/puzzles/{ASSET}/credits.md")
+        asset = practice["puzzle_id"]
+        self.assertIn(asset, self.available_asset_ids())
+        self.assertTrue(practice["level"]["url"].startswith("/puzzles/" + asset + "/level-"))
+        self.assertEqual(practice["credits_url"], f"/puzzles/{asset}/credits.md")
+
+    def test_mosaic_practice_works_without_configured_daily_entries(self):
+        with Session(self.engine) as session, session.begin():
+            session.execute(delete(Puzzle))
+        practice = self.client.post("/api/practice/mosaic").json()
+        self.assertEqual(practice["mode"], "practice")
+        self.assertEqual(practice["status"], "playing")
+        self.assertIn(practice["puzzle_id"], self.available_asset_ids())
+        self.assertTrue(practice["level"]["url"].startswith("/puzzles/" + practice["puzzle_id"] + "/level-"))
 
     def test_skip_advances_level_without_name_guess(self):
         body = self.skip().json()

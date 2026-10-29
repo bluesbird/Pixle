@@ -243,7 +243,7 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
 test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
   await page.goto("/");
-  await page.getByRole("button", { name: "Practice random face (pixel)" }).click();
+  await page.getByRole("button", { name: "Pixel practice" }).click();
   await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
   await page.getByRole("button", { name: "Skip" }).click();
@@ -256,10 +256,10 @@ test("random practice rounds are unscored and replayable", async ({ page }) => {
   await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
 });
 
-test("daily mosaic practice mode can be started", async ({ page }) => {
+test("random mosaic practice mode can be started", async ({ page }) => {
   await mockApi(page);
   await page.goto("/");
-  await page.getByRole("button", { name: "Practice daily mosaic" }).click();
-  await expect(page.getByText("daily mosaic style")).toBeVisible();
+  await page.getByRole("button", { name: "Mosaic practice" }).click();
+  await expect(page.getByText("random mosaic style")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
 });

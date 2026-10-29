@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import {
-  ApiError, gameSchema, normalize, pendingSchema, peopleSchema, request, shareText, statsSchema,
+  ApiError, gameSchema, normalize, pendingSchema, peopleSchema, request, statsSchema,
   type Game, type Pending, type Person, type Stats,
 } from "./api";
 
@@ -25,13 +25,13 @@ export function App() {
   const [active, setActive] = useState(-1);
   const [pending, setPending] = useState<Pending | null>(null);
   const [storageError, setStorageError] = useState("");
-  const [share, setShare] = useState("");
   const [imageState, setImageState] = useState<"loading" | "ready" | "error">("loading");
   const [imageRetry, setImageRetry] = useState(0);
   const [preview, setPreview] = useState<"original" | number>(1);
   const submitting = useRef(false);
   const input = useRef<HTMLInputElement>(null);
   const result = useRef<HTMLHeadingElement>(null);
+  const preloadedUrls = useRef(new Set<string>());
 
   async function loadStats() {
     try {
@@ -124,6 +124,18 @@ export function App() {
   }, [imageUrl]);
 
   useEffect(() => {
+    if (!game) return;
+    const urls = game.levels.map((level) => level.url);
+    if (game.original_image_url) urls.push(game.original_image_url);
+    for (const url of urls) {
+      if (preloadedUrls.current.has(url)) continue;
+      preloadedUrls.current.add(url);
+      const image = new Image();
+      image.src = url;
+    }
+  }, [game?.puzzle_id, game?.practice_id, game?.original_image_url, game?.levels]);
+
+  useEffect(() => {
     if (game && game.status !== "playing") result.current?.focus();
   }, [game?.status]);
 
@@ -193,7 +205,6 @@ export function App() {
   async function startPractice(mode: "random" | "mosaic") {
     setBusy(true);
     setError("");
-    setShare("");
     setNotice("");
     setQuery("");
     remember(null);
@@ -205,7 +216,7 @@ export function App() {
       setGame(next);
       setNotice(mode === "random" ?
         "Practice mode started (pixel style). These rounds are unscored." :
-        "Practice mode started (daily mosaic style). These rounds are unscored.");
+        "Practice mode started (random mosaic style). These rounds are unscored.");
     } catch (failure) {
       setError(message(failure));
     } finally {
@@ -247,29 +258,28 @@ export function App() {
   ).slice(0, 7) : [];
   const canGuess = game !== null && !finished && !loading && !busy;
 
-  async function copyResult() {
-    if (!game || !finished || game.mode !== "daily") return;
-    const text = shareText(game);
-    try {
-      await navigator.clipboard.writeText(text);
-      setShare("");
-      setNotice("Result copied. No answer is included.");
-    } catch {
-      setShare(text);
-      setNotice("Clipboard access is unavailable. Copy the result below.");
-    }
-  }
-
   return <div className="shell">
     <header className="masthead">
       <a className="brand" href="/" aria-label="Pixle home"><span className="brand-mark" aria-hidden="true">P</span>pixle<span className="brand-dot">.</span></a>
-      <span className="edition">A new face, every day</span>
+      <div className="masthead-actions">
+        <span className="edition">A new face, every day</span>
+        <div className="quick-actions">
+          <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("random")}>
+            Pixel practice
+          </button>
+          <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("mosaic")}>
+            Mosaic practice
+          </button>
+          <a className="github-link" href="https://github.com/bluesbird/Pixle" target="_blank" rel="noreferrer">
+            GitHub <span aria-hidden="true">&#8599;</span>
+          </a>
+        </div>
+      </div>
     </header>
     <main>
       <section className="intro" aria-labelledby="title">
         <p className="eyebrow">THE DAILY PHOTO MOSAIC</p>
         <h1 id="title">Familiar faces.<br /><span>One hidden identity.</span></h1>
-        <p>Look at the bigger picture. Who do all these faces make?</p>
       </section>
 
       <div className="game-layout">
@@ -329,11 +339,9 @@ export function App() {
               <p>{game.status === "won" ?
                 `Solved in ${game.attempts} ${game.attempts === 1 ? "guess" : "guesses"}.` :
                 game.mode === "daily" ? "A fresh challenge arrives at midnight UTC." : "Start another random face to keep practicing."}</p>
-              {game.mode === "daily" && <button className="primary" onClick={() => void copyResult()}>Copy spoiler-free result <span aria-hidden="true">&#8599;</span></button>}
               {game.mode === "practice" && <button className="primary" disabled={busy} onClick={() => void startPractice("random")}>
                 Play another random face <span aria-hidden="true">&#8594;</span>
               </button>}
-              {share && <label className="share-fallback">Copy this result<textarea readOnly value={share} onFocus={(event) => event.target.select()} rows={5} /></label>}
             </div> : <form onSubmit={(event) => { event.preventDefault(); void submit(); }}
               onBlur={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
@@ -380,14 +388,6 @@ export function App() {
                 </button>
               </div>
             </form>}
-            <div className="mode-actions">
-              <button className="text-button" disabled={busy || loading} onClick={() => void startPractice("random")}>
-                Practice random face (pixel)
-              </button>
-              <button className="text-button" disabled={busy || loading} onClick={() => void startPractice("mosaic")}>
-                Practice daily mosaic
-              </button>
-            </div>
             {pending && finished && <button disabled={busy} onClick={() => void submit()}>Confirm pending submission</button>}
             {game.guesses.length > 0 && <div className="history">
               <h3>Your guesses</h3>

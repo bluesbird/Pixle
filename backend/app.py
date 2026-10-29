@@ -438,24 +438,55 @@ def create_app(engine=None, today=None, secure_cookie=None):
 
     def create_mosaic_practice(existing_player, source_puzzle):
         if source_puzzle is None:
-            raise HTTPException(404, "No published puzzle is available for mosaic practice")
+            raise HTTPException(404, "No mosaic puzzle is available for practice")
+        if isinstance(source_puzzle, Puzzle):
+            asset_id = source_puzzle.asset_id
+            target_id = source_puzzle.target_id
+            levels = source_puzzle.levels
+        else:
+            asset_id = source_puzzle["asset_id"]
+            target_id = source_puzzle["target_id"]
+            levels = source_puzzle["levels"]
         practice_id = uuid4().hex
-        levels = level_outputs(source_puzzle.asset_id, source_puzzle.levels)
+        levels = level_outputs(asset_id, levels)
         with practice_lock:
             practice_games[practice_id] = {
                 "id": practice_id,
                 "player_id": existing_player.token_hash,
-                "target_id": source_puzzle.target_id,
-                "puzzle_id": source_puzzle.asset_id,
+                "target_id": target_id,
+                "puzzle_id": asset_id,
                 "status": "playing",
                 "attempts": 0,
                 "levels": levels,
                 "guesses": [],
-                "credits_url": f"/puzzles/{source_puzzle.asset_id}/credits.md",
+                "credits_url": f"/puzzles/{asset_id}/credits.md",
                 "requests": {},
                 "files": {},
             }
             return practice_games[practice_id]
+
+    def offline_mosaic_sources(session):
+        sources = []
+        private_root = ROOT / "puzzles" / "private"
+        public_root = ROOT / "puzzles" / "public"
+        for metadata_path in sorted(private_root.glob("*.json")):
+            if metadata_path.name == "targets.json":
+                continue
+            try:
+                private = json.loads(metadata_path.read_text(encoding="utf-8"))
+                asset_id = private["puzzle_id"]
+                target_id = private["target"]["id"]
+                if session.get(Person, target_id) is None:
+                    continue
+                manifest_path = public_root / asset_id / "manifest.json"
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                levels = manifest["levels"]
+                if manifest["puzzle_id"] != asset_id or not levels:
+                    continue
+                sources.append({"asset_id": asset_id, "target_id": target_id, "levels": levels})
+            except (OSError, KeyError, TypeError, json.JSONDecodeError):
+                continue
+        return sources
 
     @app.post("/api/practice/random", response_model=GameOutput, response_model_exclude_none=True)
     def start_practice_random(request: Request, session: Session = Depends(session_dependency)):
@@ -470,9 +501,17 @@ def create_app(engine=None, today=None, secure_cookie=None):
     @app.post("/api/practice/mosaic", response_model=GameOutput, response_model_exclude_none=True)
     def start_practice_mosaic(request: Request, session: Session = Depends(session_dependency)):
         existing_player = player(session, request)
-        source_puzzle = session.get(Puzzle, current_date()) or session.scalar(
-            select(Puzzle).order_by(Puzzle.date.desc())
-        )
+        published = list(session.scalars(select(Puzzle)))
+        source_puzzles = [{
+            "asset_id": puzzle.asset_id,
+            "target_id": puzzle.target_id,
+            "levels": puzzle.levels,
+        } for puzzle in published]
+        known_assets = {source["asset_id"] for source in source_puzzles}
+        for source in offline_mosaic_sources(session):
+            if source["asset_id"] not in known_assets:
+                source_puzzles.append(source)
+        source_puzzle = random.choice(source_puzzles) if source_puzzles else None
         state = create_mosaic_practice(existing_player, source_puzzle)
         return practice_output(session, state)
 

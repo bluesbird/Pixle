@@ -9,3 +9,4 @@ frontend/test-results/
 frontend/playwright-report/
 .env.production
 deploy/backups/
+*.tgz

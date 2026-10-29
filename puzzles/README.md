@@ -5,6 +5,7 @@ Generate a sample from the reviewed dataset, from the project root:
 ```powershell
 python -m pip install -r requirements-people.txt
 python tools\generate_mosaic.py --target albert-einstein
+python tools\generate_all_mosaics.py
 python -m unittest discover -s tools -p "test_*.py"
 ```
 
@@ -17,6 +18,33 @@ The included sample is `public\1d79c84a0dd89e24dd601cfe`, with its answer
 and provenance in the matching private JSON file. All five levels were visually
 reviewed: coarse levels obscure the target, and finer levels reveal the face.
 The sample is an offline demonstration, not yet assigned to a puzzle date.
+
+`1d79c84a0dd89e24dd601cfe` is intentionally **not** a person name. Puzzle IDs are
+opaque content-version hashes (first 24 hex chars of SHA-256), derived from the
+algorithm version, target ID, all portrait hashes/credits, output size/grids, and
+processing dependency versions. This avoids leaking the answer in public URLs and
+ensures reproducible versioning.
+
+## Generate every puzzle
+
+From the project root:
+
+```powershell
+python tools\generate_all_mosaics.py
+```
+
+This builds one puzzle per reviewed person and writes `private\targets.json`:
+`{target-id -> puzzle-id}` for offline scheduling workflows.
+
+When the people dataset changes (add/remove/replace portraits), regenerate all:
+
+```powershell
+python tools\curate_people.py --verify
+python tools\generate_all_mosaics.py --prune
+```
+
+`--prune` removes stale puzzle outputs that no longer correspond to the current
+people set, while keeping newly generated versioned outputs.
 
 ## Output boundary
 

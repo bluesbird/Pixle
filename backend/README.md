@@ -47,7 +47,7 @@ or original portraits, and never serves either directory.
 | `POST /api/puzzles/YYYY-MM-DD/guesses` | Validate a guess and advance the game |
 | `POST /api/puzzles/YYYY-MM-DD/skip` | Consume one attempt and reveal the next level |
 | `POST /api/practice/random` | Start an unscored random practice mosaic |
-| `POST /api/practice/mosaic` | Start an unscored practice round using published daily mosaic levels |
+| `POST /api/practice/mosaic` | Start an unscored random practice round using available pre-generated mosaic levels |
 | `GET /api/practice/{practice_id}` | Retrieve the current practice game state |
 | `POST /api/practice/{practice_id}/guesses` | Submit a practice guess |
 | `POST /api/practice/{practice_id}/skip` | Skip to the next practice level |
@@ -97,8 +97,8 @@ Responses are not cacheable. Database errors are logged and return 503.
 
 Practice mode is unscored and does not update `/api/stats/me`. Random practice
 creates five authenticated mosaic images generated from the selected portrait
-at progressively finer block sizes. Mosaic practice reuses a published daily
-puzzle's five `/puzzles/.../level-*.jpg` assets.
+at progressively finer block sizes. Mosaic practice reuses pre-generated
+`/puzzles/.../level-*.jpg` assets chosen at random from the local puzzle set.
 
 PostgreSQL row locks on the player serialize concurrent guesses, including the
 first guess, and uniqueness constraints enforce one game per player/date, one
