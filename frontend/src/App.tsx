@@ -6,6 +6,8 @@ import {
 } from "./api";
 
 const PENDING_KEY = "pixle.pending.v1";
+const EXAMPLE_PUZZLE_ID = "1d79c84a0dd89e24dd601cfe";
+const HOWTO_SEEN_KEY = "pixle.howto.seen.v1";
 
 function message(error: unknown) {
   return error instanceof Error ? error.message : "Something went wrong. Please try again.";
@@ -28,10 +30,14 @@ export function App() {
   const [imageState, setImageState] = useState<"loading" | "ready" | "error">("loading");
   const [imageRetry, setImageRetry] = useState(0);
   const [preview, setPreview] = useState<"original" | number>(1);
+  const [clock, setClock] = useState(() => Date.now());
+  const [panelMinHeight, setPanelMinHeight] = useState<number | null>(null);
+  const [showHowTo, setShowHowTo] = useState(false);
   const submitting = useRef(false);
   const input = useRef<HTMLInputElement>(null);
   const result = useRef<HTMLHeadingElement>(null);
   const preloadedUrls = useRef(new Set<string>());
+  const mosaicCard = useRef<HTMLElement>(null);
 
   async function loadStats() {
     try {
@@ -139,6 +145,47 @@ export function App() {
     if (game && game.status !== "playing") result.current?.focus();
   }, [game?.status]);
 
+  useEffect(() => {
+    if (!game || game.status !== "playing" || showHowTo) return;
+    requestAnimationFrame(() => input.current?.focus());
+  }, [game?.puzzle_id, game?.practice_id, game?.status, game?.attempts, showHowTo]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setClock(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(HOWTO_SEEN_KEY) !== "1") {
+        setShowHowTo(true);
+        localStorage.setItem(HOWTO_SEEN_KEY, "1");
+      }
+    } catch {
+      setShowHowTo(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const card = mosaicCard.current;
+    if (!card) return;
+    const syncHeight = () => {
+      if (window.innerWidth <= 760) {
+        setPanelMinHeight(null);
+        return;
+      }
+      setPanelMinHeight(Math.round(card.getBoundingClientRect().height));
+    };
+    syncHeight();
+    const observer = new ResizeObserver(syncHeight);
+    observer.observe(card);
+    window.addEventListener("resize", syncHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", syncHeight);
+    };
+  }, []);
+
   function remember(value: Pending | null) {
     setPending(value);
     try {
@@ -149,9 +196,9 @@ export function App() {
     }
   }
 
-  async function submit() {
+  async function submit(guessOverride?: string) {
     if (!game || submitting.current || loading) return;
-    const guess = query.trim();
+    const guess = (guessOverride ?? query).trim();
     if (!pending && !normalize(guess)) {
       setError("Enter a person's name first.");
       input.current?.focus();
@@ -188,9 +235,7 @@ export function App() {
       setGame(next);
       remember(null);
       setQuery("");
-      setNotice(next.status === "playing" ? "Not quite. A more detailed image is now revealed." :
-        next.status === "won" ? (next.mode === "daily" ? "That's right! You solved today's Pixle." : "Nice guess! Practice face solved.") :
-          (next.mode === "daily" ? "Today's puzzle is finished." : "Practice round finished."));
+      setNotice("");
       if (next.status !== "playing" && next.mode === "daily") void loadStats();
       else input.current?.focus();
     } catch (failure) {
@@ -214,9 +259,7 @@ export function App() {
         gameSchema, {}
       );
       setGame(next);
-      setNotice(mode === "random" ?
-        "Practice mode started (pixel style). These rounds are unscored." :
-        "Practice mode started (random mosaic style). These rounds are unscored.");
+      setNotice("");
     } catch (failure) {
       setError(message(failure));
     } finally {
@@ -240,8 +283,7 @@ export function App() {
       const next = await request(path, gameSchema, { request_id: requestId });
       setGame(next);
       setQuery("");
-      setNotice(next.status === "playing" ? "Skipped. A more detailed image is now revealed." :
-        next.mode === "daily" ? "Today's puzzle is finished." : "Practice round finished.");
+      setNotice("");
       if (next.status !== "playing" && next.mode === "daily") void loadStats();
       else input.current?.focus();
     } catch (failure) {
@@ -257,33 +299,65 @@ export function App() {
     !game?.guesses.some((guessItem) => normalize(guessItem.name) === normalize(person.name))
   ).slice(0, 7) : [];
   const canGuess = game !== null && !finished && !loading && !busy;
+  const currentPracticeMode = game?.mode === "practice" && game.puzzle_id.startsWith("practice-") ? "random" : "mosaic";
+  const nextPuzzleCountdown = useMemo(() => {
+    const now = new Date(clock);
+    const nextUtcMidnight = Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate() + 1,
+      0,
+      0,
+      0,
+      0,
+    );
+    const remaining = Math.max(0, Math.floor((nextUtcMidnight - clock) / 1000));
+    const hours = Math.floor(remaining / 3600).toString().padStart(2, "0");
+    const minutes = Math.floor((remaining % 3600) / 60).toString().padStart(2, "0");
+    const seconds = (remaining % 60).toString().padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  }, [clock]);
 
   return <div className="shell">
     <header className="masthead">
       <a className="brand" href="/" aria-label="Pixle home"><span className="brand-mark" aria-hidden="true">P</span>pixle<span className="brand-dot">.</span></a>
       <div className="masthead-actions">
-        <span className="edition">A new face, every day</span>
         <div className="quick-actions">
           <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("random")}>
-            Pixel practice
+            Pixle practice
           </button>
           <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("mosaic")}>
             Mosaic practice
           </button>
-          <a className="github-link" href="https://github.com/bluesbird/Pixle" target="_blank" rel="noreferrer">
-            GitHub <span aria-hidden="true">&#8599;</span>
+          <button className="top-help-button" type="button" onClick={() => setShowHowTo(true)} aria-label="How to play">
+            ?
+          </button>
+          <a className="github-link" href="https://github.com/bluesbird/Pixle" target="_blank" rel="noreferrer" aria-label="Pixle on GitHub">
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+              0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+              -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2
+              -3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+              .64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+              .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93
+              -.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+            </svg>
           </a>
         </div>
       </div>
     </header>
     <main>
-      <section className="intro" aria-labelledby="title">
-        <p className="eyebrow">THE DAILY PHOTO MOSAIC</p>
-        <h1 id="title">Familiar faces.<br /><span>One hidden identity.</span></h1>
+      <section className="intro" aria-label="Daily photo mosaic">
+        <p className="eyebrow">The Daily Photo Mosaic</p>
+        <h1 className="hero-title">Guess the famous person.</h1>
       </section>
 
       <div className="game-layout">
-        <section className="mosaic-card" aria-label={game?.mode === "practice" ? "Practice face" : "Daily mosaic"}>
+        <section
+          ref={mosaicCard}
+          className={`mosaic-card${game?.status === "won" ? " won" : game?.status === "lost" ? " lost" : ""}`}
+          aria-label={game?.mode === "practice" ? "Practice face" : "Daily mosaic"}
+        >
           <div className="card-heading">
             <span>{!game || game.mode === "daily" ? <time dateTime={game?.date ?? ""}>{game ? new Date(`${game.date}T12:00:00Z`).toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }) : "Today's puzzle"}</time> : "Practice mode"}</span>
             <span className="live-tag">{game?.mode === "practice" ? "PRACTICE / UNSCORED" : "DAILY / UTC"}</span>
@@ -308,7 +382,7 @@ export function App() {
           </div>
         </section>
 
-        <section className="play-panel" aria-label="Guess the person">
+        <section className="play-panel" style={panelMinHeight ? { minHeight: `${panelMinHeight}px` } : undefined} aria-label="Guess the person">
           {loading && <p role="status">Loading your saved progress...</p>}
           {error && <div className="error-box" role="alert"><p>{error}</p>
             {!pending && <button className="text-button" disabled={busy || loading} onClick={() => void refreshProgress()}>Refresh progress</button>}
@@ -316,7 +390,14 @@ export function App() {
           {storageError && <p className="warning" role="alert">{storageError}</p>}
           <p className="feedback" role="status" aria-live="polite">{notice}</p>
           {game && <>
-            <p className="eyebrow">{finished ? "THE BIG PICTURE" : `GUESS ${Math.min(game.attempts + 1, game.max_attempts)} OF ${game.max_attempts}`}</p>
+            {game.mode === "practice" && <p className="eyebrow practice-mode-tag">Practice mode (unscored)</p>}
+            {finished && game.original_image_url ? (
+              <button className="eyebrow eyebrow-button" onClick={() => setPreview("original")} aria-pressed={preview === "original"}>
+                THE BIG PICTURE
+              </button>
+            ) : (
+              <p className="eyebrow">{finished ? "THE BIG PICTURE" : `GUESS ${Math.min(game.attempts + 1, game.max_attempts)} OF ${game.max_attempts}`}</p>
+            )}
             <div className={`progress${finished ? " finished" : ""}`} aria-label={`${game.attempts} of ${game.max_attempts} guesses used`}>
               {Array.from({ length: game.max_attempts }, (_, index) => {
                 const className = index < game.attempts ? (game.guesses[index]?.correct ? "correct" : "used") : "";
@@ -328,33 +409,25 @@ export function App() {
                   <span key={index} className={className} />;
               })}
             </div>
-            {finished && game.original_image_url && <button className="text-button"
-              onClick={() => setPreview("original")} aria-pressed={preview === "original"}>
-              Show original portrait
-            </button>}
             {finished ? <div className="result">
-              <h2 ref={result} tabIndex={-1}>{game.status === "won" ? "You saw it." : game.mode === "daily" ? "Meet today's face." : "Practice finished."}</h2>
-              <p className="answer">{game.answer}</p>
-              {game.mode === "daily" && <p><strong className="score">{game.score}</strong> points <span className="muted">/ {game.max_attempts * 100}</span></p>}
-              <p>{game.status === "won" ?
-                `Solved in ${game.attempts} ${game.attempts === 1 ? "guess" : "guesses"}.` :
-                game.mode === "daily" ? "A fresh challenge arrives at midnight UTC." : "Start another random face to keep practicing."}</p>
-              {game.mode === "practice" && <button className="primary" disabled={busy} onClick={() => void startPractice("random")}>
-                Play another random face <span aria-hidden="true">&#8594;</span>
+              <h2 ref={result} tabIndex={-1}>{game.mode === "daily" ? "Meet today's face." : "Meet this face."}</h2>
+              <h3 className="answer">{game.answer}</h3>
+              {game.mode === "daily" && <p><strong className="score">{game.score}</strong> points <span className="muted">/ {game.max_attempts * 100}</span>{game.status === "won" ? <span className="muted"> · Solved in {game.attempts} {game.attempts === 1 ? "guess" : "guesses"}.</span> : null}</p>}
+              {game.mode === "practice" && <button className="primary primary-compact" disabled={busy} onClick={() => void startPractice(currentPracticeMode)}>
+                Play next <span aria-hidden="true">&#8594;</span>
               </button>}
             </div> : <form onSubmit={(event) => { event.preventDefault(); void submit(); }}
               onBlur={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
               }}>
-              <h2>Who's the face?</h2>
-              <p className="muted">Each miss reveals a little more.</p>
-              <label htmlFor="guess">Your guess</label>
+              <h2>Who is it?</h2>
               <div className="suggestions">
                 <input ref={input} id="guess" role="combobox" aria-autocomplete="list"
+                  aria-label="Your guess"
                   aria-expanded={open && !pending && query.trim().length > 0}
                   aria-controls={open && !pending && query.trim() ? "people-list" : undefined}
                   aria-activedescendant={open && active >= 0 && matches[active] ? `person-${active}` : undefined}
-                  autoComplete="off" maxLength={200} placeholder="Start typing a name..."
+                  autoComplete="off" maxLength={200} placeholder="Your guess..."
                   value={query} disabled={!canGuess || pending !== null}
                   onFocus={() => setOpen(true)}
                   onChange={(event) => { setQuery(event.target.value); setOpen(true); setActive(-1); setError(""); }}
@@ -374,7 +447,7 @@ export function App() {
                 {open && !pending && query.trim() && <ul id="people-list" role="listbox" aria-label="People suggestions">
                   {matches.length ? matches.map((person, index) =>
                     <li key={person.id} id={`person-${index}`} role="option" aria-selected={index === active}
-                      onPointerDown={(event) => { event.preventDefault(); setQuery(person.name); setOpen(false); setActive(-1); }}>
+                      onPointerDown={(event) => { event.preventDefault(); setQuery(person.name); setOpen(false); setActive(-1); void submit(person.name); }}>
                       {person.name}
                     </li>) : <li role="presentation" className="no-match">No matching people. Try another name.</li>}
                 </ul>}
@@ -383,7 +456,7 @@ export function App() {
                 <button type="button" disabled={!canGuess || pending !== null} onClick={() => void skipReveal()}>
                   Skip
                 </button>
-                <button className="primary" type="submit" disabled={!canGuess || (!pending && !query.trim())}>
+                <button className="primary primary-compact" type="submit" disabled={!canGuess || (!pending && !query.trim())}>
                   {busy ? "Checking..." : pending ? "Retry pending guess" : "Make a guess"} <span aria-hidden="true">&#8594;</span>
                 </button>
               </div>
@@ -393,25 +466,41 @@ export function App() {
               <h3>Your guesses</h3>
               <ol>{game.guesses.map((guessItem) => <li key={guessItem.attempt}>
                 <span className="attempt-number">{guessItem.attempt.toString().padStart(2, "0")}</span>
-                <span>{guessItem.name}</span><span className={guessItem.correct ? "good" : "muted"}>{guessItem.correct ? "Correct" : "Not quite"}</span>
+                <span className={guessItem.correct ? "good-name" : "bad"}>{guessItem.name}</span><span className={guessItem.correct ? "good" : "bad"}>{guessItem.correct ? "Correct" : (guessItem.name === "Skipped" ? "" : "Not quite")}</span>
               </li>)}</ol>
             </div>}
           </>}
           {!game && !loading && !error && <p>No puzzle is available yet.</p>}
-          <details className="how-to">
-            <summary>How to play</summary>
-            <p>Find the famous person hidden in the puzzle. Choose a name and make a guess.
-              A wrong guess unlocks a clearer image. Fewer guesses mean more points in daily mode.</p>
-            <p>One puzzle worldwide, resetting at midnight UTC. Random practice rounds are separate and unscored.</p>
-          </details>
-          <section className="stats" aria-label="Your statistics">
-            <h3>Your daily record</h3>
-            {stats ? <dl><div><dt>Played</dt><dd>{stats.played}</dd></div><div><dt>Won</dt><dd>{stats.won}</dd></div><div><dt>Points</dt><dd>{stats.total_score}</dd></div></dl> : !statsError && <p className="muted">Statistics load with your puzzle.</p>}
-            {statsError && <div role="alert"><p>{statsError}</p><button className="text-button" onClick={() => void loadStats()}>Retry statistics</button></div>}
-          </section>
+          <div className="panel-tail">
+            <section className="stats" aria-label="Your statistics">
+              <h3>Your daily record</h3>
+              {stats ? <dl><div><dt>Played</dt><dd>{stats.played}</dd></div><div><dt>Won</dt><dd>{stats.won}</dd></div><div><dt>Points</dt><dd>{stats.total_score}</dd></div></dl> : !statsError && <p className="muted">Statistics load with your puzzle.</p>}
+              {statsError && <div role="alert"><p>{statsError}</p><button className="text-button" onClick={() => void loadStats()}>Retry statistics</button></div>}
+            </section>
+          </div>
         </section>
       </div>
     </main>
-    <footer><span>A little perspective changes everything.</span><span>pixle / one puzzle a day</span></footer>
+    {showHowTo && <div className="modal-backdrop" role="presentation" onClick={() => setShowHowTo(false)}>
+      <section className="howto-modal" role="dialog" aria-modal="true" aria-labelledby="howto-title" onClick={(event) => event.stopPropagation()}>
+        <h2 id="howto-title">How to play</h2>
+        <p>Guess the famous person. Wrong guesses reveal more detail, and fewer guesses give more points.</p>
+        <div className="howto-example" aria-label="Reveal example levels">
+          {[1, 3, 5].map((level) => <figure key={level}>
+            <img src={`/puzzles/${EXAMPLE_PUZZLE_ID}/level-${level.toString().padStart(2, "0")}.jpg`} alt={`Einstein example level ${level}`} loading="lazy" />
+            <figcaption>Level {level}</figcaption>
+          </figure>)}
+        </div>
+        <p className="howto-tip">Tip: Try looking at the image from a little farther away. You might recognize the face more easily!</p>
+        <img className="howto-tip-image" src="/how-to-tip.png" alt="Example tip image for stepping farther away." loading="lazy" />
+        <div className="howto-actions">
+          <button className="top-action" type="button" onClick={() => setShowHowTo(false)}>Got it</button>
+        </div>
+      </section>
+    </div>}
+    <footer>
+      <span>A new face, every day</span>
+      <span className="footer-countdown" role="status" aria-live="polite">Next puzzle: {nextPuzzleCountdown}</span>
+    </footer>
   </div>;
 }

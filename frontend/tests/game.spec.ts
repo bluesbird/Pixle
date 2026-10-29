@@ -141,7 +141,7 @@ async function guess(page: Page, name: string) {
   await page.getByRole("button", { name: "Make a guess" }).click();
 }
 
-test("keyboard suggestions, reveals, completion, spoiler-free sharing, and reload", async ({ page }) => {
+test("keyboard suggestions, reveals, completion, and reload", async ({ page }) => {
   await mockApi(page);
   await page.goto("/");
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
@@ -155,25 +155,15 @@ test("keyboard suggestions, reveals, completion, spoiler-free sharing, and reloa
   await page.reload();
   await expect(page.getByText("Taylor Swift", { exact: true })).toBeVisible();
   await guess(page, "Albert Einstein");
-  await expect(page.getByRole("heading", { name: "You saw it." })).toBeFocused();
+  await expect(page.getByRole("heading", { name: "Meet today's face." })).toBeFocused();
   await expect(page.getByText("400", { exact: true }).first()).toBeVisible();
   await page.getByRole("button", { name: "Show detail level 1" }).click();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
-  await page.getByRole("button", { name: "Show original portrait" }).click();
+  await page.getByRole("button", { name: "THE BIG PICTURE" }).click();
   await expect(page.getByRole("img", { name: /original portrait/i })).toBeVisible();
-  await page.evaluate(() => {
-    Object.defineProperty(navigator, "clipboard", { configurable: true, value: {
-      writeText: () => Promise.reject(new Error("denied")),
-    } });
-  });
-  await page.getByRole("button", { name: /Copy spoiler-free/ }).click();
-  const share = page.getByRole("textbox", { name: "Copy this result" });
-  await expect(share).toBeVisible();
-  expect(await share.inputValue()).toContain("2/5 | 400 points");
-  expect(await share.inputValue()).not.toContain("Einstein");
   await expect(page.getByRole("link", { name: /Photo credits/ })).toHaveAttribute("href", `/puzzles/${puzzleId}/credits.md`);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "You saw it." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Meet today's face." })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
@@ -243,16 +233,16 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
 test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
   await page.goto("/");
-  await page.getByRole("button", { name: "Pixel practice" }).click();
+  await page.getByRole("button", { name: "Pixle practice" }).click();
   await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
   await page.getByRole("button", { name: "Skip" }).click();
   await expect(page.getByText("Skipped", { exact: true })).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 2/ })).toBeVisible();
   await guess(page, "Tom Hanks");
-  await expect(page.getByRole("heading", { name: "You saw it." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Meet this face." })).toBeVisible();
   await expect(page.locator(".result .score")).toHaveCount(0);
-  await page.getByRole("button", { name: "Play another random face" }).click();
+  await page.getByRole("button", { name: "Play next" }).click();
   await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
 });
 
