@@ -39,6 +39,15 @@ export function App() {
   const preloadedUrls = useRef(new Set<string>());
   const mosaicCard = useRef<HTMLElement>(null);
   const mosaicImage = useRef<HTMLImageElement>(null);
+  const shouldAutoFocusGuess = useMemo(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return true;
+    return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  }, []);
+
+  function focusGuessField() {
+    if (!shouldAutoFocusGuess) return;
+    input.current?.focus();
+  }
 
   async function loadStats() {
     try {
@@ -162,8 +171,8 @@ export function App() {
 
   useEffect(() => {
     if (!game || game.status !== "playing" || showHowTo) return;
-    requestAnimationFrame(() => input.current?.focus());
-  }, [game?.puzzle_id, game?.practice_id, game?.status, game?.attempts, showHowTo]);
+    requestAnimationFrame(() => focusGuessField());
+  }, [game?.puzzle_id, game?.practice_id, game?.status, game?.attempts, showHowTo, shouldAutoFocusGuess]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setClock(Date.now()), 1000);
@@ -216,7 +225,7 @@ export function App() {
     const guess = (guessOverride ?? query).trim();
     if (!pending && !normalize(guess)) {
       setError("Enter a person's name first.");
-      input.current?.focus();
+      focusGuessField();
       return;
     }
     if (!pending && game.guesses.some((previous) => normalize(previous.name) === normalize(guess))) {
@@ -252,7 +261,7 @@ export function App() {
       setQuery("");
       setNotice("");
       if (next.status !== "playing" && next.mode === "daily") void loadStats();
-      else input.current?.focus();
+      else focusGuessField();
     } catch (failure) {
       if (failure instanceof ApiError && [401, 409, 422].includes(failure.status)) remember(null);
       setError(message(failure));
@@ -300,7 +309,7 @@ export function App() {
       setQuery("");
       setNotice("");
       if (next.status !== "playing" && next.mode === "daily") void loadStats();
-      else input.current?.focus();
+      else focusGuessField();
     } catch (failure) {
       setError(message(failure));
     } finally {
