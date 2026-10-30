@@ -1,31 +1,40 @@
 {
   "Michael Jackson": {
-    "file_title": "File:Michael Jackson in 1988.jpg"
+    "file_title": "File:Michael_Jackson_1983_(3x4_cropped)_(contrast).jpg"
   },
   "Michael Jordan": {
     "file_title": "File:Steve Lipfosky -- Michael Jordan (1997) (cropped) 3x4.jpg",
     "download_width": 960
   },
   "Stephen Hawking": {
-    "file_title": "File:Stephen Hawking.StarChild.jpg",
-    "crop": [0, 0, 250, 250]
+    "file_title": "File:Stephen Hawking 2012 (cropped).jpg"
   },
   "Elizabeth II": {
-    "file_title": "File:Queen Elizabeth II in March 2015.jpg"
+    "file_title": "File:Queen_Elizabeth_II_March_2015.jpg",
+    "download_width": 960
   },
   "Bill Gates": {
-    "crop": [0, 0, 960, 960]
+    "crop": [
+      0,
+      0,
+      960,
+      960
+    ]
   },
   "Justin Bieber": {
-    "file_title": "File:Justin Bieber 2.png",
-    "crop": [0, 0, 640, 640]
+    "file_title": "File:2009 Justin Bieber NYC 2.JPG"
   },
   "Psy": {
-    "file_title": "File:Psy.jpg"
+    "file_title": "File:Psy_from_acrofan.jpg"
   },
   "Usain Bolt": {
     "file_title": "File:Usain Bolt Olympics Celebration.jpg",
-    "crop": [300, 50, 900, 650]
+    "crop": [
+      300,
+      50,
+      900,
+      650
+    ]
   },
   "Lewis Hamilton": {
     "file_title": "File:Lewis Hamilton Silverstone 2018 (cropped).jpg"
@@ -39,20 +48,30 @@
   },
   "14th Dalai Lama": {
     "file_title": "File:His Holiness the 14th Dalai Lama (43188695315).jpg",
-    "crop": [900, 120, 1820, 1040]
+    "crop": [
+      900,
+      120,
+      1820,
+      1040
+    ]
   },
   "Ariana Grande": {
     "file_title": "File:Ariana Grande by David Shankbone (cropped).jpg",
-    "crop": [190, 110, 1420, 1340]
+    "crop": [
+      190,
+      110,
+      1420,
+      1340
+    ]
   },
   "Bad Bunny": {
     "file_title": "File:Bad Bunny 2019 by Glenn Francis.jpg"
   },
   "Billie Eilish": {
-    "file_title": "File:Billie Eilish @Pukkelpop 2019 (48590585507) (cropped).jpg"
+    "file_title": "File:Billie_Eilish_at_Pukkelpop_(48590443381)_(cropped)_square.jpg"
   },
   "Ed Sheeran": {
-    "file_title": "File:Ed Sheeran-6886 (cropped 2).jpg"
+    "file_title": "File:Ed Sheeran-6886.jpg"
   },
   "Emma Watson": {
     "file_title": "File:Emma Watson 2012 Shankbone (cropped).JPG"
@@ -61,24 +80,30 @@
     "file_title": "File:Jennifer Lawrence at the 83rd Academy Awards crop.jpg"
   },
   "Johnny Depp": {
-    "file_title": "File:Johnny Depp Alice Through the Looking Glass premiere.jpg"
+    "file_title": "File:Johnny_Depp-2821.jpg"
   },
   "Leonardo DiCaprio": {
     "file_title": "File:Leonardo DiCaprio crop.jpg"
   },
   "Mariah Carey": {
-    "file_title": "File:Mariah Carey 1999 (bigger) (cropped) (b).jpg"
+    "file_title": "File:Mariah_Carey_WBLS_2018_Interview_2.jpg"
   },
   "Mark Zuckerberg": {
     "file_title": "File:Mark Zuckerberg (7985194652).jpg"
   },
   "Michael Schumacher": {
-    "file_title": "File:Michael Schumacher.jpg"
+    "file_title": "File:Michael_Schumacher_after_2005_United_States_GP_(20413937)_(cropped).jpg",
+    "download_width": 960
   },
   "Oprah Winfrey": {
     "file_title": "File:2011 Oprah at The Cable Show (29902986311) (2).jpg",
     "download_width": 768,
-    "crop": [180, 0, 960, 780]
+    "crop": [
+      180,
+      0,
+      960,
+      780
+    ]
   },
   "Rafael Nadal": {
     "file_title": "File:Rafael Nadal January 2015.jpg"
@@ -91,7 +116,12 @@
   },
   "Roger Federer": {
     "file_title": "File:Roger Federer 2015.jpg",
-    "crop": [218, 0, 1920, 1702]
+    "crop": [
+      218,
+      0,
+      1920,
+      1702
+    ]
   },
   "Serena Williams": {
     "file_title": "File:Serena Williams Doha 2013 (cropped).jpg"
@@ -103,10 +133,11 @@
     "file_title": "File:191125 Taylor Swift at the 2019 American Music Awards.png"
   },
   "Tom Hanks": {
-    "file_title": "File:Tom Hanks 2016.jpg"
+    "file_title": "File:TIFF 2019 tom hanks (48696326453) (cropped).jpg"
   },
   "Xi Jinping": {
-    "file_title": "File:Xi Jinping in Beijing on May 13, 2025 (cropped).jpg"
+    "file_title": "File:Xi_Jinping_2019_(49060546152)_2.jpg",
+    "download_width": 960
   },
   "Adele": {
     "file_title": "File:Adele Feb 24 23 (cropped).jpg"
@@ -121,46 +152,56 @@
     "file_title": "File:Drake and Future 2016 Summer Sixteen Tour (cropped).jpg"
   },
   "Eminem": {
-    "file_title": "File:Eminem-02-mika.jpg",
-    "download_width": 768,
-    "crop": [100, 320, 620, 840]
+    "file_title": "File:Eminem 1 - Lollapalooza 2011 (6027569403) (cropped).jpg"
   },
   "Freddie Mercury": {
-    "file_title": "File:Queen News Of The World (1977 Press Kit Photo 04) Freddie Mercury.jpg",
-    "crop": [170, 0, 1170, 1000]
+    "file_title": "File:Freddie_Mercury_(1975_Elektra_publicity_photo).jpg"
   },
   "Madonna": {
     "file_title": "File:Madonna by David Shankbone cropped.jpg",
     "download_width": 768
   },
   "Ronaldinho": {
-    "file_title": "File:Ronaldinho 2017.jpg",
-    "download_width": 768,
-    "crop": [300, 50, 900, 650]
+    "file_title": "File:Ronaldinho_11feb2007.jpg"
   },
   "Tiger Woods": {
     "file_title": "File:Tiger Woods 2018.jpg"
   },
   "Elvis Presley": {
-    "crop": [570, 0, 1330, 760]
+    "file_title": "File:Elvis_Presley_1970.jpg"
   },
   "James Dean": {
-    "crop": [400, 40, 1450, 1090]
+    "file_title": "File:James Dean Publicity Shot, 1955 (HQ) (cropped).jpg"
   },
   "Winston Churchill": {
-    "crop": [380, 100, 1660, 1380]
+    "crop": [
+      380,
+      100,
+      1660,
+      1380
+    ]
   },
   "Sigmund Freud": {
-    "crop": [280, 80, 1510, 1310]
+    "crop": [
+      280,
+      80,
+      1510,
+      1310
+    ]
   },
   "J. K. Rowling": {
-    "crop": [370, 130, 1370, 1130]
+    "crop": [
+      370,
+      130,
+      1370,
+      1130
+    ]
   },
   "50 Cent": {
-    "crop": [0, 0, 1267, 1267]
+    "file_title": "File:50_cent_in_concert_(cropped).jpg"
   },
   "Arnold Schwarzenegger": {
-    "file_title": "File:Arnold Schwarzenegger by Harry Langdon 1985.jpg"
+    "file_title": "File:Schwarzenegger_1984.jpg"
   },
   "Conor McGregor": {
     "file_title": "File:Conor McGregor 2018.jpg"
@@ -173,20 +214,175 @@
     "file_title": "File:Greta Thunberg 02 cropped.jpg"
   },
   "Kim Jong Un": {
-    "file_title": "File:Kim Jong-un April 2019 crop (cropped) (2).jpg",
-    "download_width": 400
+    "file_title": "File:Kim_Jong-un_2019_(cropped).jpg"
   },
   "Magnus Carlsen": {
-    "file_title": "File:Magnus Carlsen (2012) cropped.jpg",
-    "download_width": 768
+    "file_title": "File:Magnus Carlsen 2016 (cropped).jpg"
   },
   "Mary-Louise Parker": {
     "file_title": "File:Mary-Louise Parker 1999.jpg"
   },
   "Muhammad Ali": {
-    "file_title": "File:Muhammad Ali Smiling 1962 Portrait.jpg"
+    "file_title": "File:Muhammad Ali NYWTS.jpg",
+    "crop": [
+      0,
+      260,
+      1920,
+      2180
+    ]
   },
   "Pablo Picasso": {
-    "file_title": "File:Pablo Picasso bij aankomst op Victoria Station, voor de communistische vredesconferentie in Sheffield, RP-F-F01599.jpg"
+    "file_title": "File:Pablo_picasso_1.jpg"
+  },
+  "Al Pacino": {
+    "file_title": "File:Al_Pacino.jpg"
+  },
+  "Angelina Jolie": {
+    "file_title": "File:Angelina-Jolie cropped.jpg"
+  },
+  "Anthony Hopkins": {
+    "file_title": "File:AnthonyHopkins10TIFF.jpg"
+  },
+  "Bob Dylan": {
+    "file_title": "File:Joan Baez Bob Dylan crop.jpg"
+  },
+  "Bob Ross": {
+    "file_title": "File:Bob Ross circa 1985.jpg"
+  },
+  "Daniel Craig": {
+    "file_title": "File:Daniel craig (51593655096) (cropped).jpg"
+  },
+  "Clint Eastwood": {
+    "file_title": "File:Clint_Eastwood_at_2010_New_York_Film_Festival.jpg"
+  },
+  "Daniel Radcliffe": {
+    "file_title": "File:Daniel Radcliffe (14594645950) (cropped).jpg"
+  },
+  "David Bowie": {
+    "file_title": "File:David_Bowie.jpg"
+  },
+  "Eliud Kipchoge": {
+    "file_title": "File:Eliud Kipchoge in Berlin (cropped).jpg"
+  },
+  "Emma Stone": {
+    "file_title": "File:Emma_Stone_2014.jpg"
+  },
+  "Faker (gamer)": {
+    "file_title": "File:Faker_2020_interview.jpg"
+  },
+  "Frank Sinatra": {
+    "file_title": "File:Frank_Sinatra_by_Gottlieb_c1947-_2.jpg"
+  },
+  "George Clooney": {
+    "file_title": "File:George Clooney 66ème Festival de Venise (cropped2).jpg"
+  },
+  "Heath Ledger": {
+    "file_title": "File:Heath Ledger (2) (cropped).jpg"
+  },
+  "Jay-Z": {
+    "file_title": "File:Jay-Z_@_Shawn_'Jay-Z'_Carter_Foundation_Carnival_(crop_2).jpg"
+  },
+  "Jennifer Aniston": {
+    "file_title": "File:2013 TIFF - LIfe Of Crime - Jennifer Aniston.jpg"
+  },
+  "John Travolta": {
+    "file_title": "File:John Travolta, 2014 (cropped).jpg"
+  },
+  "Kim Kardashian": {
+    "file_title": "File:Kim_Kardashian_(6308129062).jpg"
+  },
+  "Kylie Jenner": {
+    "file_title": "File:Kylie_Jenner1.png"
+  },
+  "Larry Page": {
+    "file_title": "File:Larry Page (cropped).jpg"
+  },
+  "Lamine Yamal": {
+    "file_title": "File:Lamine Yamal Argentina v Spain 19 July 2026-214 (cropped).jpg"
+  },
+  "Malcolm X": {
+    "file_title": "File:Malcolm_X_in_1964.jpg"
+  },
+  "Margot Robbie": {
+    "file_title": "File:Margot_Robbie_by_Gage_Skidmore.jpg"
+  },
+  "Michael Phelps": {
+    "file_title": "File:MICHAEL PHELPS E KATIE LEDECKY CONCEDEM ENTREVISTAS NO PARQUE OLÍMPICO (28132564163) (cropped).jpg"
+  },
+  "Michelle Obama": {
+    "file_title": "File:Michelle Obama official portrait crop.jpg"
+  },
+  "Nicole Kidman": {
+    "file_title": "File:Nicole_Kidman_(cropped).jpg"
+  },
+  "Novak Djokovic": {
+    "file_title": "File:Novak_Djokovic_Paris_2024_Olympic_Games_(cropped).jpg"
+  },
+  "Prince (musician)": {
+    "file_title": "File:Prince_promo_picture_(1988;_cropped_and_retouched).png"
+  },
+  "Quentin Tarantino": {
+    "file_title": "File:Quentin Tarantino @ 2010 Academy Awards cropped.jpg"
+  },
+  "Robert Pattinson": {
+    "file_title": "File:Robert_Pattinson_by_Gage_Skidmore.jpg"
+  },
+  "Rosa Parks": {
+    "file_title": "File:Rosa_Parks_1955_3_(cropped_3x4).jpg",
+    "download_width": 960
+  },
+  "Scarlett Johansson": {
+    "file_title": "File:Scarlett_Johansson_by_Gage_Skidmore_2_(cropped)_(cropped).jpg"
+  },
+  "Selena Gomez": {
+    "file_title": "File:Selena_Gomez_at_the_2024_Toronto_International_Film_Festival_10_(cropped).jpg"
+  },
+  "Shawn Mendes": {
+    "file_title": "File:191125 Shawn Mendes at the 2019 American Music Awards (cropped).png"
+  },
+  "Stephen King": {
+    "file_title": "File:Portrait photograph of Owen and Stephen King by James Leonard, c. 1982.jpg"
+  },
+  "The Weeknd": {
+    "file_title": "File:The_Weeknd_Cannes_2023.png"
+  },
+  "Timothée Chalamet": {
+    "file_title": "File:Timothée Chalamet-63541 (cropped).jpg"
+  },
+  "Tom Brady": {
+    "file_title": "File:Tom_Brady_2021.png"
+  },
+  "Tom Cruise": {
+    "file_title": "File:Tom_Cruise_at_53rd_Saturn_Awards_2026-01.jpg"
+  },
+  "Whitney Houston": {
+    "file_title": "File:Whitney_Houston_in_1988.png"
+  },
+  "John Cena": {
+    "file_title": "File:John_Cena_134616.jpg"
+  },
+  "David Goggins": {
+    "file_title": "File:Supersoldier_David_Goggins.png"
+  },
+  "Keanu Reeves": {
+    "file_title": "File:Keanu_Reeves_(crop_and_levels)_(cropped).jpg"
+  },
+  "Lady Gaga": {
+    "file_title": "File:Lady_Gaga_interview_2016.jpg"
+  },
+  "Logan Paul": {
+    "file_title": "File:Logan_Paul_(48086619418).jpg"
+  },
+  "Brad Pitt": {
+    "file_title": "File:Brad_Pitt_2019_by_Glenn_Francis.jpg"
+  },
+  "Zinedine Zidane": {
+    "file_title": "File:Zinedine_Zidane_by_Tasnim_02.jpg"
+  },
+  "Christopher Nolan": {
+    "file_title": "File:Christopher_Nolan,_London,_2013.jpg"
+  },
+  "John Lennon": {
+    "file_title": "File:John_Lennon_in_Let_It_Be.png"
   }
 }

@@ -11,6 +11,12 @@ from backend.database import Person, Puzzle
 
 ROOT = Path(__file__).resolve().parents[1]
 
+PERSON_BYNAMES = {
+    "elizabeth-ii": {"queen", "the queen", "queen elizabeth"},
+    "elvis-presley": {"king", "the king"},
+    "dwayne-johnson": {"the rock", "dwayne the rock johnson"},
+}
+
 
 def normalize_answer(value):
     value = unicodedata.normalize("NFKD", value.casefold())
@@ -75,9 +81,11 @@ def configure_puzzle(engine, puzzle_date, asset_id, puzzle_root=ROOT / "puzzles"
                 raise ValueError("A different puzzle is already assigned to this date")
             return
         for record in records:
+            bynames = PERSON_BYNAMES.get(record["id"], set())
             aliases = sorted({
                 normalize_answer(record["name"]), normalize_answer(record["wikipedia_title"]),
                 normalize_answer(record["id"]),
+                *(normalize_answer(value) for value in bynames),
             })
             person = session.get(Person, record["id"])
             if person is None:

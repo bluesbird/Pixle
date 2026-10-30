@@ -568,7 +568,7 @@ export function App() {
             <figcaption>Level {level}</figcaption>
           </figure>)}
         </div>
-        <p className="howto-tip">Tip: Try looking at the image from a little farther away. You might recognize the face more easily!</p>
+        <p className="howto-tip">Tip: Step back and see the bigger picture!</p>
         <img className="howto-tip-image" src="/how-to-tip.png" alt="Example tip image for stepping farther away." loading="lazy" />
         <div className="howto-actions">
           <button className="top-action" type="button" onClick={() => setShowHowTo(false)}>Got it</button>

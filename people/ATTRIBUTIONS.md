@@ -16,7 +16,7 @@ Rihanna - Liam Mendes; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/
 
 ## Lady Gaga ([`lady-gaga.jpg`](images/lady-gaga.jpg))
 
-Lady Gaga - Carlos M. Vazquez II; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Lady_Gaga_at_Joe_Biden%27s_inauguration_(cropped_5).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: 210120-D-WD757-1720.
+Lady Gaga - SMP Entertainment; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Lady_Gaga_interview_2016.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Vimeo: SB50 Lady GaGa Interview (view archived source).
 
 ## Madonna ([`madonna.jpg`](images/madonna.jpg))
 
@@ -25,7 +25,7 @@ derivative work: Truu (talk); CC BY-SA 3.0 (http://creativecommons.org/licenses/
 
 ## Michael Jackson ([`michael-jackson.jpg`](images/michael-jackson.jpg))
 
-Michael Jackson - Zoran Veselinovic; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Michael_Jackson_in_1988.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Flickr.
+Michael Jackson - Matthew Rolston; Distributed by Epic Records; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Michael_Jackson_1983_(3x4_cropped)_(contrast).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Worthpoint  Immediate from iHeart.
 
 ## Shakira ([`shakira.jpg`](images/shakira.jpg))
 
@@ -37,11 +37,11 @@ Adele - Lady Lotus; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0
 
 ## Justin Bieber ([`justin-bieber.jpg`](images/justin-bieber.jpg))
 
-Justin Bieber - Kevin; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Justin_Bieber_2.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: originally posted to Flickr as Justin Bieber.
+Justin Bieber - Kerosene Photography; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:2009_Justin_Bieber_NYC_2.JPG. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Justin Bieber.
 
 ## Ed Sheeran ([`ed-sheeran.jpg`](images/ed-sheeran.jpg))
 
-Ed Sheeran - Harald Krichel; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Ed_Sheeran-6886_(cropped_2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+Ed Sheeran - Harald Krichel; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Ed_Sheeran-6886.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
 
 ## Ariana Grande ([`ariana-grande.jpg`](images/ariana-grande.jpg))
 
@@ -49,7 +49,7 @@ Ariana Grande - David Shankbone; CC BY 2.0 (https://creativecommons.org/licenses
 
 ## Billie Eilish ([`billie-eilish.jpg`](images/billie-eilish.jpg))
 
-Billie Eilish - crommelincklars; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Billie_Eilish_@Pukkelpop_2019_(48590585507)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Billie Eilish @Pukkelpop 2019.
+Billie Eilish - Lars Crommelinck; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Billie_Eilish_at_Pukkelpop_(48590443381)_(cropped)_square.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/142899511@N03/48590443381/.
 
 ## Dua Lipa ([`dua-lipa.jpg`](images/dua-lipa.jpg))
 
@@ -65,7 +65,7 @@ Drake - The Come Up Show; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0
 
 ## Eminem ([`eminem.jpg`](images/eminem.jpg))
 
-Eminem - Mika-photography; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Eminem-02-mika.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+Eminem - - EMR -; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Eminem_1_-_Lollapalooza_2011_(6027569403)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Eminem 1 - Lollapalooza 2011.
 
 ## Jung Kook ([`jung-kook.jpg`](images/jung-kook.jpg))
 
@@ -73,7 +73,7 @@ Jung Kook - K-POPIT 케이팝잇; CC BY 4.0 (https://creativecommons.org/license
 
 ## Psy ([`psy.jpg`](images/psy.jpg))
 
-Psy - Eva Rinaldi; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Psy.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This image has been extracted from another file.
+Psy - acrofan.com; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Psy_from_acrofan.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: http://www.acrofan.com/ko-kr/life/content/20120328/0702030301. Source attribution statement: ACROFAN.
 
 ## Bob Marley ([`bob-marley.jpg`](images/bob-marley.jpg))
 
@@ -85,7 +85,7 @@ Celine Dion - Kingkongphoto & www.celebrity-photos.com from Laurel  Maryland, US
 
 ## Mariah Carey ([`mariah-carey.jpg`](images/mariah-carey.jpg))
 
-Mariah Carey - John Mathew Smith & www.celebrity-photos.com from Laurel  Maryland, USA; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Mariah_Carey_1999_(bigger)_(cropped)_(b).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: MARIAH CAREY.
+Mariah Carey - WBLS; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Mariah_Carey_WBLS_2018_Interview_2.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: YouTube: https://www.youtube.com/watch?v=k-ME-4gcB40 – View/save archived versions on archive.org. Source attribution statement: WBLS.
 
 ## Elton John ([`elton-john.jpg`](images/elton-john.jpg))
 
@@ -93,7 +93,7 @@ Elton John - Raph_PH; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); h
 
 ## Freddie Mercury ([`freddie-mercury.jpg`](images/freddie-mercury.jpg))
 
-Freddie Mercury - Christopher Hopper; Distributed by Elektra Records; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Queen_News_Of_The_World_(1977_Press_Kit_Photo_04)_Freddie_Mercury.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: News Of The World Press Kit Scan, no copyright markings visible with photo..
+Freddie Mercury - Koh Hasebe; Distributed by Elektra Records; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Freddie_Mercury_(1975_Elektra_publicity_photo).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Queen press photos Promotional photo direct link  "Billboard", page 94, 26 November 1977.
 
 ## Snoop Dogg ([`snoop-dogg.jpg`](images/snoop-dogg.jpg))
 
@@ -105,11 +105,91 @@ Jennifer Lopez - Everwest; CC BY 4.0 (https://creativecommons.org/licenses/by/4.
 
 ## 50 Cent ([`50-cent.jpg`](images/50-cent.jpg))
 
-50 Cent - Senior Airman Nia Jacobs; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Curtis_%2250_Cent%22_Jackson_visits_Barksdale_AFB_(5)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.dvidshub.net/image/8536971/curtis-50-cent-jackson-visits-barksdale-afb.
+50 Cent - Alex Const; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:50_cent_in_concert_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: originally posted to Flickr as 50 cent.
 
 ## Elvis Presley ([`elvis-presley.jpg`](images/elvis-presley.jpg))
 
-Elvis Presley - Metro-Goldwyn-Mayer, Inc. Reproduction Number: LC-USZ6-2067 Location: NYWTS -- BIOG; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Elvis_Presley_promoting_Jailhouse_Rock.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: The Library of Congress retrieved 3d02067r.jpg from Jailhouse Rock..
+Elvis Presley - Ollie Atkins, chief White House photographer at the time. See ARC record.; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Elvis_Presley_1970.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This is a cropped and retouched version of Image:Elvis-nixon.jpg, a White House photograph by Ollie Atkins via https://www.archives.gov/exhibits/nixon-met-elvis/.
+
+## Selena Gomez ([`selena-gomez.jpg`](images/selena-gomez.jpg))
+
+Selena Gomez - Frank Sun; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Selena_Gomez_at_the_2024_Toronto_International_Film_Festival_10_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Frank Sun / WikiPortraits.
+
+## Harry Styles ([`harry-styles.jpg`](images/harry-styles.jpg))
+
+Harry Styles - Raph_PH; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:HarryStylesWembley170623_(65_of_93)_(52982678051)_(cropped_2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: HarryStylesWembley170623 (65 of 93).
+
+## Olivia Rodrigo ([`olivia-rodrigo.jpg`](images/olivia-rodrigo.jpg))
+
+Olivia Rodrigo - Raph_PH; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0); https://commons.wikimedia.org/wiki/File:Glasto2025-546_(cropped)_2.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://https://www.billboard.com/wp-content/uploads/2023/07/Olivia-Rodrigo-cr-Larissa-Hofmann-press-04-2023-billboard-1548.jpg?w=942&h=628&crop=1/.
+
+## The Weeknd ([`the-weeknd.jpg`](images/the-weeknd.jpg))
+
+The Weeknd - Canal22; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:The_Weeknd_Cannes_2023.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: YouTube: https://www.youtube.com/watch?v=3mGznwQ5l6A – View/save archived versions on archive.org.
+
+## Shawn Mendes ([`shawn-mendes.jpg`](images/shawn-mendes.jpg))
+
+Shawn Mendes - Cosmopolitan UK; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:191125_Shawn_Mendes_at_the_2019_American_Music_Awards.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: YouTube: The Best Outfits At The 2019 American Music Awards | Cosmopolitan UK] – View/save archived versions on archive.org(See specific archived version). Source attribution statement: Cosmopolitan UK.
+
+## Cardi B ([`cardi-b.jpg`](images/cardi-b.jpg))
+
+Cardi B - Runawaymo; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Cardi_B_at_2026_Essence_Festival_of_Culture_02_(cropped)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Miley Cyrus ([`miley-cyrus.jpg`](images/miley-cyrus.jpg))
+
+Miley Cyrus - Raphael Pour-Hashemi; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Miley_Cyrus_Primavera19_-226_(48986293772)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Primavera19_-226.
+
+## XXXTentacion ([`xxxtentacion.jpg`](images/xxxtentacion.jpg))
+
+XXXTentacion - State of Florida; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Xxxtentacion_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Florida Dept. of Corrections.
+
+## John Lennon ([`john-lennon.jpg`](images/john-lennon.jpg))
+
+John Lennon - Apple Records; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:John_Lennon_in_Let_It_Be.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Let It Be album cover.
+
+## Whitney Houston ([`whitney-houston.jpg`](images/whitney-houston.jpg))
+
+Whitney Houston - Galaxy Artist Management; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Whitney_Houston_in_1988.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: WorthPoint.
+
+## Bob Dylan ([`bob-dylan.jpg`](images/bob-dylan.jpg))
+
+Bob Dylan - Rowland Scherman; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Joan_Baez_Bob_Dylan_crop.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing..
+
+## Britney Spears ([`britney-spears.jpg`](images/britney-spears.jpg))
+
+Britney Spears - Glenn Francis; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Britney_Spears_2013_(Straighten_Crop).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This file was derived from:  Britney Spears 2013.jpg:.
+
+## David Bowie ([`david-bowie.jpg`](images/david-bowie.jpg))
+
+David Bowie - Arthur from Westchester County north of NYC, USA, at Arthur@NYCArthur.com; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:David_Bowie.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Cropped from the original, David Bowie.
+
+## Stevie Wonder ([`stevie-wonder.jpg`](images/stevie-wonder.jpg))
+
+Stevie Wonder - Raph_PH; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:SWonderBSTHyde060719-72_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: SWonderBSTHyde060719-72.
+
+## Frank Sinatra ([`frank-sinatra.jpg`](images/frank-sinatra.jpg))
+
+Frank Sinatra - William P. Gottlieb; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Frank_Sinatra_by_Gottlieb_c1947-_2.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: William P. Gottlieb Collection (Library of Congress).
+
+## Jay-Z ([`jay-z.jpg`](images/jay-z.jpg))
+
+Jay-Z - Joella Marano from Manhattan, NY; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Jay-Z_@_Shawn_%27Jay-Z%27_Carter_Foundation_Carnival_(crop_2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/ellasportfolio/6198085452/.
+
+## Amy Winehouse ([`amy-winehouse.jpg`](images/amy-winehouse.jpg))
+
+Amy Winehouse - Rama; CC BY-SA 2.0 fr (https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en); https://commons.wikimedia.org/wiki/File:Amy_Winehouse_f4962007_crop.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: cropped version from.
+
+## Kanye West ([`kanye-west.jpg`](images/kanye-west.jpg))
+
+Kanye West - David Shankbone; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Kanye_West_at_the_2009_Tribeca_Film_Festival_(crop_2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Katy Perry ([`katy-perry.jpg`](images/katy-perry.jpg))
+
+Katy Perry - Colleen Sturtevant; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Katy_Perry_2026_Tribeca_Film_Festival_(cropped_1).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Nicki Minaj ([`nicki-minaj.jpg`](images/nicki-minaj.jpg))
+
+Nicki Minaj - Gage Skidmore from Surprise, AZ, United States of America; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Nicki_Minaj_(55022495106)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Nicki Minaj.
 
 ## Tom Cruise ([`tom-cruise.jpg`](images/tom-cruise.jpg))
 
@@ -121,11 +201,12 @@ Leonardo DiCaprio - Thore Siebrands; CC BY-SA 3.0 (https://creativecommons.org/l
 
 ## Brad Pitt ([`brad-pitt.jpg`](images/brad-pitt.jpg))
 
-Brad Pitt - Harald Krichel; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Brad_Pitt-69858.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+Brad Pitt - Toglenn; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Brad_Pitt_2019_by_Glenn_Francis.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: © Glenn Francis, www.PacificProDigital.com.
 
 ## Angelina Jolie ([`angelina-jolie.jpg`](images/angelina-jolie.jpg))
 
-Angelina Jolie - Harald Krichel; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Angelina_Jolie-643531_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+Angelina Jolie - Angelina-Jolie.jpg: www.promiflash.de - Bitte bei Bildverwendung auch Link setzen
+derivative work: Born Slippy (talk); CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Angelina-Jolie_cropped.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Angelina-Jolie.jpg.
 
 ## Dwayne Johnson ([`dwayne-johnson.jpg`](images/dwayne-johnson.jpg))
 
@@ -133,7 +214,7 @@ Dwayne Johnson - Harald Krichel; CC BY-SA 4.0 (https://creativecommons.org/licen
 
 ## Johnny Depp ([`johnny-depp.jpg`](images/johnny-depp.jpg))
 
-Johnny Depp - Jonas 528; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Johnny_Depp_Alice_Through_the_Looking_Glass_premiere.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+Johnny Depp - Harald Krichel; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Johnny_Depp-2821.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
 
 ## Robert Downey Jr. ([`robert-downey-jr.jpg`](images/robert-downey-jr.jpg))
 
@@ -157,7 +238,7 @@ Emma Watson - David Shankbone; CC BY 3.0 (https://creativecommons.org/licenses/b
 
 ## Scarlett Johansson ([`scarlett-johansson.jpg`](images/scarlett-johansson.jpg))
 
-Scarlett Johansson - Harald Krichel; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Scarlett_Johansson-8588.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Harald Krichel / WikiPortraits.
+Scarlett Johansson - Gage Skidmore; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Scarlett_Johansson_by_Gage_Skidmore_2_(cropped)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Gage Skidmore.
 
 ## Jennifer Lawrence ([`jennifer-lawrence.jpg`](images/jennifer-lawrence.jpg))
 
@@ -166,7 +247,7 @@ derivative work: Tabercil (talk); CC BY-SA 2.0 (https://creativecommons.org/lice
 
 ## Keanu Reeves ([`keanu-reeves.jpg`](images/keanu-reeves.jpg))
 
-Keanu Reeves - Gabriel Hutchinson; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Keanu_Reeves_at_TIFF_2025_02_(Cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Gabriel Hutchinson / WikiPortraits.
+Keanu Reeves - Marybel Le Pape; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Keanu_Reeves_(crop_and_levels)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: File:Keanu_Reeves.jpg.
 
 ## Tom Hanks ([`tom-hanks.jpg`](images/tom-hanks.jpg))
 
@@ -186,15 +267,15 @@ Zendaya - PhilipRomano; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 
 ## Kim Kardashian ([`kim-kardashian.jpg`](images/kim-kardashian.jpg))
 
-Kim Kardashian - Eva Rinaldi; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Kim_Kardashian_West_2014.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/58820009@N05/15199017476/.
+Kim Kardashian - Eva Rinaldi; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Kim_Kardashian_(6308129062).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Flickr.
 
 ## Arnold Schwarzenegger ([`arnold-schwarzenegger.jpg`](images/arnold-schwarzenegger.jpg))
 
-Arnold Schwarzenegger - HarryLangdon; CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en); https://commons.wikimedia.org/wiki/File:Arnold_Schwarzenegger_by_Harry_Langdon_1985.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/201509297@N05/54979819253/.
+Arnold Schwarzenegger - White House Photographer Michael Arthur Worden Evans; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Schwarzenegger_1984.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This image has been extracted from another file.
 
 ## James Dean ([`james-dean.jpg`](images/james-dean.jpg))
 
-James Dean - In-house publicity still; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:James_Dean_in_Rebel_Without_a_Cause_(HQ).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Warner Bros. publicity still for for the film Rebel Without a Cause.
+James Dean - Media Punch; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:James_Dean_Publicity_Shot,_1955_(HQ)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.alamy.com/los-angeles-1955-actor-james-dean-poses-for-a-warner-bros-publicity-shot-for-his-film-rebel-without-a-cause-in-1955-in-los-angeles-california-warner-bros-1955-directed-by-nicholas-ray-camera-ernest-haller-with-james-dean-natalie-wood-sal-mineo-jim-backus-ann-doran-corey-allen-william-hopper-rochelle-hudson-dennis-hopper-edward-platt-nick-adams-credit-hollywood-photo-archive-mediapunch-image241603052.html?imageid=2E7179F6-CE94-4CB0-8733-B19D7071C901&pn=1&searchId=e18898d42e78741c0a53df3e2220c1be&searchtype=0.
 
 ## Mary-Louise Parker ([`mary-louise-parker.jpg`](images/mary-louise-parker.jpg))
 
@@ -207,6 +288,135 @@ Marilyn Monroe - Bert Parry; Public domain (https://commons.wikimedia.org/wiki/C
 ## Ellen DeGeneres ([`ellen-degeneres.jpg`](images/ellen-degeneres.jpg))
 
 Ellen DeGeneres - Tulane Public Relations; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Ellen_DeGeneres-2009.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/tulanesally/3539754287/.
+
+## Timothée Chalamet ([`timothee-chalamet.jpg`](images/timothee-chalamet.jpg))
+
+Timothée Chalamet - Harald Krichel; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Timoth%C3%A9e_Chalamet-63541_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Tom Holland ([`tom-holland.jpg`](images/tom-holland.jpg))
+
+Tom Holland - PhilipRomano; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:TomHolland-byPhilipRomano.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Daniel Radcliffe ([`daniel-radcliffe.jpg`](images/daniel-radcliffe.jpg))
+
+Daniel Radcliffe - Gage Skidmore from Peoria, AZ, United States of America; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Daniel_Radcliffe_(14594645950)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Daniel Radcliffe.
+
+## Rowan Atkinson ([`rowan-atkinson.jpg`](images/rowan-atkinson.jpg))
+
+Rowan Atkinson - Eva Rinaldi; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Rowan_Atkinson,_2011.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Rowan Atkinson.
+
+## John Travolta ([`john-travolta.jpg`](images/john-travolta.jpg))
+
+John Travolta - lauraleedooley; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:John_Travolta,_2014_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/76679744@N00/13931780147/.
+
+## George Clooney ([`george-clooney.jpg`](images/george-clooney.jpg))
+
+George Clooney - Nicolas Genin; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:George_Clooney_66%C3%A8me_Festival_de_Venise_(cropped2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: 66ème Festival de Venise (Mostra).
+
+## Alfred Hitchcock ([`alfred-hitchcock.jpg`](images/alfred-hitchcock.jpg))
+
+Alfred Hitchcock - Ante Brkan; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Hitchcock,_Alfred_02.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Dr. Macro.
+
+## Daniel Craig ([`daniel-craig.jpg`](images/daniel-craig.jpg))
+
+Daniel Craig - Zach Catanzareti Photo; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Daniel_craig_(51593655096)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: daniel craig.
+
+## Marlon Brando ([`marlon-brando.jpg`](images/marlon-brando.jpg))
+
+Marlon Brando - None visible/Paramount Pictures; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Marlon_Brando_publicity_for_One-Eyed_Jacks.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Publicity photo for the film One-Eyed Jacks (1961).
+
+## Clint Eastwood ([`clint-eastwood.jpg`](images/clint-eastwood.jpg))
+
+Clint Eastwood - Raffi Asdourian; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Clint_Eastwood_at_2010_New_York_Film_Festival.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Flickr.
+
+## Robert De Niro ([`robert-de-niro.jpg`](images/robert-de-niro.jpg))
+
+Robert De Niro - Harald Krichel; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Robert_de_Niro_Cannes_Film_Festival_(3x4_cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Harald Krichel / WikiPortraits.
+
+## Al Pacino ([`al-pacino.jpg`](images/al-pacino.jpg))
+
+Al Pacino - Kindly granted by Thomas Schulz from Vienna, Austria; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Al_Pacino.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Al PACINO.
+
+## Stephen King ([`stephen-king.jpg`](images/stephen-king.jpg))
+
+Stephen King - Kevin Payravi; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Stephen_King_at_the_2024_Toronto_International_Film_Festival_2_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Kevin Payravi / WikiPortraits.
+
+## MrBeast ([`mrbeast.jpg`](images/mrbeast.jpg))
+
+MrBeast - Tyren Redd; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0); https://commons.wikimedia.org/wiki/File:MrBeast_in_2026_(cropped_4).png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: David Soled.
+
+## Logan Paul ([`logan-paul.jpg`](images/logan-paul.jpg))
+
+Logan Paul - Erik Drost; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Logan_Paul_(48086619418).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Logan Paul.
+
+## PewDiePie ([`pewdiepie.jpg`](images/pewdiepie.jpg))
+
+PewDiePie - Cold Ones Clips; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Pewdiepie_head_shot.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: YouTube: https://www.youtube.com/watch?v=9otmiJ_wGJk – View/save archived versions on archive.org.
+
+## Anthony Hopkins ([`anthony-hopkins.jpg`](images/anthony-hopkins.jpg))
+
+Anthony Hopkins - gdcgraphics at https://www.flickr.com/photos/gdcgraphics/; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:AnthonyHopkins10TIFF.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/gdcgraphics/5011122387/. Source attribution statement: gdcgraphics.
+
+## Christopher Nolan ([`christopher-nolan.jpg`](images/christopher-nolan.jpg))
+
+Christopher Nolan - Richard Goldschmidt, www.piqtured.com; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Christopher_Nolan,_London,_2013.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Richard Goldschmidt. Source attribution statement: Richard Goldschmidt.
+
+## Quentin Tarantino ([`quentin-tarantino.jpg`](images/quentin-tarantino.jpg))
+
+Quentin Tarantino - Quentin_Tarantino_and_Diane_Kruger_@_2010_Academy_Awards.jpg: Photo by Sgt. Michael Connors
+derivative work: SaloméW; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Quentin_Tarantino_@_2010_Academy_Awards_cropped.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Quentin_Tarantino_and_Diane_Kruger_@_2010_Academy_Awards.jpg.
+
+## Steven Spielberg ([`steven-spielberg.jpg`](images/steven-spielberg.jpg))
+
+Steven Spielberg - Martin Kraft; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:MKr25402_Steven_Spielberg_(Berlinale_2023)_(3x4_cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Kristen Stewart ([`kristen-stewart.jpg`](images/kristen-stewart.jpg))
+
+Kristen Stewart - Kevin Paul; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0); https://commons.wikimedia.org/wiki/File:Kristen_Stewart_at_WWD_Style_Awards_2026.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Robert Pattinson ([`robert-pattinson.jpg`](images/robert-pattinson.jpg))
+
+Robert Pattinson - Gage Skidmore; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Robert_Pattinson_by_Gage_Skidmore.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Gage Skidmore.
+
+## Cillian Murphy ([`cillian-murphy.jpg`](images/cillian-murphy.jpg))
+
+Cillian Murphy - Netflix; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Cillian_Murphy_at_the_London_premier_of_Steve_in_September_2025_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Provided by Netflix..
+
+## Heath Ledger ([`heath-ledger.jpg`](images/heath-ledger.jpg))
+
+Heath Ledger - Howie; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Heath_Ledger_(2)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Heath Ledger.
+
+## Nicole Kidman ([`nicole-kidman.jpg`](images/nicole-kidman.jpg))
+
+Nicole Kidman - Michael Albov; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Nicole_Kidman_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: originally posted to Flickr as Nicole Kidman.
+
+## John Cena ([`john-cena.jpg`](images/john-cena.jpg))
+
+John Cena - Staff Sgt. James Selesnick; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:John_Cena_134616.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: http://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/P_literature.gif/60px-P_literature.gif.
+
+## Kylie Jenner ([`kylie-jenner.jpg`](images/kylie-jenner.jpg))
+
+Kylie Jenner - Hayu; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Kylie_Jenner1.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: YouTube: https://www.youtube.com/watch?v=PjLni7RcqDc – View/save archived versions on archive.org.
+
+## IShowSpeed ([`ishowspeed.jpg`](images/ishowspeed.jpg))
+
+IShowSpeed - Chin Yu Chu; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:IShowSpeed_at_Chinatown_(Portrait)_04.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/195030826@N02/54020270455/.
+
+## Jennifer Aniston ([`jennifer-aniston.jpg`](images/jennifer-aniston.jpg))
+
+Jennifer Aniston - Ross; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:2013_TIFF_-_LIfe_Of_Crime_-_Jennifer_Aniston.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: LIfe Of Crime - Jennifer Aniston Tim Robbins.
+
+## Emma Stone ([`emma-stone.jpg`](images/emma-stone.jpg))
+
+Emma Stone - Eva Rinaldi; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Emma_Stone_2014.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/evarinaldiphotography/13279241403/.
+
+## Margot Robbie ([`margot-robbie.jpg`](images/margot-robbie.jpg))
+
+Margot Robbie - Gage Skidmore; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Margot_Robbie_by_Gage_Skidmore.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Gage Skidmore.
+
+## Charlie Chaplin ([`charlie-chaplin.jpg`](images/charlie-chaplin.jpg))
+
+Charlie Chaplin - Strauss-Peyton Studio; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Charlie_Chaplin_portrait_Getty_1739411952.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Original publication: Magazine Photoplay No. 3, 1922Immediate sources: this imagealso found at National Portrait Gallery.
 
 ## Lionel Messi ([`lionel-messi.jpg`](images/lionel-messi.jpg))
 
@@ -238,7 +448,7 @@ David Beckham - Brian MInkoff-London Pixels; CC BY-SA 3.0 (https://creativecommo
 
 ## Ronaldinho ([`ronaldinho.jpg`](images/ronaldinho.jpg))
 
-Ronaldinho - Кирилл Венедиктов; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Ronaldinho_2017.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.soccer0010.com/galery/989914/photo/637887.
+Ronaldinho - Darz Mol; CC BY-SA 2.5 es (https://creativecommons.org/licenses/by-sa/2.5/es/deed.en); https://commons.wikimedia.org/wiki/File:Ronaldinho_11feb2007.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
 
 ## Serena Williams ([`serena-williams.jpg`](images/serena-williams.jpg))
 
@@ -286,7 +496,7 @@ Lewis Hamilton - Jen_ross83; CC BY 2.0 (https://creativecommons.org/licenses/by/
 
 ## Michael Schumacher ([`michael-schumacher.jpg`](images/michael-schumacher.jpg))
 
-Michael Schumacher - Gunnar Richter Namenlos.net; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Michael_Schumacher.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: eigene Arbeit, Daniel Milbord.
+Michael Schumacher - Original:  Ryosuke Yagi / Derivative work:  Danyele; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Michael_Schumacher_after_2005_United_States_GP_(20413937)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: 渋い顔のマイケル (original photo). Source attribution statement: Ryosuke Yagi.
 
 ## Shohei Ohtani ([`shohei-ohtani.jpg`](images/shohei-ohtani.jpg))
 
@@ -294,7 +504,7 @@ Shohei Ohtani - All-Pro Reels from District of Columbia, USA; CC BY-SA 2.0 (http
 
 ## Magnus Carlsen ([`magnus-carlsen.jpg`](images/magnus-carlsen.jpg))
 
-Magnus Carlsen - Autopilot; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Magnus_Carlsen_(2012)_cropped.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: File:Magnus_Carlsen_(2012).jpg.
+Magnus Carlsen - Andreas Kontokanis from Piraeus, Greece; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Magnus_Carlsen_2016_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Carlsen Magnus.
 
 ## Erling Haaland ([`erling-haaland.jpg`](images/erling-haaland.jpg))
 
@@ -310,7 +520,59 @@ Mike Tyson - Super Festivals; CC BY 2.0 (https://creativecommons.org/licenses/by
 
 ## Muhammad Ali ([`muhammad-ali.jpg`](images/muhammad-ali.jpg))
 
-Muhammad Ali - Stanley Weston; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Muhammad_Ali_Smiling_1962_Portrait.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Big Book Of Boxing December 1976 (page 42) and March 1979 (page 18).
+Muhammad Ali - Ira Rosenberg; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Muhammad_Ali_NYWTS.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This image  is available from the United States Library of Congress's Prints and Photographs division under the digital ID cph.3c15435.This tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing..
+
+## Ronnie O'Sullivan ([`ronnie-o-sullivan.jpg`](images/ronnie-o-sullivan.jpg))
+
+Ronnie O'Sullivan - DerHexer; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Ronnie_O%E2%80%99Sullivan_at_Snooker_German_Masters_(DerHexer)_2015-02-06_07.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: DerHexer, Wikimedia Commons, CC-by-sa 4.0.
+
+## Michael Phelps ([`michael-phelps.jpg`](images/michael-phelps.jpg))
+
+Michael Phelps - Agência Brasil Fotografias; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:MICHAEL_PHELPS_E_KATIE_LEDECKY_CONCEDEM_ENTREVISTAS_NO_PARQUE_OL%C3%8DMPICO_(28132564163)_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: MICHAEL PHELPS E KATIE LEDECKY CONCEDEM ENTREVISTAS NO PARQUE OLÍMPICO.
+
+## Shaquille O'Neal ([`shaquille-o-neal.jpg`](images/shaquille-o-neal.jpg))
+
+Shaquille O'Neal - TechCrunch; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:TechCrunch_Disrupt_2023_-_Day_1_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/techcrunch/53199618694/.
+
+## Tom Brady ([`tom-brady.jpg`](images/tom-brady.jpg))
+
+Tom Brady - Congressman Charlie Crist; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Tom_Brady_2021.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://twitter.com/RepCharlieCrist/status/1417539213168418816/photo/1.
+
+## Lamine Yamal ([`lamine-yamal.jpg`](images/lamine-yamal.jpg))
+
+Lamine Yamal - Bryan Berlin; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Lamine_Yamal_Argentina_v_Spain_19_July_2026-214_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work. Source attribution statement: Bryan Berlin.
+
+## Eddie Hall ([`eddie-hall.jpg`](images/eddie-hall.jpg))
+
+Eddie Hall - Quejaytee; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Eddie_Hall_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Chris Bumstead ([`chris-bumstead.jpg`](images/chris-bumstead.jpg))
+
+Chris Bumstead - Gymshark; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Chris_Bumstead_on_Gymshark.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Chris Bumstead Reacts to Thirst Tweets and TikToks | Gymshark at 0:10, cropped, brightened.
+
+## Ronnie Coleman ([`ronnie-coleman.jpg`](images/ronnie-coleman.jpg))
+
+Ronnie Coleman - Haribhagirath; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Ronnie_Coleman_Invited_Guest.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Hafþór Júlíus Björnsson ([`hafor-julius-bjornsson.jpg`](images/hafor-julius-bjornsson.jpg))
+
+Hafþór Júlíus Björnsson - Paula  R. Lively from Zanesville; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Bj%C3%B6rnsson_Arnold_Classic_2017_(cropped_2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Aronald Classic Columbus.Ohio USA 2017.
+
+## Eliud Kipchoge ([`eliud-kipchoge.jpg`](images/eliud-kipchoge.jpg))
+
+Eliud Kipchoge - Desitlicheresguruweil; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Eliud_Kipchoge_in_Berlin_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
+
+## Faker ([`faker.jpg`](images/faker.jpg))
+
+Faker - Fomos Esports; CC BY 3.0 (https://creativecommons.org/licenses/by/3.0); https://commons.wikimedia.org/wiki/File:Faker_2020_interview.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: YouTube: https://www.youtube.com/watch?v=m9fE9m--_A0 – View/save archived versions on archive.org (3:15).
+
+## Zinedine Zidane ([`zinedine-zidane.jpg`](images/zinedine-zidane.jpg))
+
+Zinedine Zidane - Hadi Abyar; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0); https://commons.wikimedia.org/wiki/File:Zinedine_Zidane_by_Tasnim_02.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Tasnim News Agency. Source attribution statement: Tasnim News Agency.
+
+## Pep Guardiola ([`pep-guardiola.jpg`](images/pep-guardiola.jpg))
+
+Pep Guardiola - Steffen Prößdorf; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Josep_Guardiola_2023-10-04_Fu%C3%9Fball,_M%C3%A4nner,_UEFA_Champions_League,_RB_Leipzig_-_Manchester_City_FC_1DX_2797_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Self-photographed. Source attribution statement: Steffen Prößdorf.
 
 ## Barack Obama ([`barack-obama.jpg`](images/barack-obama.jpg))
 
@@ -342,7 +604,7 @@ Angela Merkel - Raimond Spekking; CC BY-SA 4.0 (https://creativecommons.org/lice
 
 ## Elizabeth II ([`elizabeth-ii.jpg`](images/elizabeth-ii.jpg))
 
-Elizabeth II - Original: Joel Rouse/ Ministry of DefenceDerivative: nagualdesign; OGL 3 (http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3); https://commons.wikimedia.org/wiki/File:Queen_Elizabeth_II_in_March_2015.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: defenceimagery.mod.uk. Contains public sector information licensed under the Open Government Licence v3.0.
+Elizabeth II - Joel Rouse/ Ministry of Defence; OGL 3 (http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3); https://commons.wikimedia.org/wiki/File:Queen_Elizabeth_II_March_2015.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: www.defenceimagery.mod.uk. Contains public sector information licensed under the Open Government Licence v3.0.
 
 ## Charles III ([`charles-iii.jpg`](images/charles-iii.jpg))
 
@@ -361,7 +623,7 @@ This tag does not indicate the copyright status of the attached work. A normal c
 
 ## Xi Jinping ([`xi-jinping.jpg`](images/xi-jinping.jpg))
 
-Xi Jinping - Juan Diego Cano; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Xi_Jinping_in_Beijing_on_May_13,_2025_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This image has been extracted from another file.
+Xi Jinping - Palácio do Planalto; CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0); https://commons.wikimedia.org/wiki/File:Xi_Jinping_2019_(49060546152)_2.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: 13/11/2019 Declaração à Imprensa.
 
 ## Nelson Mandela ([`nelson-mandela.jpg`](images/nelson-mandela.jpg))
 
@@ -379,10 +641,6 @@ Pope Francis - Casa Rosada; CC BY-SA 2.0 (https://creativecommons.org/licenses/b
 
 Benjamin Netanyahu - Avi Ohayon; CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0); https://commons.wikimedia.org/wiki/File:Benjamin_Netanyahu,_February_2023_(cropped)(b).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Government Press Office of Israel. Source attribution statement: Avi Ohayon / Government Press Office of Israel.
 
-## Adolf Hitler ([`adolf-hitler.jpg`](images/adolf-hitler.jpg))
-
-Adolf Hitler - Heinrich Hoffmann; CC BY-SA 3.0 de (https://creativecommons.org/licenses/by-sa/3.0/de/deed.en); https://commons.wikimedia.org/wiki/File:Hitler_portrait_crop_(cropped)(2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This  is a retouched picture, which means that it has been digitally altered from its original version. Modifications: 3:4 portrait crop, some dust and scratches removed, contrast/brightness changed. The original can be viewed here: Bundesarchiv Bild 183-H1216-0500-002, Adolf Hitler.jpg: . Modifications made by Notwist.. Source attribution statement: Bundesarchiv, Bild 183-H1216-0500-002 / CC-BY-SA.
-
 ## Winston Churchill ([`winston-churchill.jpg`](images/winston-churchill.jpg))
 
 Winston Churchill - Author not specified (public domain); Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Sir_Winston_Churchill_-_19086236948_(restored).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Flickr: Sir Winston Churchill.
@@ -399,13 +657,9 @@ Ronald Reagan - Michael Evans; Public domain (https://commons.wikimedia.org/wiki
 
 Mahatma Gandhi - Elliott & Fry; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Mahatma-Gandhi,_studio,_1931.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: philogalichet.fr (context).
 
-## Mao Zedong ([`mao-zedong.jpg`](images/mao-zedong.jpg))
-
-Mao Zedong - Chen Zhengqing (1917–1966); Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Mao_Zedong_1950_Portrait_(3x4_cropped)(2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://newsroom.ap.org/editorial-photos-videos/detail?itemid=dfab0b3b1ce5da11af9f0014c2589dfb&mediatype=photo.
-
 ## Kim Jong Un ([`kim-jong-un.jpg`](images/kim-jong-un.jpg))
 
-Kim Jong Un - Alexei Nikolsky, The Presidential Press and Information Office; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0); https://commons.wikimedia.org/wiki/File:Kim_Jong-un_April_2019_crop_(cropped)_(2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: http://www.kremlin.ru/events/president/news/60363/photos. Source attribution statement: Kremlin.ru.
+Kim Jong Un - The White House from Washington, DC; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Kim_Jong-un_2019_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: President Trump's Trip to Vietnam.
 
 ## John F. Kennedy ([`john-f-kennedy.jpg`](images/john-f-kennedy.jpg))
 
@@ -414,6 +668,38 @@ John F. Kennedy - Cecil W. Stoughton; Public domain (https://commons.wikimedia.o
 ## Diana, Princess of Wales ([`diana-princess-of-wales.jpg`](images/diana-princess-of-wales.jpg))
 
 Diana, Princess of Wales - John Mathew Smith & www.celebrity-photos.com from Laurel  Maryland, USA (Archived link); CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Diana,_Princess_of_Wales_1997_(2).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: BEST ALL-TIME DIANA! (Archived link).
+
+## Mother Teresa ([`mother-teresa.jpg`](images/mother-teresa.jpg))
+
+Mother Teresa - Kingkongphoto & www.celebrity-photos.com from Laurel  Maryland, USA; CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0); https://commons.wikimedia.org/wiki/File:Mother_Teresa_1.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Mother Teresa best  ©     copyright 2010.
+
+## Martin Luther King Jr. ([`martin-luther-king-jr.jpg`](images/martin-luther-king-jr.jpg))
+
+Martin Luther King Jr. - Yoichi Okamoto; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Martin_Luther_King,_Jr._and_Lyndon_Johnson_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Lyndon Baines Johnson Library and Museum. Image Serial Number: A2133-10. http://photolab.lbjlib.utexas.edu/detail.asp?id=1083.
+
+## Malcolm X ([`malcolm-x.jpg`](images/malcolm-x.jpg))
+
+Malcolm X - Marion S. Trikosko; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Malcolm_X_in_1964.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This image  is available from the United States Library of Congress's Prints and Photographs division under the digital ID ppmsc.01274.This tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing..
+
+## Rosa Parks ([`rosa-parks.jpg`](images/rosa-parks.jpg))
+
+Rosa Parks - Associated Press; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Rosa_Parks_1955_3_(cropped_3x4).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://newsroom.ap.org/editorial-photos-videos/detail?itemid=03b726acdee2da11af9f0014c2589dfb&mediatype=photo.
+
+## Hillary Clinton ([`hillary-clinton.jpg`](images/hillary-clinton.jpg))
+
+Hillary Clinton - U.S. Department of State; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Former_United_States_Secretary_of_State_Hillary_Rodham_Clinton_at_the_U.S._Department_of_State_on_September_26,_2023_in_Washington,_D.C._14_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.flickr.com/photos/9364837@N06/53216301859/.
+
+## Boris Johnson ([`boris-johnson.jpg`](images/boris-johnson.jpg))
+
+Boris Johnson - Ben Shread; OGL 3 (http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3); https://commons.wikimedia.org/wiki/File:Boris_Johnson_official_portrait_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: This image has been extracted from another file. Source attribution statement: Ben Shread / Cabinet Office. Contains public sector information licensed under the Open Government Licence v3.0.
+
+## Michelle Obama ([`michelle-obama.jpg`](images/michelle-obama.jpg))
+
+Michelle Obama - Joyce Boghosian; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Michelle_Obama_official_portrait_crop.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: http://www.whitehouse.gov/assets/hi_res/P021809JB-0046_MrsObamaPortrait.jpg.
+
+## Ursula von der Leyen ([`ursula-von-der-leyen.jpg`](images/ursula-von-der-leyen.jpg))
+
+Ursula von der Leyen - European People's Party; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:Ursula_von_der_Leyen_2024.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: EPP Lead Candidate Multimedia Content.
 
 ## Oprah Winfrey ([`oprah-winfrey.jpg`](images/oprah-winfrey.jpg))
 
@@ -456,19 +742,13 @@ Steve Jobs - Matthew Yohe (talk); CC BY-SA 3.0 (https://creativecommons.org/lice
 
 Marie Curie - Henri Manuel; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Marie_Curie_c._1920s.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: cdn-images-1.medium.com.
 
-## Franz Kafka ([`franz-kafka.jpg`](images/franz-kafka.jpg))
-
-Franz Kafka - Unknown photographer; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Franz_Kafka,_1923.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Franz Kafka: Pictures of a Life by Klaus Wagenbach (1984), p. 209 and Kafka Bildarchiv. Photographer not identified.
-Exhibition Kafka: Making of an Icon, Morgan Library & Museum (PDF, page 25)
-Kafka: The Years of Insight by Reiner Stach (2013), fig. 70. Details about the photograph..
-
 ## J. K. Rowling ([`j-k-rowling.jpg`](images/j-k-rowling.jpg))
 
 J. K. Rowling - Daniel Ogren; CC BY 2.0 (https://creativecommons.org/licenses/by/2.0); https://commons.wikimedia.org/wiki/File:J._K._Rowling_2010.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Flickr: 100405_EasterEggRoll_683.
 
 ## Pablo Picasso ([`pablo-picasso.jpg`](images/pablo-picasso.jpg))
 
-Pablo Picasso - Rijksmuseum; CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en); https://commons.wikimedia.org/wiki/File:Pablo_Picasso_bij_aankomst_op_Victoria_Station,_voor_de_communistische_vredesconferentie_in_Sheffield,_RP-F-F01599.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: http://hdl.handle.net/10934/RM0001.COLLECT.252812.
+Pablo Picasso - Argentina. Revista Vea y Lea; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Pablo_picasso_1.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://www.magicasruinas.com.ar/revistero/internacional/pintura-pablo-picasso.htm.
 
 ## Sigmund Freud ([`sigmund-freud.jpg`](images/sigmund-freud.jpg))
 
@@ -477,3 +757,26 @@ Sigmund Freud - Max Halberstadt; Public domain (https://commons.wikimedia.org/wi
 ## Anne Frank ([`anne-frank.jpg`](images/anne-frank.jpg))
 
 Anne Frank - Unknown photographer; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Anne_Frank_passport_photo,_May_1942_(cropped).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Anne Frank, 1942.
+
+## Walt Disney ([`walt-disney.jpg`](images/walt-disney.jpg))
+
+Walt Disney - Boy Scouts of America; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Walt_Disney_1946_(cropped2).JPG. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: eBay item
+photo front
+
+photo back.
+
+## Karl Marx ([`karl-marx.jpg`](images/karl-marx.jpg))
+
+Karl Marx - John Jabez Edwin Mayall; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: https://sammlung.staedelmuseum.de/de/werk/portraet-karl-marx.
+
+## Louis Armstrong ([`louis-armstrong.jpg`](images/louis-armstrong.jpg))
+
+Louis Armstrong - Harry Warnecke / Gus Schoenbaechler; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Louis_Armstrong_in_Color_(restored).jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: National Portrait Gallery.
+
+## Neil Armstrong ([`neil-armstrong.jpg`](images/neil-armstrong.jpg))
+
+Neil Armstrong - Unknown authorUnknown author; Public domain (https://commons.wikimedia.org/wiki/Commons:Public_domain); https://commons.wikimedia.org/wiki/File:Neil_Armstrong_pose.jpg. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: NASA Photo ID: S69-31741 - Program: Apollo XI.
+
+## David Goggins ([`david-goggins.jpg`](images/david-goggins.jpg))
+
+David Goggins - Newqoreyaaalogag; CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en); https://commons.wikimedia.org/wiki/File:Supersoldier_David_Goggins.png. Modified: square crop, resized to 768x768, converted to JPEG; source metadata removed. Credit: Own work.
