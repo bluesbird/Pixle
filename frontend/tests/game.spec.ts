@@ -251,6 +251,30 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
   await expect(page.getByRole("combobox")).toHaveAttribute("aria-expanded", "false");
 });
 
+test("suggestions match only at the start of a name part", async ({ page }) => {
+  await mockApi(page);
+  await openGame(page);
+  const combobox = page.getByRole("combobox", { name: "Your guess" });
+
+  await combobox.fill("t");
+  await expect(page.getByRole("option", { name: "Tom Hanks" })).toBeVisible();
+
+  await combobox.fill("h");
+  await expect(page.getByRole("option", { name: "Tom Hanks" })).toBeVisible();
+
+  await combobox.fill("to");
+  await expect(page.getByRole("option", { name: "Tom Hanks" })).toBeVisible();
+
+  await combobox.fill("han");
+  await expect(page.getByRole("option", { name: "Tom Hanks" })).toBeVisible();
+
+  await combobox.fill("o");
+  await expect(page.getByRole("option", { name: "Tom Hanks" })).toHaveCount(0);
+
+  await combobox.fill("ank");
+  await expect(page.getByRole("option", { name: "Tom Hanks" })).toHaveCount(0);
+});
+
 test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
   await openGame(page);

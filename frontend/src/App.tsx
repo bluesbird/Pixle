@@ -319,8 +319,12 @@ export function App() {
     }
   }
 
+  const normalizedQuery = normalize(query);
   const matches = query.trim() ? people.filter((person) =>
-    normalize(person.name).includes(normalize(query)) &&
+    person.name
+      .split(/[^\p{L}\p{N}]+/u)
+      .map((part) => normalize(part))
+      .some((part) => part.startsWith(normalizedQuery)) &&
     !game?.guesses.some((guessItem) => normalize(guessItem.name) === normalize(person.name))
   ).slice(0, 7) : [];
   const canGuess = game !== null && !finished && !loading && !busy;
