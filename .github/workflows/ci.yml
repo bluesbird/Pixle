@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend (FastAPI)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-api.txt
+      - name: Install backend dependencies
+        run: python -m pip install -r requirements-api.txt
+      - name: Run backend tests
+        run: python -m unittest discover -s backend/tests -v
+
+  frontend:
+    name: Frontend (React)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install frontend dependencies
+        run: npm ci
+      - name: Build frontend
+        run: npm run build
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright tests
+        run: npm test
+
+  deploy:
+    name: Deploy to VPS
+    needs: [backend, frontend]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    concurrency:
+      group: pixle-vps-production
+      cancel-in-progress: false
+    steps:
+      - name: Configure SSH
+        env:
+          PIXLE_ACTIONS_SSH_KEY: ${{ secrets.PIXLE_ACTIONS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$PIXLE_ACTIONS_SSH_KEY"
+          test -n "$VPS_KNOWN_HOSTS"
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$PIXLE_ACTIONS_SSH_KEY" > "$HOME/.ssh/id_ed25519"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/id_ed25519" "$HOME/.ssh/known_hosts"
+
+      - name: Build and deploy tested commit
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_REPO_PATH: ${{ secrets.VPS_REPO_PATH }}
+          PIXLE_PUBLIC_DIR: ${{ secrets.PIXLE_PUBLIC_DIR }}
+          DEPLOY_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          test -n "$VPS_HOST"
+          test -n "$VPS_USER"
+          test -n "$VPS_REPO_PATH"
+          test -n "$PIXLE_PUBLIC_DIR"
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+          ssh -i "$HOME/.ssh/id_ed25519" \
+            -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=15 -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=6 \
+            "$VPS_USER@$VPS_HOST" bash -s -- "$DEPLOY_SHA" "$VPS_REPO_PATH" "$PIXLE_PUBLIC_DIR" <<'REMOTE'
+          set -euo pipefail
+          deploy_sha="$1"
+          repo_path="$2"
+          public_dir="$3"
+          cd "$repo_path"
+          exec 9>"$repo_path/.git/deploy.lock"
+          flock -w 1200 9
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Deployment stopped: VPS checkout has local changes."
+            exit 1
+          fi
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$deploy_sha" ]; then
+            echo "Skipping superseded commit $deploy_sha."
+            exit 0
+          fi
+          git merge --ff-only "$deploy_sha"
+          docker compose --env-file .env.production config --quiet
+          docker compose --env-file .env.production build
+          docker compose --env-file .env.production up -d --no-build --remove-orphans
+          docker compose --env-file .env.production ps
+          install -d -m 755 "$public_dir"
+          rsync -a --delete puzzles/public/ "$public_dir/"
+          curl --fail --silent --show-error --output /dev/null \
+            --retry 30 --retry-delay 2 --retry-all-errors --max-time 10 \
+            "http://127.0.0.1:18000/api/health"
+          curl --fail --silent --show-error --output /dev/null \
+            --retry 30 --retry-delay 2 --retry-all-errors --max-time 10 \
+            "http://127.0.0.1:18080/"
+          echo "Deployed $deploy_sha."
+          REMOTE
+
+      - name: Verify public HTTPS
+        run: |
+          set -euo pipefail
+          for path in / /api/health; do
+            curl --fail --silent --show-error --output /dev/null \
+              --retry 10 --retry-delay 3 --retry-all-errors --max-time 15 \
+              "https://pixle.duckdns.org$path"
+          done
+
+      - name: Remove SSH credentials
+        if: always()
+        run: rm -f "$HOME/.ssh/id_ed25519" "$HOME/.ssh/known_hosts"

@@ -23,6 +23,19 @@ cp -r puzzles/public/* /opt/mnemo/Mnemo/deploy/pixle-public/
 
 Edit `.env.production` and replace every placeholder password.
 
+## GitHub Actions deployment secrets
+
+The workflow at `.github/workflows/ci.yml` deploys `main` automatically after
+backend and frontend checks pass. Configure these repository secrets:
+
+- `PIXLE_ACTIONS_SSH_KEY` (private key for your `pixle-actions` SSH user/key)
+- `VPS_KNOWN_HOSTS` (output of `ssh-keyscan -H <your-host>`)
+- `VPS_HOST` (for example `your-vps.example.org`)
+- `VPS_USER` (SSH user on the VPS)
+- `VPS_REPO_PATH` (absolute path to Pixle checkout on the VPS)
+- `PIXLE_PUBLIC_DIR` (absolute path served by Caddy for `/puzzles/*`,
+  for example `/opt/mnemo/Mnemo/deploy/pixle-public`)
+
 ## 2. Start and verify the Pixle stack
 
 ```sh
