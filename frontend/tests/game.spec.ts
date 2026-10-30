@@ -75,13 +75,23 @@ async function mockApi(page: Page, options: { empty?: boolean; commitAndDrop?: b
       if (failDaily) return route.fulfill({ status: 503, json: { detail: "Unavailable" } });
       return route.fulfill({ json: current() });
     }
-    if (url.pathname === "/api/practice/random") return route.fulfill({ json: practice() });
+    if (url.pathname === "/api/practice/random") {
+      practiceGuesses.length = 0;
+      practiceRequests.clear();
+      return route.fulfill({ json: practice() });
+    }
     if (url.pathname === "/api/practice/mosaic") {
+      practiceGuesses.length = 0;
+      practiceRequests.clear();
       const daily = current();
       return route.fulfill({ json: {
         ...daily,
         mode: "practice",
         practice_id: practiceId,
+        status: "playing",
+        attempts: 0,
+        level: daily.levels[0],
+        guesses: [],
         score: undefined,
         answer: undefined,
         original_image_url: undefined,
@@ -141,9 +151,17 @@ async function guess(page: Page, name: string) {
   await page.getByRole("button", { name: "Make a guess" }).click();
 }
 
+async function openGame(page: Page) {
+  await page.goto("/");
+  const gotIt = page.getByRole("button", { name: "Got it" });
+  if (await gotIt.isVisible()) {
+    await gotIt.click();
+  }
+}
+
 test("keyboard suggestions, reveals, completion, and reload", async ({ page }) => {
   await mockApi(page);
-  await page.goto("/");
+  await openGame(page);
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
   await page.getByRole("combobox").fill("Tay");
   await page.getByRole("combobox").press("ArrowDown");
@@ -169,7 +187,7 @@ test("keyboard suggestions, reveals, completion, and reload", async ({ page }) =
 
 test("committed but interrupted submissions retain UUID across reload", async ({ page }) => {
   const api = await mockApi(page, { commitAndDrop: true });
-  await page.goto("/");
+  await openGame(page);
   await guess(page, "Adele");
   await expect(page.getByRole("alert").filter({ hasText: "Connection interrupted" })).toBeVisible();
   await expect(page.getByRole("combobox")).toHaveValue("Adele");
@@ -183,7 +201,7 @@ test("committed but interrupted submissions retain UUID across reload", async ({
 
 test("five misses end the game and disable further guesses", async ({ page }) => {
   await mockApi(page);
-  await page.goto("/");
+  await openGame(page);
   for (const name of ["Adele", "Beyonce", "Rihanna", "Taylor Swift", "Tom Hanks"]) {
     await guess(page, name);
   }
@@ -195,7 +213,7 @@ test("five misses end the game and disable further guesses", async ({ page }) =>
 
 test("empty daily puzzle offers a clear retry without invented game state", async ({ page }) => {
   await mockApi(page, { empty: true });
-  await page.goto("/");
+  await openGame(page);
   await expect(page.getByRole("alert")).toContainText("No puzzle is available");
   await expect(page.getByRole("button", { name: "Refresh progress" })).toBeEnabled();
   await expect(page.getByRole("combobox")).toHaveCount(0);
@@ -203,7 +221,7 @@ test("empty daily puzzle offers a clear retry without invented game state", asyn
 
 test("refresh failure preserves the current mosaic and guess history", async ({ page }) => {
   const api = await mockApi(page);
-  await page.goto("/");
+  await openGame(page);
   await guess(page, "Adele");
   await guess(page, "Unknown");
   await expect(page.getByRole("alert")).toContainText("Choose a name");
@@ -219,7 +237,7 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
   await mockApi(page);
   let fail = true;
   await page.route("**/puzzles/**/level-*.jpg*", (route) => fail ? route.abort() : route.continue());
-  await page.goto("/");
+  await openGame(page);
   await expect(page.getByText("The image could not load.")).toBeVisible();
   fail = false;
   await page.getByRole("button", { name: "Retry image" }).click();
@@ -232,9 +250,9 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
 
 test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
-  await page.goto("/");
+  await openGame(page);
   await page.getByRole("button", { name: "Pixle practice" }).click();
-  await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
+  await expect(page.getByText("Practice mode (unscored)")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
   await page.getByRole("button", { name: "Skip" }).click();
   await expect(page.getByText("Skipped", { exact: true })).toBeVisible();
@@ -243,13 +261,15 @@ test("random practice rounds are unscored and replayable", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Meet this face." })).toBeVisible();
   await expect(page.locator(".result .score")).toHaveCount(0);
   await page.getByRole("button", { name: "Play next" }).click();
-  await expect(page.getByText("Practice mode started (pixel style).")).toBeVisible();
+  await expect(page.getByText("Practice mode (unscored)")).toBeVisible();
+  await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
 });
 
 test("random mosaic practice mode can be started", async ({ page }) => {
   await mockApi(page);
-  await page.goto("/");
+  await openGame(page);
   await page.getByRole("button", { name: "Mosaic practice" }).click();
-  await expect(page.getByText("random mosaic style")).toBeVisible();
+  await expect(page.getByText("Practice mode (unscored)")).toBeVisible();
+  await expect(page.getByText("PRACTICE / UNSCORED")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
 });
