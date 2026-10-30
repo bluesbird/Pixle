@@ -1,1 +1,4 @@
 *.sh text eol=lf
+puzzles/public/**/credits.md text eol=lf
+puzzles/public/**/manifest.json text eol=lf
+puzzles/private/*.json text eol=lf

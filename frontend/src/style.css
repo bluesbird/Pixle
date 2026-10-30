@@ -17,7 +17,7 @@ a { color: inherit; text-underline-offset: 4px; }
 .shell { max-width: 1160px; padding: 0 40px; margin: auto; }
 .masthead { display: flex; align-items: center; justify-content: space-between; padding: 10px 0 8px; border-bottom: 1px solid #d9d9cc; }
 .brand { display: flex; align-items: center; gap: 8px; font-size: 32px; font-weight: 850; text-decoration: none; letter-spacing: -2px; }
-.brand-mark { display: grid; place-items: center; height: 28px; width: 28px; background: #314b38; color: #f5f2e9; font-size: 21px; letter-spacing: 0; border-radius: 5px 5px 0 5px; }
+.brand-mark { display: block; height: 28px; width: 28px; border-radius: 6px; }
 .brand-dot { color: #69836b; margin-left: -7px; }
 .masthead-actions { display: flex; align-items: center; gap: 10px; }
 .quick-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
@@ -38,9 +38,11 @@ a { color: inherit; text-underline-offset: 4px; }
 .top-help-button {
   min-height: 36px;
   min-width: 36px;
-  padding: 0 10px;
+  height: 36px;
+  width: 36px;
+  padding: 0;
   border: 1px solid #c6ccb9;
-  border-radius: 8px;
+  border-radius: 999px;
   background: #f9f7f0;
   color: #1f3328;
   font-size: 17px;

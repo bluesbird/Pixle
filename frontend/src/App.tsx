@@ -320,7 +320,11 @@ export function App() {
 
   return <div className="shell">
     <header className="masthead">
-      <a className="brand" href="/" aria-label="Pixle home"><span className="brand-mark" aria-hidden="true">P</span>pixle<span className="brand-dot">.</span></a>
+      <a className="brand" href="/" aria-label="Pixle home">
+        <img className="brand-mark" src="/favicon.svg" alt="" aria-hidden="true" />
+        pixle
+        <span className="brand-dot">.</span>
+      </a>
       <div className="masthead-actions">
         <div className="quick-actions">
           <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("random")}>
