@@ -38,6 +38,7 @@ export function App() {
   const result = useRef<HTMLHeadingElement>(null);
   const preloadedUrls = useRef(new Set<string>());
   const mosaicCard = useRef<HTMLElement>(null);
+  const mosaicImage = useRef<HTMLImageElement>(null);
 
   async function loadStats() {
     try {
@@ -134,6 +135,14 @@ export function App() {
     setImageState("loading");
     setImageRetry(0);
   }, [imageUrl]);
+
+  useEffect(() => {
+    const image = mosaicImage.current;
+    if (!image || imageState !== "loading") return;
+    if (image.complete) {
+      setImageState(image.naturalWidth > 0 ? "ready" : "error");
+    }
+  }, [imageUrl, imageRetry, imageState]);
 
   useEffect(() => {
     if (!game) return;
@@ -375,6 +384,7 @@ export function App() {
           <div className="mosaic-frame" aria-busy={loading || imageState === "loading"}>
             {game ? <>
               <img key={`${imageUrl}-${imageRetry}`}
+                ref={mosaicImage}
                 src={`${imageUrl}${imageRetry ? `?retry=${imageRetry}` : ""}`}
                 alt={preview === "original" ? "Original portrait revealed after finishing the game." : `Photo reveal, detail level ${imageLevel} of ${game.max_attempts}. Identify the hidden person.`}
                 width={selectedLevel?.width ?? game.level.width} height={selectedLevel?.height ?? game.level.height}
