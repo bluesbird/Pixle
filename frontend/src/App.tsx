@@ -39,6 +39,7 @@ export function App() {
   const preloadedUrls = useRef(new Set<string>());
   const mosaicCard = useRef<HTMLElement>(null);
   const mosaicImage = useRef<HTMLImageElement>(null);
+  const touchSuggestionStart = useRef<{ x: number; y: number } | null>(null);
   const shouldAutoFocusGuess = useMemo(() => {
     if (typeof window === "undefined" || typeof window.matchMedia !== "function") return true;
     return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -467,7 +468,10 @@ export function App() {
               </button>}
             </div> : <form onSubmit={(event) => { event.preventDefault(); void submit(); }}
               onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+                const form = event.currentTarget;
+                window.setTimeout(() => {
+                  if (!form.contains(document.activeElement)) setOpen(false);
+                }, 0);
               }}>
               <h2>Who is it?</h2>
               <div className="suggestions">
@@ -496,7 +500,31 @@ export function App() {
                 {open && !pending && query.trim() && <ul id="people-list" role="listbox" aria-label="People suggestions">
                   {matches.length ? matches.map((person, index) =>
                     <li key={person.id} id={`person-${index}`} role="option" aria-selected={index === active}
-                      onPointerDown={(event) => { event.preventDefault(); setQuery(person.name); setOpen(false); setActive(-1); void submit(person.name); }}>
+                      onPointerDown={(event) => {
+                        if (event.pointerType === "touch") {
+                          touchSuggestionStart.current = { x: event.clientX, y: event.clientY };
+                          return;
+                        }
+                        event.preventDefault();
+                        setQuery(person.name);
+                        setOpen(false);
+                        setActive(-1);
+                        void submit(person.name);
+                      }}
+                      onPointerMove={(event) => {
+                        if (event.pointerType !== "touch" || touchSuggestionStart.current === null) return;
+                        if (Math.abs(event.clientX - touchSuggestionStart.current.x) > 8 ||
+                            Math.abs(event.clientY - touchSuggestionStart.current.y) > 8) {
+                          touchSuggestionStart.current = null;
+                        }
+                      }}
+                      onPointerUp={(event) => {
+                        if (event.pointerType !== "touch" || touchSuggestionStart.current === null) return;
+                        touchSuggestionStart.current = null;
+                        setQuery(person.name);
+                        setOpen(false);
+                        setActive(-1);
+                      }}>
                       {person.name}
                     </li>) : <li role="presentation" className="no-match">No matching people. Try another name.</li>}
                 </ul>}

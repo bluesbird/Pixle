@@ -213,9 +213,11 @@ footer { border-top: 1px solid #d9d9cc; margin-top: 20px; padding: 14px 0 18px; 
   .panel-tail .stats { align-self: center; margin-top: 10px; }
   .panel-tail .stats h3 { text-align: center; }
   .panel-tail .stats dl { justify-content: center; }
-  .stats dl { gap: 12px; }
-  .stats dl div { padding: 0; }
-  .stats dl div + div { border-left: 0; }
+  .stats dl { gap: 0; }
+  .stats dl div { padding: 0 12px; }
+  .stats dl div + div { border-left: 1px solid #c8cebf; }
+  .stats dl div:first-child { padding-left: 0; }
+  .stats dl div:last-child { padding-right: 0; }
   .howto-example { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .howto-modal { padding: 18px; }
   .card-heading, .mosaic-caption { padding: 12px 14px; }
