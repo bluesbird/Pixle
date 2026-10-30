@@ -197,8 +197,9 @@ footer { border-top: 1px solid #d9d9cc; margin-top: 20px; padding: 14px 0 18px; 
   .brand { font-size: 29px; }
   .intro { padding: 12px 0 10px; }
   .hero-title { font-size: 32px; }
-  .game-layout { grid-template-columns: minmax(0, 1fr); gap: 23px; }
+  .game-layout { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .play-panel { padding: 0; }
+  .play-panel p.eyebrow:not(.practice-mode-tag) { display: none; }
   .panel-tail { margin-top: 0; padding-top: 22px; }
   .panel-tail .stats { align-self: stretch; }
   .panel-tail .stats h3 { text-align: left; }
@@ -209,7 +210,10 @@ footer { border-top: 1px solid #d9d9cc; margin-top: 20px; padding: 14px 0 18px; 
   .howto-example { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .howto-modal { padding: 18px; }
   .card-heading, .mosaic-caption { padding: 12px 14px; }
-  .progress { margin-bottom: 20px; }
+  .progress { margin: 2px 0 12px; }
+  h2 { margin: 0 0 6px; }
+  form > p { margin-bottom: 14px; }
+  .turn-actions { margin-top: 8px; }
   footer { margin-top: 32px; flex-wrap: wrap; }
 }
 @media (prefers-reduced-motion: no-preference) {
