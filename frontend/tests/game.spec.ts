@@ -217,6 +217,9 @@ test("empty daily puzzle offers a clear retry without invented game state", asyn
   await expect(page.getByRole("alert")).toContainText("No puzzle is available");
   await expect(page.getByRole("button", { name: "Refresh progress" })).toBeEnabled();
   await expect(page.getByRole("combobox")).toHaveCount(0);
+  await page.getByRole("button", { name: "Pixle practice" }).click();
+  await page.getByRole("combobox", { name: "Your guess" }).fill("A");
+  await expect(page.getByRole("option", { name: "Adele" })).toBeVisible();
 });
 
 test("refresh failure preserves the current mosaic and guess history", async ({ page }) => {

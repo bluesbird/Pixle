@@ -75,11 +75,17 @@ export function App() {
     setError("");
     try {
       await request("/api/session", z.object({ status: z.literal("ready") }), {});
-      const [nextGame, catalogue] = await Promise.all([
-        request("/api/puzzles/daily", gameSchema), request("/api/people", peopleSchema),
-      ]);
-      setGame(nextGame);
+      const catalogue = await request("/api/people", peopleSchema);
       setPeople(catalogue);
+      let nextGame: Game | null = null;
+      try {
+        nextGame = await request("/api/puzzles/daily", gameSchema);
+      } catch (failure) {
+        if (!(failure instanceof ApiError && failure.status === 404)) throw failure;
+        setGame(null);
+        setError(message(failure));
+      }
+      if (nextGame) setGame(nextGame);
       try {
         const saved = sessionStorage.getItem(PENDING_KEY);
         if (saved) {
@@ -87,7 +93,7 @@ export function App() {
           if (!parsed.success) {
             sessionStorage.removeItem(PENDING_KEY);
             setStorageError("An unreadable saved submission was removed. Server progress is unchanged.");
-          } else if (parsed.data.mode === "daily" && parsed.data.date === nextGame.date) {
+          } else if (nextGame && parsed.data.mode === "daily" && parsed.data.date === nextGame.date) {
             setPending(parsed.data);
             setQuery(parsed.data.guess);
             setNotice("A submission is awaiting confirmation. Retry it safely below.");
