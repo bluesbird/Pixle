@@ -6,7 +6,7 @@ import {
 } from "./api";
 
 const PENDING_KEY = "pixle.pending.v1";
-const EXAMPLE_PUZZLE_ID = "1d79c84a0dd89e24dd601cfe";
+const EXAMPLE_PUZZLE_ID = "bbde88819742bd384112a358";
 const HOWTO_SEEN_KEY = "pixle.howto.seen.v1";
 
 function message(error: unknown) {
