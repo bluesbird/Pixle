@@ -1,0 +1,53 @@
+{
+  "algorithm": "rgb-average-v1",
+  "credits": "credits.md",
+  "levels": [
+    {
+      "file": "level-01.jpg",
+      "grid": 8,
+      "height": 768,
+      "level": 1,
+      "sha256": "fee0a3d1714ac26f7272e5f1e5fa20a1b68a98d98a1ba36dc4b2f5421029fd5b",
+      "tile_size": 96,
+      "width": 768
+    },
+    {
+      "file": "level-02.jpg",
+      "grid": 12,
+      "height": 768,
+      "level": 2,
+      "sha256": "5caf5c0388422dd14ba39b83b480c041edcd9ae4c6b961cd44ce3dde11e23db0",
+      "tile_size": 64,
+      "width": 768
+    },
+    {
+      "file": "level-03.jpg",
+      "grid": 24,
+      "height": 768,
+      "level": 3,
+      "sha256": "2c32dfae155508ab4a54c19f62ae1e6ce9b993c1070c703e45151b31a7b20343",
+      "tile_size": 32,
+      "width": 768
+    },
+    {
+      "file": "level-04.jpg",
+      "grid": 48,
+      "height": 768,
+      "level": 4,
+      "sha256": "df62713afc50b877992d74c864459f5ba2d203b53000c2f6adbc9e2262e9045b",
+      "tile_size": 16,
+      "width": 768
+    },
+    {
+      "file": "level-05.jpg",
+      "grid": 96,
+      "height": 768,
+      "level": 5,
+      "sha256": "bf68b3c7309308c1e84593980f740fd1be947296a00aa6631c4d01d2fdee9f99",
+      "tile_size": 8,
+      "width": 768
+    }
+  ],
+  "puzzle_id": "81ba7dde5c1988bd583d1ebb",
+  "schema_version": 1
+}
