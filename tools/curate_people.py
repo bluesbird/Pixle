@@ -28,6 +28,35 @@ USER_AGENT = "PixlePeopleDataset/1.0 (Wikimedia portrait curation; Python urllib
 SIZE = 768
 LOCAL = threading.local()
 
+CREDIT_OVERRIDES = {
+    "Olivia Rodrigo": "Photograph by Raph_PH.",
+    "Taylor Swift": "YouTube still published by Cosmopolitan UK.",
+    "Shawn Mendes": "YouTube still published by Cosmopolitan UK.",
+    "Michael Jackson": "Promotional publicity photo (1983).",
+    "Freddie Mercury": "Queen promotional press photo (1975; published in Billboard, 26 November 1977).",
+    "Bob Dylan": "Photograph by Rowland Scherman.",
+    "John Cena": "U.S. military photograph by Staff Sgt. James Selesnick.",
+    "Marilyn Monroe": "Photograph by Bert Parry (circa 1953).",
+    "James Dean": "Warner Bros. publicity photo for Rebel Without a Cause (1955).",
+    "Amy Winehouse": "Derived crop by Rama from the original Amy Winehouse 2007 photograph.",
+    "Whitney Houston": "Promotional portrait photograph (1988).",
+    "Kim Kardashian": "Flickr photo by Eva Rinaldi.",
+    "Clint Eastwood": "Flickr photo by Raffi Asdourian.",
+    "Arnold Schwarzenegger": "White House photograph by Michael Arthur Worden Evans.",
+    "Roger Federer": "Photograph by Tatiana (Flickr).",
+    "Boris Johnson": "Official portrait photograph by Ben Shread / Cabinet Office.",
+    "Britney Spears": "Derived crop from 'Britney Spears 2013.jpg' (photo by Glenn Francis).",
+    "Pope Francis": "Derived crop from 'Cristina de Kirchner with Franciscus in 2015-2.jpg' (Casa Rosada).",
+    "Greta Thunberg": "Derived crop from 'Greta Thunberg 02.jpg' (Anders Hellberg; derivative by Dikson).",
+    "Stephen Hawking": "NASA portrait photograph from StarChild Learning Center archive source.",
+    "Lewis Hamilton": "Flickr photo by Jen_ross83: https://www.flickr.com/photos/69527563@N05/29870497978/.",
+    "Charlie Chaplin": "Original publication: Photoplay Magazine No. 3 (1922); also cataloged by the National Portrait Gallery.",
+}
+
+ARTIST_OVERRIDES = {
+    "Greta Thunberg": "Anders Hellberg (original), Dikson (derivative crop)",
+}
+
 
 def now():
     return datetime.now(timezone.utc).isoformat()
@@ -35,6 +64,51 @@ def now():
 
 def plain(value):
     return html.unescape(re.sub(r"<[^>]*>", "", str(value))).strip()
+
+
+def normalize_whitespace(value):
+    return re.sub(r"\s+", " ", str(value)).strip()
+
+
+def clean_artist(value):
+    artist = normalize_whitespace(value)
+    if artist == "Unknown authorUnknown author":
+        return "Unknown author"
+    return artist
+
+
+def clean_attribution_value(value):
+    cleaned = normalize_whitespace(value)
+    if not cleaned:
+        return ""
+    if cleaned.lower() == "own work":
+        return ""
+    cleaned = cleaned.replace("https://https://", "https://")
+    cleaned = cleaned.replace("�", "-")
+    cleaned = cleaned.replace("[dead link]", "")
+    cleaned = cleaned.replace("] –", " -")
+    cleaned = re.sub(r"\s*[-–]\s*View/save archived versions on archive\.org.*$", "", cleaned)
+    cleaned = cleaned.split("This file comes from Narendra Modi's official Flickr account.", 1)[0]
+    cleaned = cleaned.split("This tag does not indicate the copyright status of the attached work.", 1)[0]
+    cleaned = cleaned.split("A normal copyright tag is still required. See Commons:Licensing.", 1)[0]
+    cleaned = normalize_whitespace(cleaned).strip(" .")
+    if "P_literature.gif" in cleaned:
+        return ""
+    if cleaned == "White HouseFacebook":
+        return "White House"
+    if cleaned == "Page 39":
+        return ""
+    if "direct link)Official White House page direct link)" in cleaned:
+        return "Official White House page"
+    if "billboard.com/wp-content/uploads" in cleaned:
+        return ""
+    if cleaned.startswith("This file was derived from:"):
+        derived = cleaned.split(":", 1)[-1].strip()
+        return f"Derived from {derived}" if derived else "Derived file on Wikimedia Commons"
+    lowered = cleaned.lower()
+    if any(host in lowered for host in ("cdn-images-1.medium.com", "sotheby's", "minerva auctions", "christies.com", "ebay item", "dodmedia.osd.mil")):
+        return ""
+    return cleaned
 
 
 def slug(name):
@@ -126,10 +200,10 @@ def check_license(info):
     return {
         "name": name,
         "url": url or "https://commons.wikimedia.org/wiki/Commons:Public_domain",
-        "artist": values.get("Artist", ""),
-        "credit": values.get("Credit", ""),
-        "copyright_notice": values.get("Copyright", ""),
-        "attribution_statement": values.get("Attribution", ""),
+        "artist": clean_artist(values.get("Artist", "")),
+        "credit": clean_attribution_value(values.get("Credit", "")),
+        "copyright_notice": clean_attribution_value(values.get("Copyright", "")),
+        "attribution_statement": clean_attribution_value(values.get("Attribution", "")),
         "usage_terms": values.get("UsageTerms", ""),
         "attribution_required": values.get("AttributionRequired", ""),
         "restrictions": values.get("Restrictions", ""),
@@ -268,21 +342,33 @@ def save_metadata(records):
         if record["status"] != "downloaded":
             continue
         license_info = record["license"]
+        override_credit = CREDIT_OVERRIDES.get(record["name"])
+        display_artist = ARTIST_OVERRIDES.get(record["name"], clean_artist(license_info["artist"]))
         attribution = (
-            f'{record["name"]} - {license_info["artist"] or "Author not specified (public domain)"}; '
+            f'{record["name"]} - {display_artist or "Author not specified (public domain)"}; '
             f'{license_info["name"]} ({license_info["url"]}); '
             f'{record["source_page_url"]}. Modified: square crop, resized to {SIZE}x{SIZE}, '
             "converted to JPEG; source metadata removed."
         )
+        has_detail = False
         for label, key in (
             ("Credit", "credit"), ("Copyright notice", "copyright_notice"),
             ("Source attribution statement", "attribution_statement"),
         ):
-            value = license_info.get(key, "")
+            value = clean_attribution_value(license_info.get(key, ""))
             if not value and key == "attribution_statement":
-                value = plain(license_info["raw_extmetadata"].get("Attribution", {}).get("value", ""))
+                value = clean_attribution_value(
+                    plain(license_info["raw_extmetadata"].get("Attribution", {}).get("value", ""))
+                )
+            if label == "Credit" and override_credit:
+                continue
+            if label == "Credit" and value and value.lower().strip(".") == record["name"].lower():
+                value = ""
             if value:
+                has_detail = True
                 attribution += f" {label}: {value}."
+        if override_credit:
+            attribution += f" Credit: {override_credit}"
         if license_info["name"] == "OGL 3":
             attribution += " Contains public sector information licensed under the Open Government Licence v3.0."
         record["attribution"] = attribution

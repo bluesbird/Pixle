@@ -46,7 +46,9 @@
     "Amy Winehouse",
     "Kanye West",
     "Katy Perry",
-    "Nicki Minaj"
+    "Nicki Minaj",
+    "Sabrina Carpenter",
+    "Bruce Springsteen"
   ],
   "screen_and_media": [
     "Tom Cruise",
@@ -70,7 +72,6 @@
     "Kim Kardashian",
     "Arnold Schwarzenegger",
     "James Dean",
-    "Mary-Louise Parker",
     "Marilyn Monroe",
     "Ellen DeGeneres",
     "Timothée Chalamet",
@@ -104,7 +105,12 @@
     "Jennifer Aniston",
     "Emma Stone",
     "Margot Robbie",
-    "Charlie Chaplin"
+    "Charlie Chaplin",
+    "Denzel Washington",
+    "Morgan Freeman",
+    "Ryan Reynolds",
+    "Khloé Kardashian",
+    "Khaby Lame"
   ],
   "sports": [
     "Lionel Messi",
@@ -139,13 +145,13 @@
     "Tom Brady",
     "Lamine Yamal",
     "Eddie Hall",
-    "Chris Bumstead",
     "Ronnie Coleman",
     "Hafþór Júlíus Björnsson",
     "Eliud Kipchoge",
     "Faker (gamer)",
     "Zinedine Zidane",
-    "Pep Guardiola"
+    "Pep Guardiola",
+    "Virat Kohli"
   ],
   "politics_and_public_life": [
     "Barack Obama",
@@ -177,7 +183,9 @@
     "Hillary Clinton",
     "Boris Johnson",
     "Michelle Obama",
-    "Ursula von der Leyen"
+    "Ursula von der Leyen",
+    "Kamala Harris",
+    "Che Guevara"
   ],
   "other": [
     "Oprah Winfrey",
@@ -198,6 +206,7 @@
     "Karl Marx",
     "Louis Armstrong",
     "Neil Armstrong",
-    "David Goggins"
+    "David Goggins",
+    "Frida Kahlo"
   ]
 }
