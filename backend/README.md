@@ -146,8 +146,8 @@ python -m unittest discover -s backend\tests -v
 
 Tests create uniquely named schemas and drop only those schemas afterwards. The
 test database user needs schema creation rights. Never point tests at production.
-The initial implementation was verified with all 18 tests on PostgreSQL 18,
-including concurrent first guesses and concurrent terminal retries. A live
+The current backend suite includes 26 tests in total, with 3 PostgreSQL-only
+concurrency checks (skipped unless `PIXLE_TEST_DATABASE_URL` is configured). A live
 Uvicorn/HTTP smoke check also confirmed repeatable schema initialization and
 date assignment, and persisted progress and results across API restarts.
 For an explicitly local smoke test without PostgreSQL, set `DATABASE_URL` to

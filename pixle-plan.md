@@ -168,19 +168,20 @@ automated coverage are documented in `puzzles/README.md`.
 its schema and serve a configured daily puzzle without exposing its answer.
 
 **Completed:** `backend` provides the FastAPI service, SQLAlchemy PostgreSQL schema,
-explicit initialization and offline daily-puzzle assignment commands, anonymous
-cookie sessions, catalogue suggestions, server-validated guesses, persisted results,
-and per-player statistics. Active games never return the answer; finished games
-may reveal it. Scores and results are derived from recorded guesses, not accepted
-from clients. PostgreSQL row locks and database constraints protect concurrent
-submissions and retries.
+Alembic-backed migrations, UTC daily puzzle retrieval with deterministic auto-cycle
+assignment, anonymous cookie sessions, catalogue suggestions, server-validated guesses,
+persisted results, and per-player statistics. Active games never return the answer;
+finished games may reveal it. Scores and results are derived from recorded guesses,
+not accepted from clients. PostgreSQL row locks and database constraints protect
+concurrent submissions and retries.
 
-All 18 API tests passed against PostgreSQL 18, including concurrent submissions.
-A live HTTP smoke check initialized the schema, assigned the sample puzzle,
-and preserved attempts and results across API restarts. Setup, UTC date policy,
-scoring, session handling, and test commands are documented in `backend/README.md`.
-Temporary validation databases and services were removed; no development database
-or API server is left running.
+The current backend suite includes 26 tests, with PostgreSQL-only concurrency checks
+for first-guess serialization, terminal idempotent retries, and daily auto-assignment
+race handling. A live HTTP smoke check validated schema migration/startup behavior and
+persisted attempts/results across API restarts. Setup, UTC date policy, scoring,
+session handling, and test commands are documented in `backend/README.md`. Temporary
+validation databases and services were removed; no development database or API server
+is left running.
 
 ### [x] 3. Build the browser game
 
