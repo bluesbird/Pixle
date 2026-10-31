@@ -64,9 +64,18 @@ Mnemo repository Caddyfile:
 
 Per your Step 5 constraint, stop here until explicit deploy confirmation.
 
-## 4. Assign the daily puzzle
+## 4. Configure automatic daily scheduling
 
-After first startup, configure each UTC date explicitly:
+Daily puzzles are auto-assigned on first access in UTC, one unique portrait per
+cycle (currently 200 days), then reshuffled for the next cycle. Set a stable
+cycle start and seed in your compose environment:
+
+```sh
+PUZZLE_CYCLE_START_DATE=2026-10-29
+PUZZLE_CYCLE_SEED=pixle-production-v1
+```
+
+You can still pin a specific date manually if needed:
 
 ```sh
 docker compose exec api python -m backend.manage configure-puzzle --date 2026-10-29 --asset-id 1d79c84a0dd89e24dd601cfe

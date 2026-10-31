@@ -117,6 +117,17 @@ def create_app(engine=None, today=None, secure_cookie=None):
     app = FastAPI(title="Pixle API", version="0.1.0", lifespan=lifespan)
     metadata_path = ROOT / "people" / "metadata.json"
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    targets_path = ROOT / "puzzles" / "private" / "targets.json"
+    targets = json.loads(targets_path.read_text(encoding="utf-8"))["targets"]
+    if not targets:
+        raise ValueError("targets.json must contain at least one puzzle target")
+    target_ids = sorted(targets)
+    target_count = len(target_ids)
+    cycle_seed = os.environ.get("PUZZLE_CYCLE_SEED", "pixle-cycle-v1")
+    cycle_start_override = os.environ.get("PUZZLE_CYCLE_START_DATE")
+    cycle_start_date = date.fromisoformat(cycle_start_override) if cycle_start_override else None
+    levels_cache = {}
+    cycle_cache = {}
     image_directory = (ROOT / "people" / metadata["image_directory"]).resolve()
     portraits = {
         person["id"]: (image_directory / person["filename"]).resolve()
@@ -157,6 +168,31 @@ def create_app(engine=None, today=None, secure_cookie=None):
         if puzzle_date > current_date():
             raise HTTPException(404, "Puzzle not available")
         puzzle = session.get(Puzzle, puzzle_date)
+        if puzzle is None:
+            start = cycle_start_date or session.scalar(select(func.min(Puzzle.date)))
+            if start is None:
+                start = puzzle_date
+            if puzzle_date >= start:
+                offset = (puzzle_date - start).days
+                cycle = offset // target_count
+                index = offset % target_count
+                order = cycle_cache.get(cycle)
+                if order is None:
+                    order = target_ids.copy()
+                    random.Random(f"{cycle_seed}:{cycle}").shuffle(order)
+                    cycle_cache[cycle] = order
+                target_id = order[index]
+                asset_id = targets[target_id]
+                levels = levels_cache.get(asset_id)
+                if levels is None:
+                    manifest_path = ROOT / "puzzles" / "public" / asset_id / "manifest.json"
+                    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                    levels = manifest["levels"]
+                    levels_cache[asset_id] = levels
+                session.add(Puzzle(date=puzzle_date, asset_id=asset_id, target_id=target_id, levels=levels))
+                session.flush()
+                session.info["created_auto_puzzle"] = True
+                puzzle = session.get(Puzzle, puzzle_date)
         if puzzle is None:
             raise HTTPException(404, "No puzzle configured for this date")
         return puzzle
@@ -269,7 +305,10 @@ def create_app(engine=None, today=None, secure_cookie=None):
         game = session.scalar(select(Game).where(
             Game.player_id == existing_player.token_hash, Game.puzzle_date == puzzle_date
         ))
-        return game_output(session, puzzle, game)
+        output = game_output(session, puzzle, game)
+        if session.info.pop("created_auto_puzzle", False):
+            session.commit()
+        return output
 
     @app.get("/api/puzzles/daily", response_model=GameOutput, response_model_exclude_none=True)
     def daily(request: Request, session: Session = Depends(session_dependency)):

@@ -276,7 +276,12 @@ class ApiTests(unittest.TestCase):
 
     def test_missing_daily_puzzle(self):
         self.today = DAY + timedelta(days=2)
-        self.assertEqual(self.client.get("/api/puzzles/daily").status_code, 404)
+        first = self.client.get("/api/puzzles/daily")
+        self.assertEqual(first.status_code, 200, first.text)
+        self.assertEqual(first.json()["date"], self.today.isoformat())
+        second = self.client.get("/api/puzzles/daily")
+        self.assertEqual(second.status_code, 200, second.text)
+        self.assertEqual(first.json()["puzzle_id"], second.json()["puzzle_id"])
 
     def test_player_isolation_cookie_and_hashed_storage(self):
         self.guess("Adele")

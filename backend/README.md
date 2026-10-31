@@ -14,16 +14,22 @@ Create a PostgreSQL database and user, then run from the project root:
 python -m pip install -r requirements-api.txt
 $env:DATABASE_URL = "postgresql+psycopg://USER:PASSWORD@localhost:5432/pixle"
 python -m backend.manage init-db
-python -m backend.manage configure-puzzle --date 2026-10-28 --asset-id 1d79c84a0dd89e24dd601cfe
 python -m uvicorn backend.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
-Set the date to the desired publication day. All daily boundaries are **UTC**.
-No puzzle is automatically scheduled or silently substituted. Missing dates return
-404; future puzzles are never returned. Past progress can be retrieved, but guesses
-are accepted only for the current UTC date. Assignment is an offline admin command,
-not a public endpoint. Repeating an identical assignment is safe; changing a date's
-puzzle or changing existing catalogue identities is rejected.
+All daily boundaries are **UTC**. Missing dates are auto-assigned on first access
+using a deterministic shuffled cycle over all available targets: one unique portrait
+per day for the full cycle length (currently 200), then a new shuffled cycle begins.
+Future puzzles are never returned, and guesses are accepted only for the current UTC
+date. Optional environment variables:
+
+- `PUZZLE_CYCLE_START_DATE=YYYY-MM-DD` to pin cycle day 1 (defaults to the earliest
+  configured puzzle date; if none exists, the first auto-assigned date).
+- `PUZZLE_CYCLE_SEED=<string>` to control shuffle deterministically across deploys.
+
+`configure-puzzle` remains available as an explicit override for a specific date.
+Repeating an identical assignment is safe; changing a date's puzzle or changing
+existing catalogue identities is rejected.
 
 `init-db` explicitly creates missing tables and constraints; the service checks
 connectivity and schema availability at startup. It does not initialize or mutate
