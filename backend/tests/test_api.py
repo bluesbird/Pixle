@@ -21,7 +21,10 @@ from backend.database import Base, Game, Guess, Player, Puzzle, Result, make_eng
 
 
 DAY = date(2026, 10, 28)
-ASSET = "1d79c84a0dd89e24dd601cfe"
+TARGETS = json.loads((ROOT / "puzzles" / "private" / "targets.json").read_text(encoding="utf-8"))["targets"]
+ASSET = TARGETS["albert-einstein"]
+SECOND_ASSET = next(asset for person_id, asset in TARGETS.items() if person_id != "albert-einstein")
+PEOPLE_COUNT = len(json.loads((ROOT / "people" / "metadata.json").read_text(encoding="utf-8"))["people"])
 
 
 class ApiTests(unittest.TestCase):
@@ -100,7 +103,7 @@ class ApiTests(unittest.TestCase):
         self.assertNotIn("einstein", response.text.lower())
         self.assertEqual(response.headers["cache-control"], "no-store")
         people = self.client.get("/api/people").json()
-        self.assertEqual(len(people), 116)
+        self.assertEqual(len(people), PEOPLE_COUNT)
         self.assertTrue(all(set(person) == {"id", "name"} for person in people))
         self.assertTrue(body["credits_url"].endswith("/credits.md"))
         self.assertEqual(self.client.get("/puzzles/private/" + ASSET + ".json").status_code, 404)
@@ -165,7 +168,7 @@ class ApiTests(unittest.TestCase):
 
     def test_mosaic_practice_uses_available_puzzle_levels(self):
         tomorrow = DAY + timedelta(days=1)
-        configure_puzzle(self.engine, tomorrow, "06ad9680afd1ac5fe465467b")
+        configure_puzzle(self.engine, tomorrow, SECOND_ASSET)
         practice = self.client.post("/api/practice/mosaic").json()
         self.assertEqual(practice["mode"], "practice")
         self.assertEqual(practice["status"], "playing")

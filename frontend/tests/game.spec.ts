@@ -9,7 +9,7 @@ const people = [
   { id: "taylor-swift", name: "Taylor Swift" },
   { id: "tom-hanks", name: "Tom Hanks" },
 ];
-const tinyJpeg = Buffer.from("/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBUQEBAVFhUVFRUVFRUVFRUVFRUWFhUXFhUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0fHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAQMBIgACEQEDEQH/xAAXAAEAAwAAAAAAAAAAAAAAAAAAAQID/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB0A//xAAXEAADAQAAAAAAAAAAAAAAAAAAAQIR/9oACAEBAAEFApWf/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwEf/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwEf/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJf/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQABPyFf/9k=", "base64");
+const tinyImage = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO7+qfkAAAAASUVORK5CYII=", "base64");
 
 type Submission = { guess: string; request_id: string };
 
@@ -26,6 +26,9 @@ async function mockApi(page: Page, options: { empty?: boolean; commitAndDrop?: b
   const levels = [8, 12, 24, 48, 96].map((grid, index) => ({
     level: index + 1, grid, width: 768, height: 768, url: `/puzzles/${puzzleId}/level-0${index + 1}.jpg`,
   }));
+  await page.route(`**/puzzles/${puzzleId}/level-*.jpg*`, (route) => {
+    route.fulfill({ status: 200, body: tinyImage, contentType: "image/png" });
+  });
   const current = () => {
     const won = guesses.at(-1)?.correct ?? false;
     const status = won ? "won" : guesses.length === 5 ? "lost" : "playing";
@@ -58,10 +61,10 @@ async function mockApi(page: Page, options: { empty?: boolean; commitAndDrop?: b
     const url = new URL(route.request().url());
     if (url.pathname === "/api/session") return route.fulfill({ json: { status: "ready" } });
     if (url.pathname.startsWith(`/api/practice/${practiceId}/level-`)) {
-      return route.fulfill({ status: 200, body: tinyJpeg, contentType: "image/jpeg" });
+      return route.fulfill({ status: 200, body: tinyImage, contentType: "image/png" });
     }
     if (url.pathname.startsWith("/api/people/") && url.pathname.endsWith("/photo")) {
-      return route.fulfill({ status: 200, body: tinyJpeg, contentType: "image/jpeg" });
+      return route.fulfill({ status: 200, body: tinyImage, contentType: "image/png" });
     }
     if (url.pathname === "/api/people") return route.fulfill({ json: people });
     if (url.pathname === "/api/stats/me") {
@@ -227,10 +230,10 @@ test("refresh failure preserves the current mosaic and guess history", async ({ 
   await openGame(page);
   await guess(page, "Adele");
   await guess(page, "Unknown");
-  await expect(page.getByRole("alert")).toContainText("Choose a name");
+  await expect(page.locator(".error-box[role='alert']")).toContainText("Choose a name");
   api.setFailDaily(true);
   await page.getByRole("button", { name: "Refresh progress" }).click();
-  await expect(page.getByRole("alert")).toContainText("temporarily unavailable");
+  await expect(page.locator(".error-box[role='alert']")).toContainText("temporarily unavailable");
   await expect(page.getByRole("img", { name: /detail level 2/ })).toBeVisible();
   await expect(page.getByText("Adele", { exact: true })).toBeVisible();
   await expect(page.getByRole("combobox")).toHaveValue("Unknown");
@@ -239,7 +242,7 @@ test("refresh failure preserves the current mosaic and guess history", async ({ 
 test("broken mosaic can be retried and no-match suggestions are explained", async ({ page }) => {
   await mockApi(page);
   let fail = true;
-  await page.route("**/puzzles/**/level-*.jpg*", (route) => fail ? route.abort() : route.continue());
+  await page.route("**/puzzles/**/level-*.jpg*", (route) => fail ? route.abort() : route.fallback());
   await openGame(page);
   await expect(page.getByText("The image could not load.")).toBeVisible();
   fail = false;
