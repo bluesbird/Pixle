@@ -128,6 +128,7 @@ class DailyService:
         return {"status": "ready"}
 
     def people(self, session):
+        ensure_catalogue_seeded(session, self.context, normalize_answer, PERSON_BYNAMES)
         return [PersonOutput(id=p.id, name=p.name)
                 for p in session.scalars(select(Person).order_by(Person.name))]
 

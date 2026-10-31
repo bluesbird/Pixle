@@ -296,6 +296,16 @@ class ApiTests(unittest.TestCase):
             self.assertGreater(session.scalar(select(func.count(Person.id))), 0)
             self.assertIsNotNone(session.get(Puzzle, self.today))
 
+    def test_people_endpoint_backfills_catalogue_before_daily_load(self):
+        with Session(self.engine) as session, session.begin():
+            session.execute(delete(Puzzle))
+            session.execute(delete(Person))
+        people = self.client.get("/api/people")
+        self.assertEqual(people.status_code, 200, people.text)
+        names = {entry["name"] for entry in people.json()}
+        self.assertEqual(len(names), PEOPLE_COUNT)
+        self.assertIn("Hillary Clinton", names)
+
     def test_player_isolation_cookie_and_hashed_storage(self):
         self.guess("Adele")
         with TestClient(self.app) as other:
