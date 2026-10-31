@@ -377,6 +377,32 @@ class ApiTests(unittest.TestCase):
             self.assertEqual(session.scalar(select(func.count(Guess.id))), 1)
             self.assertEqual(session.scalar(select(func.count(Result.game_id))), 1)
 
+    def test_concurrent_auto_daily_assignment_is_idempotent_on_postgresql(self):
+        if self.engine.dialect.name != "postgresql":
+            self.skipTest("Requires PIXLE_TEST_DATABASE_URL for PostgreSQL race verification")
+        target_day = DAY + timedelta(days=10)
+        with Session(self.engine) as session, session.begin():
+            session.execute(delete(Puzzle).where(Puzzle.date == target_day))
+        self.today = target_day
+
+        def fetch_daily():
+            with TestClient(self.app) as client:
+                client.post("/api/session")
+                return client.get("/api/puzzles/daily")
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            responses = list(pool.map(lambda _: fetch_daily(), range(2)))
+        self.assertEqual([response.status_code for response in responses], [200, 200])
+        first = responses[0].json()
+        second = responses[1].json()
+        self.assertEqual(first["date"], target_day.isoformat())
+        self.assertEqual(first["puzzle_id"], second["puzzle_id"])
+        with Session(self.engine) as session:
+            self.assertEqual(
+                session.scalar(select(func.count(Puzzle.date)).where(Puzzle.date == target_day)),
+                1,
+            )
+
 
 class NormalizationTests(unittest.TestCase):
     def test_accents_punctuation_spacing_and_case(self):

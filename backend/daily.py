@@ -7,6 +7,7 @@ from datetime import date
 from fastapi import HTTPException, Request, Response
 from fastapi.responses import FileResponse
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 
 from backend.catalog import PERSON_BYNAMES, normalize_answer
 from backend.database import Game, Guess, Person, Player, Puzzle, Result
@@ -55,10 +56,19 @@ class DailyService:
                     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
                     levels = manifest["levels"]
                     self.context.levels_cache[asset_id] = levels
-                session.add(Puzzle(date=puzzle_date, asset_id=asset_id, target_id=target_id, levels=levels))
-                session.flush()
-                session.info["created_auto_puzzle"] = True
-                puzzle = session.get(Puzzle, puzzle_date)
+                try:
+                    with session.begin_nested():
+                        session.add(Puzzle(
+                            date=puzzle_date, asset_id=asset_id, target_id=target_id, levels=levels
+                        ))
+                        session.flush()
+                except IntegrityError:
+                    puzzle = session.get(Puzzle, puzzle_date)
+                    if puzzle is None:
+                        raise
+                else:
+                    session.info["created_auto_puzzle"] = True
+                    puzzle = session.get(Puzzle, puzzle_date)
         if puzzle is None:
             raise HTTPException(404, "No puzzle configured for this date")
         return puzzle
