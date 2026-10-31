@@ -8,10 +8,11 @@ WORKDIR /app
 COPY requirements-api.txt /app/requirements-api.txt
 RUN pip install --no-cache-dir -r /app/requirements-api.txt
 
+COPY alembic.ini /app/alembic.ini
 COPY backend /app/backend
 COPY people /app/people
 COPY puzzles /app/puzzles
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python -m backend.manage init-db && python -m uvicorn backend.app:create_app --factory --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "python -m backend.manage migrate && python -m uvicorn backend.app:create_app --factory --host 0.0.0.0 --port 8000"]

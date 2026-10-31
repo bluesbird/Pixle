@@ -13,7 +13,7 @@ Create a PostgreSQL database and user, then run from the project root:
 ```powershell
 python -m pip install -r requirements-api.txt
 $env:DATABASE_URL = "postgresql+psycopg://USER:PASSWORD@localhost:5432/pixle"
-python -m backend.manage init-db
+python -m backend.manage migrate
 python -m uvicorn backend.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
@@ -31,10 +31,24 @@ date. Optional environment variables:
 Repeating an identical assignment is safe; changing a date's puzzle or changing
 existing catalogue identities is rejected.
 
-`init-db` explicitly creates missing tables and constraints; the service checks
-connectivity and schema availability at startup. It does not initialize or mutate
-the schema automatically. This is the initial schema, not a migration framework;
-use explicit migrations for subsequent schema changes.
+`migrate` is Alembic-backed and safe for both fresh and already-initialized
+databases:
+
+- Empty database: applies all migrations to `head`.
+- Existing Pixle schema without `alembic_version`: stamps to `head` once, then
+  applies future migrations.
+- Versioned database: applies pending migrations only.
+
+Management commands:
+
+```powershell
+python -m backend.manage migrate
+python -m backend.manage make-migration --message "add foo" --autogenerate
+python -m backend.manage stamp-head
+```
+
+`init-db` remains available for explicit legacy bootstrap workflows, but runtime
+startup now uses `migrate`.
 
 Configuration imports the private offline manifest and the reviewed catalogue,
 verifies public asset hashes and provenance, and stores the target reference and

@@ -45,6 +45,8 @@ docker compose ps
 ```
 
 Health checks must report `healthy` for `db`, `api`, and `frontend`.
+The API container runs `python -m backend.manage migrate` at startup before
+launching Uvicorn.
 
 API smoke checks:
 
