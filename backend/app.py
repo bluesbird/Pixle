@@ -22,7 +22,7 @@ from sqlalchemy import func, select, text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from backend.catalog import normalize_answer
+from backend.catalog import PERSON_BYNAMES, normalize_answer
 from backend.database import Game, Guess, Person, Player, Puzzle, Result, make_engine
 
 
@@ -133,6 +133,10 @@ def create_app(engine=None, today=None, secure_cookie=None):
         person["id"]: (image_directory / person["filename"]).resolve()
         for person in metadata["people"]
     }
+    people_records = {
+        person["id"]: person
+        for person in metadata["people"]
+    }
     practice_games = {}
     practice_lock = Lock()
 
@@ -169,6 +173,22 @@ def create_app(engine=None, today=None, secure_cookie=None):
             raise HTTPException(404, "Puzzle not available")
         puzzle = session.get(Puzzle, puzzle_date)
         if puzzle is None:
+            missing_people = [
+                person_id for person_id in target_ids
+                if session.get(Person, person_id) is None
+            ]
+            if missing_people:
+                for person_id in missing_people:
+                    record = people_records[person_id]
+                    bynames = PERSON_BYNAMES.get(person_id, set())
+                    aliases = sorted({
+                        normalize_answer(record["name"]),
+                        normalize_answer(record["wikipedia_title"]),
+                        normalize_answer(record["id"]),
+                        *(normalize_answer(value) for value in bynames),
+                    })
+                    session.add(Person(id=record["id"], name=record["name"], aliases=aliases))
+                session.flush()
             start = cycle_start_date or session.scalar(select(func.min(Puzzle.date)))
             if start is None:
                 start = puzzle_date

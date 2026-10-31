@@ -17,7 +17,7 @@ from sqlalchemy.schema import CreateTable
 
 from backend.app import COOKIE, create_app
 from backend.catalog import ROOT, configure_puzzle, normalize_answer
-from backend.database import Base, Game, Guess, Player, Puzzle, Result, make_engine
+from backend.database import Base, Game, Guess, Person, Player, Puzzle, Result, make_engine
 
 
 DAY = date(2026, 10, 28)
@@ -282,6 +282,19 @@ class ApiTests(unittest.TestCase):
         second = self.client.get("/api/puzzles/daily")
         self.assertEqual(second.status_code, 200, second.text)
         self.assertEqual(first.json()["puzzle_id"], second.json()["puzzle_id"])
+
+    def test_auto_daily_assignment_populates_people_on_fresh_db(self):
+        with Session(self.engine) as session, session.begin():
+            session.execute(delete(Puzzle))
+            session.execute(delete(Person))
+        self.today = DAY + timedelta(days=3)
+        response = self.client.get("/api/puzzles/daily")
+        self.assertEqual(response.status_code, 200, response.text)
+        body = response.json()
+        self.assertEqual(body["date"], self.today.isoformat())
+        with Session(self.engine) as session:
+            self.assertGreater(session.scalar(select(func.count(Person.id))), 0)
+            self.assertIsNotNone(session.get(Puzzle, self.today))
 
     def test_player_isolation_cookie_and_hashed_storage(self):
         self.guess("Adele")
