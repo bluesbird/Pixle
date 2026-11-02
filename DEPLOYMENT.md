@@ -6,7 +6,7 @@ Docker Compose runs:
 - `api` (FastAPI on host port `18000`)
 - `db` (PostgreSQL with persistent volume)
 
-It is designed to be fronted by the **existing VPS Caddy instance**.
+It is fronted by Caddy in the separate **`vps-infra` stack**.
 When Caddy runs in Docker, `host.docker.internal` needs access to Pixle's host
 ports; keep host firewall rules restrictive so only intended public paths are exposed.
 
@@ -17,11 +17,12 @@ From the Pixle repo root on the VPS:
 ```sh
 cp .env.production.example .env.production
 chmod 600 .env.production
-mkdir -p /opt/mnemo/Mnemo/deploy/pixle-public
-cp -r puzzles/public/* /opt/mnemo/Mnemo/deploy/pixle-public/
+rsync -a puzzles/public/ /srv/pixle/puzzles/public/
 ```
 
 Edit `.env.production` and replace every placeholder password.
+An administrator must first create `/srv/pixle/puzzles/public` and give the
+Pixle deployment user ownership. Keep these files outside both app checkouts.
 
 ## GitHub Actions deployment secrets
 
@@ -33,8 +34,9 @@ backend and frontend checks pass. Configure these repository secrets:
 - `VPS_HOST` (for example `your-vps.example.org`)
 - `VPS_USER` (SSH user on the VPS)
 - `VPS_REPO_PATH` (absolute path to Pixle checkout on the VPS)
-- `PIXLE_PUBLIC_DIR` (absolute path served by Caddy for `/puzzles/*`,
-  for example `/opt/mnemo/Mnemo/deploy/pixle-public`)
+
+The workflow publishes assets to `/srv/pixle/puzzles/public`. The former
+`PIXLE_PUBLIC_DIR` secret is no longer used.
 
 ## 2. Start and verify the Pixle stack
 
@@ -58,15 +60,14 @@ curl --fail http://127.0.0.1:18080/
 
 ## 3. Configure Caddy for pixle.duckdns.org
 
-Use the snippet in `deploy/Caddyfile.pixle.snippet` and merge it into the
-Mnemo repository Caddyfile:
+The Caddyfile belongs to `vps-infra`, not Mnemo or Pixle. It routes:
 
 - `/api/*` -> `host.docker.internal:18000`
-- `/puzzles/*` -> `/opt/mnemo/Mnemo/deploy/pixle-public` (via `handle_path`)
+- `/puzzles/*` -> `/srv/pixle/puzzles/public` (via `handle_path`)
 - everything else -> `host.docker.internal:18080`
 
-Validate the shared Caddy configuration before reloading it. Preserve the existing
-Mnemo routes.
+Deploy gateway changes from the `vps-infra` checkout with `bash deploy.sh`.
+Normal Pixle deployments do not modify or restart the shared gateway.
 
 ## 4. Configure automatic daily scheduling
 

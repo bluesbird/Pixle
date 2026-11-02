@@ -73,7 +73,7 @@ jobs:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_REPO_PATH: ${{ secrets.VPS_REPO_PATH }}
-          PIXLE_PUBLIC_DIR: ${{ secrets.PIXLE_PUBLIC_DIR }}
+          PIXLE_PUBLIC_DIR: /srv/pixle/puzzles/public
           DEPLOY_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
