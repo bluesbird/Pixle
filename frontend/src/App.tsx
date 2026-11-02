@@ -384,7 +384,7 @@ export function App() {
     <main>
       <section className="intro" aria-label="Daily photo mosaic">
         <div className="intro-row">
-          <p className="eyebrow">The Daily Photo Mosaic</p>
+          <p className="eyebrow">The Daily Face Mosaic</p>
           <div className="intro-utility">
             <button className="top-help-button" type="button" onClick={() => setShowHowTo(true)} aria-label="How to play">
               ?
