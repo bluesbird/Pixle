@@ -2,9 +2,10 @@
 
 FastAPI with SQLAlchemy and PostgreSQL. All gameplay state is server-side; there
 is no endpoint accepting a claimed score, attempt count, win, or arbitrary result.
-Completing the last guess transaction records exactly one result per game.
+Daily games persist in PostgreSQL; practice rounds are held in memory and lost
+on API restart. Completing a daily game records exactly one result.
 For production container deployment and backup/restore procedures, see
-`DEPLOYMENT.md`.
+[`DEPLOYMENT.md`](../DEPLOYMENT.md).
 
 ## Set up PostgreSQL and assign a daily puzzle
 
@@ -14,6 +15,7 @@ Create a PostgreSQL database and user, then run from the project root:
 python -m pip install -r requirements-api.txt
 $env:DATABASE_URL = "postgresql+psycopg://USER:PASSWORD@localhost:5432/pixle"
 python -m backend.manage migrate
+$env:COOKIE_SECURE = "false"
 python -m uvicorn backend.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
@@ -50,10 +52,13 @@ python -m backend.manage stamp-head
 `init-db` remains available for explicit legacy bootstrap workflows, but runtime
 startup now uses `migrate`.
 
-Configuration imports the private offline manifest and the reviewed catalogue,
+Explicit puzzle configuration imports the private offline manifest and reviewed catalogue,
 verifies public asset hashes and provenance, and stores the target reference and
-ordered levels in PostgreSQL. The runtime does not need the private JSON files
-or original portraits, and never serves either directory.
+ordered levels in PostgreSQL. At runtime, the API reads catalogue metadata,
+`puzzles\private\targets.json`, and public manifests for automatic assignment.
+Original portraits are used for pixelated practice and served through
+`/api/people/{person_id}/photo`; that route is public. The source directories
+are not mounted as static files.
 
 ## Routes and gameplay contract
 
@@ -62,16 +67,19 @@ or original portraits, and never serves either directory.
 | `GET /api/health` | Database connectivity |
 | `POST /api/session` | Create or reuse an anonymous session |
 | `GET /api/people` | Full catalogue of `{id, name}` suggestions, no target flags |
+| `GET /api/people/{person_id}/photo` | Public original portrait by person ID |
 | `GET /api/puzzles/daily` | Today's puzzle and this player's persisted progress |
 | `GET /api/puzzles/YYYY-MM-DD` | Available puzzle and this player's progress |
+| `GET /api/puzzles/YYYY-MM-DD/original` | Daily original portrait, requiring a completed game |
 | `POST /api/puzzles/YYYY-MM-DD/guesses` | Validate a guess and advance the game |
 | `POST /api/puzzles/YYYY-MM-DD/skip` | Consume one attempt and reveal the next level |
-| `POST /api/practice/random` | Start an unscored random practice mosaic |
+| `POST /api/practice/random` | Start an unscored pixelated portrait round |
 | `POST /api/practice/mosaic` | Start an unscored random practice round using available pre-generated mosaic levels |
 | `GET /api/practice/{practice_id}` | Retrieve the current practice game state |
 | `POST /api/practice/{practice_id}/guesses` | Submit a practice guess |
 | `POST /api/practice/{practice_id}/skip` | Skip to the next practice level |
 | `GET /api/practice/{practice_id}/level-{n}.jpg` | Authenticated practice mosaic image |
+| `GET /api/practice/{practice_id}/original` | Practice original portrait, requiring a completed game |
 | `GET /api/stats/me` | Completed games, wins, total score for this session |
 
 Puzzle, guess, and stats routes require the session cookie. Session creation
@@ -116,7 +124,7 @@ The answer and score appear only after this player's game is finished.
 Responses are not cacheable. Database errors are logged and return 503.
 
 Practice mode is unscored and does not update `/api/stats/me`. Random practice
-creates five authenticated mosaic images generated from the selected portrait
+creates five authenticated pixelated images generated from the selected portrait
 at progressively finer block sizes. Mosaic practice reuses pre-generated
 `/puzzles/.../level-*.jpg` assets chosen at random from the local puzzle set.
 
@@ -146,10 +154,8 @@ python -m unittest discover -s backend\tests -v
 
 Tests create uniquely named schemas and drop only those schemas afterwards. The
 test database user needs schema creation rights. Never point tests at production.
-The current backend suite includes 26 tests in total, with 3 PostgreSQL-only
-concurrency checks (skipped unless `PIXLE_TEST_DATABASE_URL` is configured). A live
-Uvicorn/HTTP smoke check also confirmed repeatable schema initialization and
-date assignment, and persisted progress and results across API restarts.
+Three concurrency checks require PostgreSQL and are skipped unless
+`PIXLE_TEST_DATABASE_URL` is configured.
 For an explicitly local smoke test without PostgreSQL, set `DATABASE_URL` to
 `sqlite:///pixle-local.db`; this is not the production backend or a concurrency
 substitute.

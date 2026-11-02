@@ -3,12 +3,13 @@
 React, TypeScript, and Vite. Requires **Node.js 22 or newer** and npm.
 No external fonts, analytics, accounts, or portrait downloads are used by the UI.
 For production container deployment and reverse-proxy integration, see
-`DEPLOYMENT.md`.
+[`DEPLOYMENT.md`](../DEPLOYMENT.md).
 
 ## Run locally
 
-Start the API on `127.0.0.1:8000` and configure today's UTC puzzle as described in
-`backend\README.md`. Set `COOKIE_SECURE=false` for local HTTP development.
+Start the API on `127.0.0.1:8000` as described in
+[`backend/README.md`](../backend/README.md). Daily puzzles are assigned automatically.
+Set `COOKIE_SECURE=false` for local HTTP development.
 From the project root:
 
 ```powershell
@@ -34,15 +35,15 @@ The build type-checks all frontend and test code. Browser tests run Chromium at
 desktop and mobile viewport sizes, exercising keyboard suggestions, reveal
 progression, winning and losing, sharing, restored progress, empty puzzles,
 image failures, and interrupted requests. These tests mock the HTTP API but
-load the real sample mosaic images. Native Safari/iOS testing remains part of
-cross-browser integration work.
+use a tiny placeholder image for the mocked puzzle levels. They do not verify
+real API integration or native Safari/iOS behavior.
 
 With the real API running and today's date assigned to the included Einstein
 sample, also run the opt-in live browser smoke test:
 
 ```powershell
 $env:PIXLE_LIVE_API = "true"
-npm test -- tests/live.spec.ts
+npm test -- live.spec.ts
 Remove-Item Env:\PIXLE_LIVE_API
 ```
 
@@ -52,19 +53,20 @@ Use an isolated development/test database, never production.
 
 `npm run preview` previews only the built frontend. It does not configure API or
 mosaic routes. Production must serve `dist`, proxy `/api/*`, and map `/puzzles/*`
-to `puzzles\public\` on the same origin; that reverse-proxy setup is a later
-integration/deployment step.
+to `puzzles\public\` on the same origin, as configured in
+[`deploy/Caddyfile.pixle.snippet`](../deploy/Caddyfile.pixle.snippet).
 
 ## Interaction and recovery
 
 - Search is accent-insensitive. Suggestions support Up/Down, Enter to select,
-  Escape to close, and touch/pointer selection. Submit with the button or Enter.
+  and Escape to close. Clicking or tapping a suggestion submits it immediately;
+  keyboard-selected names can be submitted with the button or Enter.
 - Use **Skip** to consume one attempt without typing a name.
 - The mosaic and guess history remain visible during recoverable API errors.
   Refresh retrieves authoritative server progress without discarding the input.
 - While a puzzle is active, the frontend preloads all reveal levels in the
-  background to reduce per-level loading delay. The original portrait URL is
-  only available after finishing the puzzle, and is preloaded at that point.
+  background to reduce per-level loading delay. Game responses include the
+  original portrait URL after completion; the UI preloads it at that point.
 - A pending guess's date, text, and UUID are retained in session storage before
   sending it. A timeout or server error keeps the same UUID for retries, including
   after reload. Only the server consumes attempts; the UI never guesses a score.

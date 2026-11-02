@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const puzzleId = "1d79c84a0dd89e24dd601cfe";
+const puzzleId = "bbde88819742bd384112a358";
 const people = [
   { id: "adele", name: "Adele" },
   { id: "albert-einstein", name: "Albert Einstein" },

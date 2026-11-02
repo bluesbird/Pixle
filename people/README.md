@@ -1,25 +1,8 @@
 # Recognizable people photo dataset
 
-An editorial selection of 116 recognizable people: 27 music, 24 screen/media,
-26 sports, 24 politics/public-life, and 15 other figures. It is **not an
+An editorial selection of 200 recognizable people. It is **not an
 empirically measured global ranking**. Recognition varies by country, age, and
 audience.
-
-The original contemporary-focused selection was revised following `feedback.md`:
-11 people were removed, all 27 requested additions were included, and all 36
-flagged photographs were replaced. The resulting 116-person scope was explicitly
-approved. Requested names have been normalized (for example, Erling Haaland,
-James Dean, Conor McGregor, and Muhammad Ali). The expanded set intentionally
-includes more historical figures and reflects the requested selection rather
-than the original regional/category balance.
-
-The second photo-review pass addressed 21 additional requests in `feedback.md`:
-20 sources were replaced and 50 Cent's existing photograph was reframed.
-Younger photographs were selected for Schwarzenegger, McGregor, and Thunberg;
-tight face crops were widened or replaced with less tightly framed sources.
-Hawking now uses the familiar smiling StarChild archival portrait. Its original
-is only 250 x 359 pixels, so the square output remains visibly soft.
-Completed requests and specific corrections are checked off in `feedback.md`.
 
 The selection includes figures associated with the Americas, Europe, Africa,
 South Asia, East Asia, Southeast Asia, and the Middle East. English-language

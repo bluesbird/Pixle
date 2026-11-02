@@ -14,12 +14,11 @@ per side, ordered from coarse to fine. Optional `--size`, `--grids`, and
 `--output` arguments change these settings; each grid must divide the output size.
 No downloads or manual image editing occur during generation.
 
-The included sample is `public\1d79c84a0dd89e24dd601cfe`, with its answer
-and provenance in the matching private JSON file. All five levels were visually
-reviewed: coarse levels obscure the target, and finer levels reveal the face.
-The sample is an offline demonstration, not yet assigned to a puzzle date.
+The Einstein example is `public\bbde88819742bd384112a358`, with its answer
+and provenance in the matching private JSON file. Daily puzzles are assigned
+automatically by the API from `private\targets.json`.
 
-`1d79c84a0dd89e24dd601cfe` is intentionally **not** a person name. Puzzle IDs are
+`bbde88819742bd384112a358` is intentionally **not** a person name. Puzzle IDs are
 opaque content-version hashes (first 24 hex chars of SHA-256), derived from the
 algorithm version, target ID, all portrait hashes/credits, output size/grids, and
 processing dependency versions. This avoids leaking the answer in public URLs and
@@ -59,7 +58,7 @@ prevents accidental browser delivery, not discovery by someone inspecting source
 Public manifests use opaque content-version IDs and numbered filenames, without
 target names, source paths, answers, or tile assignments. Credits list the entire
 portrait dataset in stable order so credit selection does not identify the answer.
-Keep credits accessible in the eventual game UI and alongside redistributed assets.
+Keep credits accessible in the game UI and alongside redistributed assets.
 Individual portrait licenses, including share-alike requirements, still apply.
 
 ## Matching and reproducibility
