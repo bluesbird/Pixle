@@ -8,7 +8,8 @@ import {
 const PENDING_KEY = "pixle.pending.v1";
 const EXAMPLE_PUZZLE_ID = "bbde88819742bd384112a358";
 const HOWTO_SEEN_KEY = "pixle.howto.seen.v1";
-const THEME_KEY = "pixle.theme.v1";
+const THEME_KEY = "pixle.theme.v2";
+const LEGACY_THEME_KEY = "pixle.theme.v1";
 
 function message(error: unknown) {
   return error instanceof Error ? error.message : "Something went wrong. Please try again.";
@@ -34,13 +35,21 @@ export function App() {
   const [clock, setClock] = useState(() => Date.now());
   const [panelMinHeight, setPanelMinHeight] = useState<number | null>(null);
   const [showHowTo, setShowHowTo] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
+  const [themeOverride, setThemeOverride] = useState<"light" | "dark" | null>(() => {
     try {
-      return window.localStorage.getItem(THEME_KEY) === "dark";
+      const savedTheme = window.localStorage.getItem(THEME_KEY);
+      if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+      return window.localStorage.getItem(LEGACY_THEME_KEY) === "dark" ? "dark" : null;
     } catch {
-      return false;
+      return null;
     }
   });
+  const [systemDarkMode, setSystemDarkMode] = useState(() =>
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
+  const darkMode = themeOverride === null ? systemDarkMode : themeOverride === "dark";
   const submitting = useRef(false);
   const input = useRef<HTMLInputElement>(null);
   const result = useRef<HTMLHeadingElement>(null);
@@ -60,7 +69,15 @@ export function App() {
 
   function themeToggle() {
     return <button className="top-help-button theme-toggle" type="button"
-      onClick={() => setDarkMode((current) => !current)}
+      onClick={() => {
+        const nextTheme = darkMode ? "light" : "dark";
+        setThemeOverride(nextTheme);
+        try {
+          window.localStorage.setItem(THEME_KEY, nextTheme);
+        } catch {
+          setStorageError("Your theme preference could not be saved in browser storage.");
+        }
+      }}
       aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={darkMode}>
       {darkMode ? (
@@ -153,12 +170,15 @@ export function App() {
   useEffect(() => { void load(); }, []);
 
   useEffect(() => {
+    if (typeof window.matchMedia !== "function") return;
+    const preference = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateSystemTheme = () => setSystemDarkMode(preference.matches);
+    preference.addEventListener("change", updateSystemTheme);
+    return () => preference.removeEventListener("change", updateSystemTheme);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? "dark" : "light";
-    try {
-      window.localStorage.setItem(THEME_KEY, darkMode ? "dark" : "light");
-    } catch {
-      setStorageError("Your theme preference could not be saved in browser storage.");
-    }
   }, [darkMode]);
 
   const finished = game !== null && game.status !== "playing";

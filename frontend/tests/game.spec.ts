@@ -292,6 +292,7 @@ test("suggestions match prefixes in name parts and full names", async ({ page })
 });
 
 test("dark mode toggles and persists across reloads", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "light" });
   await mockApi(page);
   await openGame(page);
 
@@ -316,6 +317,22 @@ test("dark mode toggles and persists across reloads", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.getByRole("button", { name: "Switch to light mode" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});
+
+test("follows system theme until a manual choice is saved", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await mockApi(page);
+  await openGame(page);
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+
+  await page.emulateMedia({ colorScheme: "light" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await page.emulateMedia({ colorScheme: "light" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 });
 
 test("random practice rounds are unscored and replayable", async ({ page }) => {
