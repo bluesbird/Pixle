@@ -8,6 +8,7 @@ import {
 const PENDING_KEY = "pixle.pending.v1";
 const EXAMPLE_PUZZLE_ID = "bbde88819742bd384112a358";
 const HOWTO_SEEN_KEY = "pixle.howto.seen.v1";
+const THEME_KEY = "pixle.theme.v1";
 
 function message(error: unknown) {
   return error instanceof Error ? error.message : "Something went wrong. Please try again.";
@@ -33,6 +34,13 @@ export function App() {
   const [clock, setClock] = useState(() => Date.now());
   const [panelMinHeight, setPanelMinHeight] = useState<number | null>(null);
   const [showHowTo, setShowHowTo] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      return window.localStorage.getItem(THEME_KEY) === "dark";
+    } catch {
+      return false;
+    }
+  });
   const submitting = useRef(false);
   const input = useRef<HTMLInputElement>(null);
   const result = useRef<HTMLHeadingElement>(null);
@@ -48,6 +56,24 @@ export function App() {
   function focusGuessField() {
     if (!shouldAutoFocusGuess) return;
     input.current?.focus();
+  }
+
+  function themeToggle() {
+    return <button className="top-help-button theme-toggle" type="button"
+      onClick={() => setDarkMode((current) => !current)}
+      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      aria-pressed={darkMode}>
+      {darkMode ? (
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.5 15.1A8.8 8.8 0 0 1 8.9 3.5a8.8 8.8 0 1 0 11.6 11.6Z" />
+        </svg>
+      )}
+    </button>;
   }
 
   async function loadStats() {
@@ -125,6 +151,15 @@ export function App() {
   }
 
   useEffect(() => { void load(); }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? "dark" : "light";
+    try {
+      window.localStorage.setItem(THEME_KEY, darkMode ? "dark" : "light");
+    } catch {
+      setStorageError("Your theme preference could not be saved in browser storage.");
+    }
+  }, [darkMode]);
 
   const finished = game !== null && game.status !== "playing";
   const selectedLevel = useMemo(() => {
@@ -363,6 +398,7 @@ export function App() {
           </button>
         </div>
         <div className="masthead-utility">
+          {themeToggle()}
           <button className="top-help-button" type="button" onClick={() => setShowHowTo(true)} aria-label="How to play">
             ?
           </button>
@@ -385,6 +421,7 @@ export function App() {
         <div className="intro-row">
           <p className="eyebrow">The Daily Face Mosaic</p>
           <div className="intro-utility">
+            {themeToggle()}
             <button className="top-help-button" type="button" onClick={() => setShowHowTo(true)} aria-label="How to play">
               ?
             </button>

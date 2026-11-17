@@ -2,6 +2,8 @@
   font-family: "Segoe UI", Arial, sans-serif;
   color: #242b26;
   background: #f5f2e9;
+  color-scheme: light;
+  --correct-color: #3d6947;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -50,6 +52,8 @@ a { color: inherit; text-underline-offset: 4px; }
   box-shadow: 0 1px 0 #ffffffcc inset;
 }
 .top-help-button:hover:not(:disabled) { background: #eef3e8; border-color: #b7c1ab; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; }
+.theme-toggle svg { display: block; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .github-link {
   display: inline-flex;
   align-items: center;
@@ -95,7 +99,7 @@ a { color: inherit; text-underline-offset: 4px; }
 .progress.finished { gap: 9px; margin-bottom: 14px; }
 .progress.finished button { height: 18px; border: 1px solid #95a088; border-radius: 6px; }
 .progress .used { background: #a97960; }
-.progress .correct { background: #3d6947; }
+.progress .correct { background: var(--correct-color); }
 h2 { font-size: 27px; letter-spacing: -.7px; margin: 0 0 8px; }
 .muted { color: #6a7165; }
 form > p { font-size: 14px; margin-bottom: 24px; }
@@ -124,8 +128,8 @@ h3 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin: 0 
 .history ol { list-style: none; padding: 0; margin: 0; }
 .history li { padding: 12px 0; border-bottom: 1px solid #dbddcf; display: grid; grid-template-columns: 24px 1fr auto; gap: 8px; font-size: 13px; align-items: center; }
 .attempt-number { font-size: 11px; color: #7a8171; }
-.good { color: #3d6947; font-weight: 600; }
-.good-name { font-weight: 700; color: #3d6947; }
+.good { color: var(--correct-color); font-weight: 600; }
+.good-name { font-weight: 700; color: var(--correct-color); }
 .bad { color: #9a4d34; font-weight: 600; }
 .panel-tail { margin-top: auto; padding-top: 16px; }
 .howto-example { margin-top: 10px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
@@ -229,3 +233,100 @@ footer { border-top: 1px solid #d9d9cc; margin-top: 20px; padding: 14px 0 18px; 
 @media (prefers-reduced-motion: no-preference) {
   button { transition: background-color 120ms ease; }
 }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #e7ece6;
+  background: #191b20;
+  --correct-color: #6daf7b;
+}
+:root[data-theme="dark"] body { background: #191b20; }
+:root[data-theme="dark"] button,
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea {
+  color: #e7e9ed;
+  background: #292c32;
+  border-color: #4a4e57;
+}
+:root[data-theme="dark"] .masthead,
+:root[data-theme="dark"] footer { border-color: #3b3e45; }
+:root[data-theme="dark"] .top-action,
+:root[data-theme="dark"] .top-help-button {
+  color: #e7e9ed;
+  background: #25282e;
+  border-color: #4a4e57;
+  box-shadow: none;
+}
+:root[data-theme="dark"] .top-action:hover:not(:disabled),
+:root[data-theme="dark"] .top-help-button:hover:not(:disabled) {
+  background: #343840;
+  border-color: #5e6570;
+}
+:root[data-theme="dark"] .github-link { color: #e7e9ed; }
+:root[data-theme="dark"] .eyebrow,
+:root[data-theme="dark"] h3 { color: #b6bdc9; }
+:root[data-theme="dark"] .practice-mode-tag { color: #e6a573; }
+:root[data-theme="dark"] .hero-title,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] .result .answer { color: #eceef2; }
+:root[data-theme="dark"] .mosaic-card {
+  background: #22252b;
+  border-color: #3b4049;
+  box-shadow: 0 8px 26px #00000020;
+}
+:root[data-theme="dark"] .mosaic-card.won { box-shadow: 0 0 0 2px #52775b, 0 16px 40px #00000030; }
+:root[data-theme="dark"] .mosaic-card.lost { box-shadow: 0 0 0 2px #805548, 0 16px 40px #00000030; }
+:root[data-theme="dark"] .mosaic-frame { background: #30343b; }
+:root[data-theme="dark"] .placeholder,
+:root[data-theme="dark"] .image-overlay { background-color: #292d34ed; }
+:root[data-theme="dark"] .placeholder {
+  background-image: linear-gradient(45deg, #363a43 25%, transparent 25%, transparent 75%, #363a43 75%), linear-gradient(45deg, #363a43 25%, transparent 25%, transparent 75%, #363a43 75%);
+}
+:root[data-theme="dark"] .mosaic-caption,
+:root[data-theme="dark"] .muted,
+:root[data-theme="dark"] .stats dt,
+:root[data-theme="dark"] .attempt-number,
+:root[data-theme="dark"] footer { color: #aeb4bf; }
+:root[data-theme="dark"] .progress span,
+:root[data-theme="dark"] .progress button { background: #3a3e45; }
+:root[data-theme="dark"] .progress .used { background: #a97960; }
+:root[data-theme="dark"] .progress .correct { background: var(--correct-color); }
+:root[data-theme="dark"] .progress button[aria-pressed="true"] { box-shadow: 0 0 0 2px #91a5c1 inset; }
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea { background: #23262c; }
+:root[data-theme="dark"] input::placeholder { color: #a4aab4; }
+:root[data-theme="dark"] .primary {
+  color: #f4f6fa;
+  background: #46566b;
+  border-color: #60728a;
+}
+:root[data-theme="dark"] .primary:hover:not(:disabled) { background: #53667c; }
+:root[data-theme="dark"] [role="listbox"] {
+  background: #25282e;
+  border-color: #484e58;
+}
+:root[data-theme="dark"] [role="option"]:hover,
+:root[data-theme="dark"] [role="option"][aria-selected="true"] { background: #363d48; }
+:root[data-theme="dark"] .history li { border-color: #3b4049; }
+:root[data-theme="dark"] .good,
+:root[data-theme="dark"] .good-name { color: var(--correct-color); }
+:root[data-theme="dark"] .bad { color: #e08e78; }
+:root[data-theme="dark"] .howto-modal {
+  color: #e7e9ed;
+  background: #22252b;
+  border-color: #3b4049;
+  box-shadow: 0 14px 40px #00000060;
+}
+:root[data-theme="dark"] .howto-example img { border-color: #444b56; }
+:root[data-theme="dark"] .howto-tip { color: #e2bd82; }
+:root[data-theme="dark"] .stats dl div + div { border-color: #3b3f47; }
+:root[data-theme="dark"] .text-button,
+:root[data-theme="dark"] .eyebrow-button { background: none; }
+:root[data-theme="dark"] .error-box {
+  color: #f2d8ca;
+  background: #3b2923;
+  border-color: #79513f;
+}
+:root[data-theme="dark"] .feedback { color: #a5d2ac; }
+:root[data-theme="dark"] .warning { color: #e4c28a; }
+:root[data-theme="dark"] .answer { color: #b4c2cf; }
+:root[data-theme="dark"] :focus-visible { outline-color: #91abd0; }

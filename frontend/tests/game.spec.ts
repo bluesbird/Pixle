@@ -291,6 +291,33 @@ test("suggestions match prefixes in name parts and full names", async ({ page })
   await expect(page.getByRole("option", { name: "Tom Hanks" })).toHaveCount(0);
 });
 
+test("dark mode toggles and persists across reloads", async ({ page }) => {
+  await mockApi(page);
+  await openGame(page);
+
+  const themeToggle = page.getByRole("button", { name: "Switch to dark mode" });
+  const iconOffset = await themeToggle.evaluate((button) => {
+    const icon = button.querySelector("svg");
+    if (!icon) throw new Error("Theme toggle icon is missing");
+    const buttonBounds = button.getBoundingClientRect();
+    const iconBounds = icon.getBoundingClientRect();
+    return Math.max(
+      Math.abs(buttonBounds.left + buttonBounds.width / 2 - iconBounds.left - iconBounds.width / 2),
+      Math.abs(buttonBounds.top + buttonBounds.height / 2 - iconBounds.top - iconBounds.height / 2),
+    );
+  });
+  expect(iconOffset).toBeLessThan(1);
+
+  await themeToggle.click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator("body")).toHaveCSS("background-color", "rgb(25, 27, 32)");
+
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});
+
 test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
   await openGame(page);
