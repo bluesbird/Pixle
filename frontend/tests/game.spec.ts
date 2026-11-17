@@ -254,7 +254,7 @@ test("broken mosaic can be retried and no-match suggestions are explained", asyn
   await expect(page.getByRole("combobox")).toHaveAttribute("aria-expanded", "false");
 });
 
-test("suggestions match only at the start of a name part", async ({ page }) => {
+test("suggestions match prefixes in name parts and full names", async ({ page }) => {
   await mockApi(page);
   await openGame(page);
   const combobox = page.getByRole("combobox", { name: "Your guess" });
@@ -270,6 +270,15 @@ test("suggestions match only at the start of a name part", async ({ page }) => {
 
   await combobox.fill("han");
   await expect(page.getByRole("option", { name: "Tom Hanks" })).toBeVisible();
+
+  await combobox.fill("albert e");
+  await expect(page.getByRole("option", { name: "Albert Einstein" })).toBeVisible();
+
+  await combobox.fill("albert einstein");
+  await expect(page.getByRole("option", { name: "Albert Einstein" })).toBeVisible();
+
+  await combobox.fill("albert z");
+  await expect(page.getByRole("option", { name: "Albert Einstein" })).toHaveCount(0);
 
   await combobox.fill("o");
   await expect(page.getByRole("option", { name: "Tom Hanks" })).toHaveCount(0);

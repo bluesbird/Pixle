@@ -319,14 +319,15 @@ export function App() {
     }
   }
 
-  const normalizedQuery = normalize(query);
-  const matches = query.trim() ? people.filter((person) =>
-    person.name
-      .split(/[^\p{L}\p{N}]+/u)
-      .map((part) => normalize(part))
-      .some((part) => part.startsWith(normalizedQuery)) &&
-    !game?.guesses.some((guessItem) => normalize(guessItem.name) === normalize(person.name))
-  ).slice(0, 7) : [];
+  const queryParts = query.split(/[^\p{L}\p{N}]+/u).map(normalize).filter(Boolean);
+  const matches = queryParts.length ? people.filter((person) => {
+    const nameParts = person.name.split(/[^\p{L}\p{N}]+/u).map(normalize);
+    const nameMatches = nameParts.some((_, start) => queryParts.every((part, index) =>
+      nameParts[start + index]?.startsWith(part) ?? false
+    ));
+    return nameMatches &&
+      !game?.guesses.some((guessItem) => normalize(guessItem.name) === normalize(person.name));
+  }).slice(0, 7) : [];
   const canGuess = game !== null && !finished && !loading && !busy;
   const currentPracticeMode = game?.mode === "practice" && game.puzzle_id.startsWith("practice-") ? "random" : "mosaic";
   const nextPuzzleCountdown = useMemo(() => {
