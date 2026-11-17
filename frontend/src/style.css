@@ -124,8 +124,8 @@ h3 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin: 0 
 .history ol { list-style: none; padding: 0; margin: 0; }
 .history li { padding: 12px 0; border-bottom: 1px solid #dbddcf; display: grid; grid-template-columns: 24px 1fr auto; gap: 8px; font-size: 13px; align-items: center; }
 .attempt-number { font-size: 11px; color: #7a8171; }
-.good { color: #315e38; font-weight: 600; }
-.good-name { font-weight: 700; color: #26372d; }
+.good { color: #3d6947; font-weight: 600; }
+.good-name { font-weight: 700; color: #3d6947; }
 .bad { color: #9a4d34; font-weight: 600; }
 .panel-tail { margin-top: auto; padding-top: 16px; }
 .howto-example { margin-top: 10px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }

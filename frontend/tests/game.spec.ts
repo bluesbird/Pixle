@@ -177,6 +177,10 @@ test("keyboard suggestions, reveals, completion, and reload", async ({ page }) =
   await expect(page.getByText("Taylor Swift", { exact: true })).toBeVisible();
   await guess(page, "Albert Einstein");
   await expect(page.getByRole("heading", { name: "Meet today's face." })).toBeFocused();
+  const progressCorrect = page.locator(".progress .correct");
+  const correctGuess = page.locator(".history .good-name");
+  const progressColor = await progressCorrect.evaluate((element) => getComputedStyle(element).backgroundColor);
+  await expect(correctGuess).toHaveCSS("color", progressColor);
   await expect(page.getByText("400", { exact: true }).first()).toBeVisible();
   await page.getByRole("button", { name: "Show detail level 1" }).click();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
