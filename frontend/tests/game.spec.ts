@@ -338,7 +338,14 @@ test("follows system theme until a manual choice is saved", async ({ page }) => 
 test("random practice rounds are unscored and replayable", async ({ page }) => {
   await mockApi(page);
   await openGame(page);
-  await page.getByRole("button", { name: "Pixle practice" }).click();
+  const pixlePractice = page.getByRole("button", { name: "Pixle practice" });
+  const mosaicPractice = page.getByRole("button", { name: "Mosaic practice" });
+  await expect(pixlePractice).toHaveAttribute("aria-pressed", "false");
+  await expect(mosaicPractice).toHaveAttribute("aria-pressed", "false");
+  await pixlePractice.click();
+  await expect(pixlePractice).toHaveAttribute("aria-pressed", "true");
+  await expect(mosaicPractice).toHaveAttribute("aria-pressed", "false");
+  await expect(pixlePractice).not.toHaveCSS("background-color", await mosaicPractice.evaluate((button) => getComputedStyle(button).backgroundColor));
   await expect(page.getByText("Practice mode (unscored)")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
   await page.getByRole("button", { name: "Skip" }).click();
@@ -350,12 +357,17 @@ test("random practice rounds are unscored and replayable", async ({ page }) => {
   await page.getByRole("button", { name: "Play next" }).click();
   await expect(page.getByText("Practice mode (unscored)")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();
+  await expect(pixlePractice).toHaveAttribute("aria-pressed", "true");
 });
 
 test("random mosaic practice mode can be started", async ({ page }) => {
   await mockApi(page);
   await openGame(page);
-  await page.getByRole("button", { name: "Mosaic practice" }).click();
+  const pixlePractice = page.getByRole("button", { name: "Pixle practice" });
+  const mosaicPractice = page.getByRole("button", { name: "Mosaic practice" });
+  await mosaicPractice.click();
+  await expect(mosaicPractice).toHaveAttribute("aria-pressed", "true");
+  await expect(pixlePractice).toHaveAttribute("aria-pressed", "false");
   await expect(page.getByText("Practice mode (unscored)")).toBeVisible();
   await expect(page.getByText("PRACTICE / UNSCORED")).toBeVisible();
   await expect(page.getByRole("img", { name: /detail level 1/ })).toBeVisible();

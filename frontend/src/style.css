@@ -37,6 +37,12 @@ a { color: inherit; text-underline-offset: 4px; }
 }
 .top-action { min-height: 36px; }
 .top-action:hover:not(:disabled) { background: #eef3e8; border-color: #b7c1ab; }
+.top-action[aria-pressed="true"] {
+  background: #e5ecdf;
+  border-color: #728b70;
+  color: #233d2c;
+  box-shadow: 0 0 0 1px #728b704d inset;
+}
 .top-help-button {
   min-height: 36px;
   min-width: 36px;
@@ -260,6 +266,12 @@ footer { border-top: 1px solid #d9d9cc; margin-top: 20px; padding: 14px 0 18px; 
 :root[data-theme="dark"] .top-help-button:hover:not(:disabled) {
   background: #343840;
   border-color: #5e6570;
+}
+:root[data-theme="dark"] .top-action[aria-pressed="true"] {
+  color: #f0f2f6;
+  background: #39434f;
+  border-color: #8292a7;
+  box-shadow: 0 0 0 1px #8292a74d inset;
 }
 :root[data-theme="dark"] .github-link { color: #e7e9ed; }
 :root[data-theme="dark"] .eyebrow,

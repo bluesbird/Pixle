@@ -410,10 +410,22 @@ export function App() {
       </a>
       <div className="masthead-actions">
         <div className="quick-actions">
-          <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("random")}>
+          <button
+            className="top-action"
+            type="button"
+            aria-pressed={game?.mode === "practice" && currentPracticeMode === "random"}
+            disabled={busy || loading}
+            onClick={() => void startPractice("random")}
+          >
             Pixle practice
           </button>
-          <button className="top-action" disabled={busy || loading} onClick={() => void startPractice("mosaic")}>
+          <button
+            className="top-action"
+            type="button"
+            aria-pressed={game?.mode === "practice" && currentPracticeMode === "mosaic"}
+            disabled={busy || loading}
+            onClick={() => void startPractice("mosaic")}
+          >
             Mosaic practice
           </button>
         </div>
