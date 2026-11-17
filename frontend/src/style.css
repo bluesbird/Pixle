@@ -16,9 +16,8 @@ a { color: inherit; text-underline-offset: 4px; }
 :focus-visible { outline: 3px solid #4f7658; outline-offset: 4px; }
 .shell { max-width: 1160px; padding: 0 40px; margin: auto; }
 .masthead { display: flex; align-items: center; justify-content: space-between; padding: 10px 0 8px; border-bottom: 1px solid #d9d9cc; }
-.brand { display: flex; align-items: center; gap: 8px; font-size: 32px; font-weight: 850; text-decoration: none; letter-spacing: -2px; }
-.brand-mark { display: block; height: 28px; width: 28px; border-radius: 6px; }
-.brand-dot { color: #69836b; margin-left: -7px; }
+.brand { display: flex; align-items: center; text-decoration: none; }
+.brand-logo { display: block; width: 116px; height: auto; object-fit: contain; }
 .masthead-actions { display: flex; align-items: center; gap: 10px; }
 .quick-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .masthead-utility { display: flex; align-items: center; gap: 8px; }
@@ -202,7 +201,7 @@ footer { border-top: 1px solid #d9d9cc; margin-top: 20px; padding: 14px 0 18px; 
   .top-help-button { min-height: 34px; min-width: 34px; height: 34px; width: 34px; font-size: 16px; }
   .intro-row { margin-bottom: 8px; }
   .intro-utility { display: inline-flex; }
-  .brand { font-size: 29px; }
+  .brand-logo { width: 100px; }
   .intro { padding: 10px 0 10px; }
   .eyebrow { margin: 0; }
   .hero-title { font-size: 32px; }

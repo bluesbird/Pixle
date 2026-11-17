@@ -350,9 +350,7 @@ export function App() {
   return <div className="shell">
     <header className="masthead">
       <a className="brand" href="/" aria-label="Pixle home">
-        <img className="brand-mark" src="/favicon.svg" alt="" aria-hidden="true" />
-        pixle
-        <span className="brand-dot">.</span>
+        <img className="brand-logo" src="/pixle-logo.png" alt="" aria-hidden="true" />
       </a>
       <div className="masthead-actions">
         <div className="quick-actions">
