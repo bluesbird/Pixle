@@ -10,7 +10,7 @@ Guess the famous person hidden in a photo mosaic. Five attempts; each wrong gues
   <em>Albert Einstein at levels 1, 3, and 5.</em>
 </p>
 
-**Tip:** Step back to see the face formed by the tiles, not the individual portraits ([Photo credits](puzzles/public/bbde88819742bd384112a358/credits.md)).
+**Tip:** Step back to see the face formed by the tiles, not the individual portraits.
 
 One shared puzzle every day at midnight UTC. Solve earlier for more points, or try unscored mosaic and pixelated practice rounds. No signup required.
 
@@ -66,6 +66,8 @@ After the round, the original portrait, answer, score, and attempt history are s
 <p align="center">
   <img src="docs/assets/pixle-daily-result.png" width="100%" alt="Completed daily puzzle revealing George Clooney, with 200 points earned in four guesses">
 </p>
+
+_See [photo credits](puzzles/public/bbde88819742bd384112a358/credits.md)._
 
 ## Local development
 
