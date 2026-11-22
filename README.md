@@ -49,16 +49,22 @@ Caddy serves public mosaics; FastAPI handles guesses and game state. The API als
 
 ## App demo
 
-The desktop game pairs the mosaic with name suggestions, reveal progress, and guess history.
+Each attempt reveals a more detailed mosaic while keeping guesses and skips visible.
 
 <p align="center">
-  <img src="docs/assets/pixle-daily-gameplay.png" width="100%" alt="Desktop daily game showing a photo mosaic of Psy, name suggestions, and previous skipped attempts">
+  <img src="docs/assets/pixle-daily-level-01.png" width="49%" alt="Pixle daily game at detail level 1">
+  <img src="docs/assets/pixle-daily-level-02.png" width="49%" alt="Pixle daily game at detail level 2 after one skipped guess">
+</p>
+
+<p align="center">
+  <img src="docs/assets/pixle-daily-level-03.png" width="49%" alt="Pixle daily game at detail level 3 after two skipped guesses">
+  <img src="docs/assets/pixle-daily-level-04.png" width="49%" alt="Pixle daily game at detail level 4 after an incorrect guess">
 </p>
 
 After the round, the original portrait, answer, score, and attempt history are shown.
 
 <p align="center">
-  <img src="docs/assets/pixle-daily-result.png" width="100%" alt="Completed daily puzzle revealing Psy, with 200 points earned in four guesses">
+  <img src="docs/assets/pixle-daily-result.png" width="100%" alt="Completed daily puzzle revealing George Clooney, with 200 points earned in four guesses">
 </p>
 
 ## Local development
